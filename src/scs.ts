@@ -1,9 +1,11 @@
-import { readFileSync } from "fs"
+import { readFileSync, writeFileSync } from "fs"
 
-export function scs(): unknown[] {
-    const file = readFileSync('./examples/example.scs', 'utf-8');
-    return something(file);
-};
+export type Token = {
+    type: TokenType;
+    value: string | number;
+    position: number;
+    end?: number;
+}
 
 export enum TokenType {
     SingleQuote,
@@ -30,6 +32,7 @@ export enum TokenType {
     Plus,
     Minus,
     Slash,
+    BackSlash,
     Asterisk,
     GreaterThan,
     LessThan,
@@ -53,8 +56,6 @@ export enum TokenType {
     SimiColonList,
     SimiColonSeperate,
 
-    Value,
-
     NewSchedule,
     ScheduleParam,
     ClassParam,
@@ -71,12 +72,20 @@ export enum TokenType {
     MultiLineCommentEnd,
 }
 
+export function scs(): Token[] {
+    const file = readFileSync('./examples/example.scs', 'utf-8');
+
+    // Temporary for pos checking
+    writeFileSync('./tests/pos.scs', file.replace(/\n/gi, ' '));
+    return something(file);
+};
+
 // makes tokens
 // does not work if its minified
-export function something(text: string): unknown[] {
+export function something(text: string): Token[] {
     const chars = text.split('');
-    const things = [];
-    let working = {};
+    const things: Token[] = [];
+    let working: Token | Record<string, unknown> = {};
     let index = 0;
     for (index; index < chars.length; null) {
         const last = chars[index - 1];
@@ -87,7 +96,7 @@ export function something(text: string): unknown[] {
             if (working.type === TokenType.Value) {
                 if (char.match(/[a-z0-9]/i) === null) {
                     // no longer a value
-                    things.push(Object.assign({}, working));
+                    things.push(Object.assign({}, working as Token));
                     working = {};
                     // do not index++; because then it would skip this value that isnt text
                     continue;
@@ -109,6 +118,26 @@ export function something(text: string): unknown[] {
                 things.push({ type: TokenType.Slash, value: char, position: index });
                 break;
             }
+            case (char === '\\'): {
+                things.push({ type: TokenType.BackSlash, value: char, position: index });
+                break;
+            }
+            case (char === '*'): {
+                things.push({ type: TokenType.Asterisk, value: char, position: index });
+                break;
+            }
+            case (char === ','): {
+                things.push({ type: TokenType.Comma, value: char, position: index });
+                break;
+            }
+            case (char === '@'): {
+                things.push({ type: TokenType.At, value: char, position: index });
+                break;
+            }
+            case (char === '.'): {
+                things.push({ type: TokenType.Point, value: char, position: index });
+                break;
+            }
 
             case (char === '\''): {
                 things.push({ type: TokenType.SingleQuote, value: char, position: index });
@@ -124,11 +153,11 @@ export function something(text: string): unknown[] {
             }
 
             case (char === '{'): {
-                things.push({ type: TokenType.LeftCurly, value: char, positon: index });
+                things.push({ type: TokenType.LeftCurly, value: char, position: index });
                 break;
             }
             case (char === '}'): {
-                things.push({ type: TokenType.RightCurly, value: char, positon: index });
+                things.push({ type: TokenType.RightCurly, value: char, position: index });
                 break;
             }
             case (char === '['): {
@@ -183,7 +212,7 @@ export function something(text: string): unknown[] {
 }
 
 // Takes the tokens and figures out what exactly is going on and returns something more meaningful
-export function makeUsefullTokens(tokens: unknown[]): unknown[] {
+export function makeUsefullTokens(tokens: Token[]): Token[] {
     /*
 
 if (working.type === 'comment') {
@@ -234,15 +263,98 @@ continue;
 }
 }
     */
-    return tokens;
+    const newTokens = [];
+
+    let index = 0;
+    for (index; index < tokens.length; null) {
+        const last = tokens[index - 1];
+        const token = tokens[index];
+        const next = tokens[index + 1];
+
+        if (token.type === TokenType.Slash) {
+            if (next.type === TokenType.Slash) {
+                // single line comment
+                let tempToken = { type: TokenType.SingleLineComment, value: '', position: index, end: index };
+                let i = true;
+                while (i) {
+                    if (tokens[index].type === TokenType.NewLine) {
+                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        i = false;
+                    } else {
+                        tempToken.value += tokens[index].value;
+                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        index++;
+                    }
+                }
+                newTokens.push(tempToken);
+                continue;
+            } else if (next.type === TokenType.Asterisk) {
+                // multi line comment
+                let tempToken = { type: TokenType.MultiLineCommentStart, value: '', position: index, end: index };
+                let i = true;
+                while (i) {
+                    if (tokens[index].type === TokenType.Slash && tokens[index - 1].type === TokenType.Asterisk) {
+                        // make sure to include the last slash
+                        tempToken.value += tokens[index].value;
+                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        index++;
+
+                        i = false;
+                    } else {
+                        tempToken.value += tokens[index].value;
+                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        index++;
+                    }
+                }
+                newTokens.push(tempToken);
+                continue;
+            } else {
+                // just a slash ?
+                // TODO add some checks to make sure its not just a random character
+                newTokens.push(token);
+                index++;
+                continue;
+            }
+        } else if (token.type === TokenType.SingleQuote) {
+            // single quote string
+            // LEFT OFF need to make it not include the quotes lol
+            let tempToken = { type: TokenType.SingleQuote, value: '', position: index, end: index };
+            let i = true;
+            while (i) {
+                if ((tokens[index].type === TokenType.SingleQuote && tokens[index - 1].type !== TokenType.BackSlash) && index !== tempToken.position) {
+                    // make sure to include the last quote
+                    tempToken.value += tokens[index].value;
+                    tempToken.end = tokens[index].end || tokens[index].position || -1;
+                    index++;
+
+                    i = false;
+                } else {
+                    tempToken.value += tokens[index].value;
+                    tempToken.end = tokens[index].end || tokens[index].position || -1;
+                    index++;
+                }
+            }
+            newTokens.push(tempToken);
+            continue;
+        } else if (token.type === TokenType.NewLine) {
+            // new line
+            newTokens.push(token);
+            index++;
+            continue;
+        }
+
+        // Dev safty, temporary
+        index++;
+    }
+    return newTokens;
 }
 
-export function toObject(tokens: unknown[]): unknown {
-    const newObj = {};
+export function toObject(tokens: Token[]): unknown {
+    const newObj: Record<string, unknown> = {};
     for (const token of tokens) {
         newObj[token.type + token.position] = token.value
     }
     return { WARNING: "not implemented correctly", ...newObj }
 }
 
-export default { scs, something, toObject, TokenType };
+export default { scs, something, toObject, makeUsefullTokens, TokenType };
