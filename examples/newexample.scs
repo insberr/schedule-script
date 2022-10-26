@@ -1,0 +1,21 @@
+// maybe
+
+@overide cambridge {
+    // values passed to this are the class list and the display day schedule and the event if there is any
+    if (classes.periods.includes(11 12 or 13)) {
+        if (user.grade === 10) {
+            return grade10overide;
+        }
+        if (user.grade === 11) {
+            return grade11overide;
+        }
+        return some error;
+    }
+    return null;
+}
+
+///
+
+if user is cambridge {                                                          // if (user.cambridge) {
+    schedule is (find schedule.name + "-cambridge" from schedules) or schedule; //      schedule = schedules.get(schedule.name+"-cambridge") || schedule
+}                                                                               // }
