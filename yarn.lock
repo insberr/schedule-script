@@ -1668,6 +1668,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/estree-jsx@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@types/estree-jsx@npm:0.0.1"
+  dependencies:
+    "@types/estree": "*"
+  checksum: aed43dfcbcc9c881f571618847661cd69026680466657d1443c12f51d835c7a8ccf5109a800e56c8fc33ae093f096aa937e4656ce3eb71c4f914334c389cf7be
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:*":
+  version: 1.0.0
+  resolution: "@types/estree@npm:1.0.0"
+  checksum: 910d97fb7092c6738d30a7430ae4786a38542023c6302b95d46f49420b797f21619cdde11fa92b338366268795884111c2eb10356e4bd2c8ad5b92941e9e6443
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:^0.0.50":
+  version: 0.0.50
+  resolution: "@types/estree@npm:0.0.50"
+  checksum: 9a2b6a4a8c117f34d08fbda5e8f69b1dfb109f7d149b60b00fd7a9fb6ac545c078bc590aa4ec2f0a256d680cf72c88b3b28b60c326ee38a7bc8ee1ee95624922
+  languageName: node
+  linkType: hard
+
 "@types/graceful-fs@npm:^4.1.3":
   version: 4.1.5
   resolution: "@types/graceful-fs@npm:4.1.5"
@@ -2550,6 +2573,16 @@ __metadata:
     esparse: ./bin/esparse.js
     esvalidate: ./bin/esvalidate.js
   checksum: b45bc805a613dbea2835278c306b91aff6173c8d034223fa81498c77dcbce3b2931bf6006db816f62eacd9fd4ea975dfd85a5b7f3c6402cfd050d4ca3c13a628
+  languageName: node
+  linkType: hard
+
+"estree-toolkit@npm:^1.3.1":
+  version: 1.3.1
+  resolution: "estree-toolkit@npm:1.3.1"
+  dependencies:
+    "@types/estree": ^0.0.50
+    "@types/estree-jsx": ^0.0.1
+  checksum: d3782bd7370caf7dc3c3d5010a5a0b33182175743b202c9018f59c6eb9317f54fb432ca1b32d2204c97643c25795a84e950f0a471d1df7beb8022035842adf6e
   languageName: node
   linkType: hard
 
@@ -3816,6 +3849,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"meriyah@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "meriyah@npm:4.3.2"
+  checksum: 0bd5a86e9c336796beb30f73e64304b05031c5344d5d71aa839d5c85663f893b09777db636afebbb151d57f69387adea132e609f98a38dda3b45d9fe0e2090e6
+  languageName: node
+  linkType: hard
+
 "micromatch@npm:^4.0.4":
   version: 4.0.5
   resolution: "micromatch@npm:4.0.5"
@@ -4528,11 +4568,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "schedule-script@workspace:."
   dependencies:
-    "@babel/parser": ^7.19.6
     "@parcel/packager-ts": 2.7.0
     "@parcel/transformer-typescript-types": 2.7.0
     "@types/jest": ^29.2.0
+    estree-toolkit: ^1.3.1
     jest: ^29.2.2
+    meriyah: ^4.3.2
     parcel: ^2.7.0
     ts-jest: ^29.0.3
     typescript: ^4.8.4
