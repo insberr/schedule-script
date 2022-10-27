@@ -44,6 +44,11 @@ schedule default {
 
 schedule default-nolunch inherit default {
     lunchBased false; // same as default but with no lunches
+    // override <replace/prepend/append> [...arguments]
+    // override <prepend/append> <type> [num] <start> <end>
+    // override replace <index> <type> [num] <start> <end> (index is the 0 based index of the class, first class definied is 0, then 1 etc etc.)
+    override replace 6 dismissal 14:05 14:35 //make dismissal 30 minutes long
+
 };
 
 
