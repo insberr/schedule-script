@@ -1,0 +1,48 @@
+
+
+// <term> [arguments]
+
+// schedule <id>
+schedule default {
+    desc Regular Bell Schedule; // desc <info> (shown below schedule)
+
+    // classes
+    // class <type> [num] <start> <end>
+    class zero 6:35 7:30;
+    class period 1 7:35 8:45;
+    class period 2 8:50 9:55;
+    class period 3 9:55 11:40;
+    class period 4 11:45 12:55;
+    class period 5 13:00 14:05;
+    class dismissal 14:05 14:10;
+
+    lunchBased 3; // lunches based on 3rd period, if missing, means there isnt lunches
+
+
+    //lunch <num> <type> <start> <end>
+    lunch 1 lunch 9:55 10:25;
+    lunch 1 period 10:30 11:40;
+
+    lunch 2 period 10:00 10:30;
+    lunch 2 lunch 10:30 11:00;
+    lunch 2 period 11:05 11:40;
+
+    lunch 3 period 10:00 11:10;
+    lunch 3 lunch 11:10 11:40;
+
+};
+
+schedule default-nolunch inherit default {
+    lunchBased false; // same as default but with no lunches
+};
+
+
+// event <id>
+event nonadv {
+    // every <dayofweek>
+    every mon;
+    every wen;
+    every fri;
+    schedule default;
+    date 12-27-2022; // specify specific date
+};
