@@ -15,15 +15,12 @@ schedule default {
     class period 5 13:00 14:05;
     class dismissal 14:05 14:10;
 
-    //lunch <num> <type> <start> <end>
+    // lunch <num> <type> <start> <end>
+    // Only the lunch times are needed, we can use the based on period and split it/modify the times to display it correctly
     lunch 1 lunch 9:55 10:25;
-    lunch 1 period 10:30 11:40;
 
-    lunch 2 period 10:00 10:30;
     lunch 2 lunch 10:30 11:00;
-    lunch 2 period 11:05 11:40;
 
-    lunch 3 period 10:00 11:10;
     lunch 3 lunch 11:10 11:40;
 
     overide cambridge-10 {

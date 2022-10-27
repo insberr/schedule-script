@@ -1,57 +1,53 @@
 
-// Schedule <name>
-Schedule normal {
-    Description: Default schedule;
-    Class [Advisory] 7:30am | 8am;
-    Class [Period 1] 7:30am | 8:00am;
+/* schedule <name> */
+schedule normal {
+    # Default schedule; // Description
+    
+    class [advisory] 7:30 8:00;
+    class [period 1] 7:30 8; // or just 8 works
     // Can also write just the period number ONLY FOR PERIODS
-    Class [2] 7:30am | 8:00am;
-    Class [3] 7:30am | 8:00am;
-    Class [4] 7:30am | 8:00am;
-    Class [5] 7:30am | 8:00am;
-    Class [Dismissal] 7:30am | 8:00am;
+    class [2] 7:30 to 8:00;
+    class [3] 7:30 to 8:00;
+    class [4] 7:30 to 8:00;
+    class [5] 7:30 to 8:00;
+    class [dismissal] 7:30 8:00;
 
-    Lunch [Config] based on period 3 | passing 5min;
-    Lunch [1] 10:30 | 11:00;
-    Lunch [2] 11:00 | 11:30;
+    lunch [config] (basedOnPeriod 3) (passing 5 minutes);
+    lunch [1] 10:30 to 11:00;
+    lunch [2] 11:00 to 11:30;
+    lunch [3] 11:30 to 12:00;
 }
 
-Schedule LateStart1Hour {
+schedule LateStart1Hour {
     // write code here
 }
 
-Schedule Pain inherit normal {
+/* Inherit Schedule */
+schedule pain inherit normal {
     // do stuff
 }
 
-// This is just an idea, might be useless
-Schedule [SomethingWeird] {
-    // If for some reason the schedule needs to be reused from an existing one
-    #use Normal;
-    // white stuff that changes the values maybe
-}
+// Events. You could put this in a seperat file aswell
+// event [<config>] <date> ...<args>
 
-// events. you could put this in a seperat file aswell
 
 // Message only event
-Event [SingleDay, MessageOnly] {
-    date: October 23, 2022;
-    message: 'Test';
+// SigngleDay, MessageOnly <date> '<message>'
+event [SingleDay, MessageOnly] October 23, 2022 {
+    Test Event;
 }
 
 // Single day event
-Event [SingleDay] {
-    date: October 23, 2022;
-    message: 'Test';
-    schedule: EarlyDismissal;
+event [SingleDay] October 23, 2022 {
+    LateStart1Hour;
+    Test Schedule Event;
 }
 
 // Group of events that use the same schedule, but different days have different messages
 // write ...
 
 // A event that reoccurrs
-Event [Reocurring] {
-    message: '1 Hour Late Start';
+event [Reocurring] { 1 Hour Late Start };
     schedule: LateStart1Hour;
     occurs: [
         November 10, 2022;
@@ -63,7 +59,7 @@ Event [Reocurring] {
     {
         Schedules: {
             Normal: {
-                Classes: [
+                classes: [
                     // the type is written in its ts enum form, in reality itll be a number
                     { type: Advisory, period: null, ... },
                     { type: Period, period: 1, ... },
