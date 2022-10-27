@@ -263,7 +263,6 @@ continue;
 }
 }
     */
-    const newTokens = [];
 
     let index = 0;
     for (index; index < tokens.length; null) {
@@ -277,15 +276,18 @@ continue;
                 // we choose to ignore them so yeah
                 
                 // let tempToken = { type: TokenType.SingleLineComment, value: '', position: index, end: index };
-                
+                tokens.splice(index, 1);
                 let i = true;
                 while (i) {
                     if (tokens[index].type === TokenType.NewLine) {
                         // tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        tokens.splice(index, 1);
+                        // index++;
                         i = false;
                     } else {
                         // tempToken.value += tokens[index].value;
                         // tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        tokens.splice(index, 1)
                         index++;
                     }
                 }
@@ -296,26 +298,39 @@ continue;
                 // ignore these too
                 // let tempToken = { type: TokenType.MultiLineCommentStart, value: '', position: index, end: index };
                 let i = true;
+                /// tokens.splice(index, 1);
+                let startIndex = index;
+                
+                
                 while (i) {
-                    if (tokens[index].type === TokenType.Slash && tokens[index - 1].type === TokenType.Asterisk) {
+                    if (index >= tokens.length) {
+                        // just pain
+                        console.log(tokens)
+                        throw new Error('Unterminated comment at position ' + token.position);
+                    } else if (tokens[index].type === TokenType.Slash && tokens[index - 1]?.type === TokenType.Asterisk) {
                         // make sure to include the last slash
                         // tempToken.value += tokens[index].value;
                         // tempToken.end = tokens[index].end || tokens[index].position || -1;
-                        index++;
+                        
+                        // index++;
 
                         i = false;
                     } else {
                         // tempToken.value += tokens[index].value;
                         // tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        
                         index++;
                     }
                 }
+                tokens.splice(startIndex, index - startIndex);
+                index = startIndex;
+                // index = startIndex;
                 // newTokens.push(tempToken);
                 continue;
             } else {
                 // just a slash ?
                 // TODO add some checks to make sure its not just a random character
-                newTokens.push(token);
+                // leave as is
                 index++;
                 continue;
             }
@@ -323,25 +338,34 @@ continue;
             // single quote string
             // LEFT OFF need to make it not include the quotes lol
             let tempToken = { type: TokenType.SingleQuote, value: '', position: token.position, end: token.position || -1 };
+            let startIndex = index;
             // let tempTokenIndex = index;
             // index++; // skip current token as its the first quote
 
             let i = true;
             while (i) {
-                if ((tokens[index].type === TokenType.SingleQuote && tokens[index].position !== tempToken.position && tokens[index - 1].type !== TokenType.BackSlash)) {
+                if (index >= tokens.length) {
+                    // just pain
+                    console.log(tokens)
+                    throw new Error('Unterminated string at position ' + token.position);
+                    
+                } else if ((tokens[index].type === TokenType.SingleQuote && tokens[index].position !== tempToken.position && tokens[index - 1].type !== TokenType.BackSlash)) {
                     // make sure to include the last quote
                     
                     tempToken.end = tokens[index].end || tokens[index].position || -1;
                     index++;
 
                     i = false;
+                } else if (tokens[index].type === TokenType.NewLine && tokens[index - 1].type !== TokenType.BackSlash) {
+                    throw new Error(`Unexpected newline in string at ${tokens[index].position}`);
                 } else {
                     tempToken.value += tokens[index].value;
                     tempToken.end = tokens[index].end || tokens[index].position || -1;
                     index++;
                 }
             }
-            newTokens.push(tempToken);
+            tokens.splice(startIndex, index, tempToken);
+            // index = startIndex;
             continue;
         } else if (token.type === TokenType.NewLine) {
             // new line
@@ -354,17 +378,18 @@ continue;
                 //because im too lazy to figure out whats before the whitespace
                 throw new Error(`Unexpected ${TokenType[last.type]} before colon at position ${token.position}`);
             }
-            newTokens.push({ ...last, type: TokenType.Key });
-            newTokens.push({ ...token, type: TokenType.ColonKeyValue });
+            tokens.splice(index - 1, 1, { ...last, type: TokenType.Key });
+            tokens.splice(index, 1, { ...token, type: TokenType.ColonKeyValue });
             
             index++;
             continue;
         }
 
         // Dev safty, temporary
+        new Error('Unknown token type ' + token.type + ' at position ' + token.position);
         index++;
     }
-    return newTokens;
+    return tokens;
 }
 
 export function toObject(tokens: Token[]): unknown {
