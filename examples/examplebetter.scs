@@ -1,5 +1,4 @@
 
-
 // <term> [arguments]
 
 // schedule <id>
@@ -16,19 +15,30 @@ schedule default {
     class period 5 13:00 14:05;
     class dismissal 14:05 14:10;
 
-    lunchBased 3; // lunches based on 3rd period, if missing, means there isnt lunches
-
-
     //lunch <num> <type> <start> <end>
-    lunch 1 lunch 9:55 10:25;
-    lunch 1 period 10:30 11:40;
+    lunch {
+        based 3 {
+            lunch 1 9:55 10:25;
+            lunch 2 10:30 11:00;
+            lunch 3 11:10 11:40;
+        };
+        // if lunch is based on two periods (this was that multilunch idea i had but never implemented)
+        based 4 {
+            lunch 4 11:40 12:10;
+            lunch 5 12:15 12:55;
+        };
+    };
 
-    lunch 2 period 10:00 10:30;
-    lunch 2 lunch 10:30 11:00;
-    lunch 2 period 11:05 11:40;
+    overide cambridge-10 {
+        condition: grade = 10 and classes has period 11, 12, or 13; // figure this out later
+        replace period 1 with period 11 <time>;
+        replace period 2 with period 12 <time>;
+        insert period 13 after period 12 <time>;
+    }
 
-    lunch 3 period 10:00 11:10;
-    lunch 3 lunch 11:10 11:40;
+    overide cambridge-11 {
+        // do code
+    }
 
 };
 
@@ -43,11 +53,10 @@ schedule default-nolunch inherit default {
 
 
 // event <id>
-event nonadv {
+event adv {
     // every <dayofweek>
-    every mon;
-    every wen;
-    every fri;
-    schedule default;
+    every tue;
+    every thu;
+    schedule adv;
     date 12-27-2022; // specify specific date
 };
