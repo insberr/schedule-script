@@ -16,6 +16,7 @@ schedule default {
     class dismissal 14:05 14:10;
 
     //lunch <num> <type> <start> <end>
+    // really dont see the need for this complex stuff, per grade lunches would be handled by overrides. 
     lunch {
         based 3 {
             lunch 1 9:55 10:25;
@@ -30,10 +31,12 @@ schedule default {
     };
 
     overide cambridge-10 {
-        condition: grade = 10 and classes has period 11, 12, or 13; // figure this out later
-        replace period 1 with period 11 <time>;
-        replace period 2 with period 12 <time>;
-        insert period 13 after period 12 <time>;
+        only grade 10 
+        only classes contains 11 or 12 or 13 // figure this out later
+        // if these conditions pass, the following is injected into the body
+        override replace 1 period 11 <time>;
+        override replace 2 period 12  <time>;
+        override append 2 period 13 <time>;
     }
 
     overide cambridge-11 {
@@ -44,9 +47,7 @@ schedule default {
 
 schedule default-nolunch inherit default {
     lunchBased false; // same as default but with no lunches
-    // override <replace/prepend/append> [...arguments]
-    // override <prepend/append> <type> [num] <start> <end>
-    // override replace <index> <type> [num] <start> <end> (index is the 0 based index of the class, first class definied is 0, then 1 etc etc.)
+    // override <replace/prepend/append> <index> <type> [num] <start> <end> (index is the 0 based index of the class, first class definied is 0, then 1 etc etc.)
     override replace 6 dismissal 14:05 14:35 //make dismissal 30 minutes long
 
 };
