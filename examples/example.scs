@@ -8,8 +8,8 @@ Schedule [Normal] {
     */
     @Classes;
     Class [Advisory] {
-        startTime: 7:30am; // 24 hour time is default unless am/pm is specified
-        endTime:   8am; // 8:00am would work too
+        start: 7:30am; // 24 hour time is default unless am/pm is specified
+        end:   8am; // 8:00am would work too
     }
     Class [Period, 1] {
         start: 7:30am;

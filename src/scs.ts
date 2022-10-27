@@ -274,39 +274,43 @@ continue;
         if (token.type === TokenType.Slash) {
             if (next.type === TokenType.Slash) {
                 // single line comment
-                let tempToken = { type: TokenType.SingleLineComment, value: '', position: index, end: index };
+                // we choose to ignore them so yeah
+                
+                // let tempToken = { type: TokenType.SingleLineComment, value: '', position: index, end: index };
+                
                 let i = true;
                 while (i) {
                     if (tokens[index].type === TokenType.NewLine) {
-                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        // tempToken.end = tokens[index].end || tokens[index].position || -1;
                         i = false;
                     } else {
-                        tempToken.value += tokens[index].value;
-                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        // tempToken.value += tokens[index].value;
+                        // tempToken.end = tokens[index].end || tokens[index].position || -1;
                         index++;
                     }
                 }
-                newTokens.push(tempToken);
+                // newTokens.push(tempToken);
                 continue;
             } else if (next.type === TokenType.Asterisk) {
                 // multi line comment
-                let tempToken = { type: TokenType.MultiLineCommentStart, value: '', position: index, end: index };
+                // ignore these too
+                // let tempToken = { type: TokenType.MultiLineCommentStart, value: '', position: index, end: index };
                 let i = true;
                 while (i) {
                     if (tokens[index].type === TokenType.Slash && tokens[index - 1].type === TokenType.Asterisk) {
                         // make sure to include the last slash
-                        tempToken.value += tokens[index].value;
-                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        // tempToken.value += tokens[index].value;
+                        // tempToken.end = tokens[index].end || tokens[index].position || -1;
                         index++;
 
                         i = false;
                     } else {
-                        tempToken.value += tokens[index].value;
-                        tempToken.end = tokens[index].end || tokens[index].position || -1;
+                        // tempToken.value += tokens[index].value;
+                        // tempToken.end = tokens[index].end || tokens[index].position || -1;
                         index++;
                     }
                 }
-                newTokens.push(tempToken);
+                // newTokens.push(tempToken);
                 continue;
             } else {
                 // just a slash ?
@@ -318,12 +322,15 @@ continue;
         } else if (token.type === TokenType.SingleQuote) {
             // single quote string
             // LEFT OFF need to make it not include the quotes lol
-            let tempToken = { type: TokenType.SingleQuote, value: '', position: index, end: index };
+            let tempToken = { type: TokenType.SingleQuote, value: '', position: token.position, end: token.position || -1 };
+            // let tempTokenIndex = index;
+            // index++; // skip current token as its the first quote
+
             let i = true;
             while (i) {
-                if ((tokens[index].type === TokenType.SingleQuote && tokens[index - 1].type !== TokenType.BackSlash) && index !== tempToken.position) {
+                if ((tokens[index].type === TokenType.SingleQuote && tokens[index].position !== tempToken.position && tokens[index - 1].type !== TokenType.BackSlash)) {
                     // make sure to include the last quote
-                    tempToken.value += tokens[index].value;
+                    
                     tempToken.end = tokens[index].end || tokens[index].position || -1;
                     index++;
 
@@ -338,7 +345,18 @@ continue;
             continue;
         } else if (token.type === TokenType.NewLine) {
             // new line
-            newTokens.push(token);
+            // ignore these for now
+            // newTokens.push(token);
+            index++;
+            continue;
+        } else if (token.type === TokenType.Colon) {
+            if (last.type !== TokenType.Value) {
+                //because im too lazy to figure out whats before the whitespace
+                throw new Error(`Unexpected ${TokenType[last.type]} before colon at position ${token.position}`);
+            }
+            newTokens.push({ ...last, type: TokenType.Key });
+            newTokens.push({ ...token, type: TokenType.ColonKeyValue });
+            
             index++;
             continue;
         }

@@ -1,553 +1,471 @@
 const tokens = [
     {
-        "type": "SingleLineComment",
-        "value": "// this is an inline comment or whatever",
-        "position": 0,
-        "end": 40
+        "type": "Key",
+        "value": "start",
+        "position": 211,
+        "end": 215
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 40
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 216
     },
     {
-        "type": "MultiLineCommentStart",
-        "value": "/* this is a multiline comment */",
-        "position": 17,
-        "end": 73
+        "type": "Key",
+        "value": "7",
+        "position": 218,
+        "end": 218
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 74
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 219
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 75
+        "type": "Key",
+        "value": "end",
+        "position": 287,
+        "end": 289
     },
     {
-        "type": "SingleLineComment",
-        "value": "// Schedules",
-        "position": 34,
-        "end": 88
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 290
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 88
+        "type": "Key",
+        "value": "start",
+        "position": 362,
+        "end": 366
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 108
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 367
     },
     {
-        "type": "MultiLineCommentStart",
-        "value": "/* Idea ?\n        #Passing [5min, nodisplay];\n    */",
-        "position": 51,
-        "end": 164
+        "type": "Key",
+        "value": "7",
+        "position": 369,
+        "end": 369
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 165
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 370
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 179
+        "type": "Key",
+        "value": "end",
+        "position": 385,
+        "end": 387
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 202
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 388
     },
     {
-        "type": "SingleLineComment",
-        "value": "// 24 hour time is default unless am/pm is specified",
-        "position": 120,
-        "end": 282
+        "type": "Key",
+        "value": "8",
+        "position": 392,
+        "end": 392
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 282
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 393
     },
     {
-        "type": "SingleLineComment",
-        "value": "// 8:00am would work too",
-        "position": 159,
-        "end": 331
+        "type": "Key",
+        "value": "start",
+        "position": 514,
+        "end": 518
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 331
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 519
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 337
+        "type": "Key",
+        "value": "7",
+        "position": 521,
+        "end": 521
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 361
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 522
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 384
+        "type": "Key",
+        "value": "end",
+        "position": 537,
+        "end": 539
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 407
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 540
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 413
+        "type": "Key",
+        "value": "8",
+        "position": 544,
+        "end": 544
     },
     {
-        "type": "SingleLineComment",
-        "value": "// Period can be ommited, its default. It is not recommended because of readability",
-        "position": 245,
-        "end": 513
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 545
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 513
+        "type": "Key",
+        "value": "start",
+        "position": 590,
+        "end": 594
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 536
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 595
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 559
+        "type": "Key",
+        "value": "7",
+        "position": 597,
+        "end": 597
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 565
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 598
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 589
+        "type": "Key",
+        "value": "end",
+        "position": 613,
+        "end": 615
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 612
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 616
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 635
+        "type": "Key",
+        "value": "8",
+        "position": 620,
+        "end": 620
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 641
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 621
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 665
+        "type": "Key",
+        "value": "start",
+        "position": 666,
+        "end": 670
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 688
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 671
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 711
+        "type": "Key",
+        "value": "7",
+        "position": 673,
+        "end": 673
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 717
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 674
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 741
+        "type": "Key",
+        "value": "end",
+        "position": 689,
+        "end": 691
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 764
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 692
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 787
+        "type": "Key",
+        "value": "8",
+        "position": 696,
+        "end": 696
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 793
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 697
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 817
+        "type": "Key",
+        "value": "start",
+        "position": 742,
+        "end": 746
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 840
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 747
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 863
+        "type": "Key",
+        "value": "7",
+        "position": 749,
+        "end": 749
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 869
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 750
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 870
+        "type": "Key",
+        "value": "end",
+        "position": 765,
+        "end": 767
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 884
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 768
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 900
+        "type": "Key",
+        "value": "8",
+        "position": 772,
+        "end": 772
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 926
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 773
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 954
+        "type": "Key",
+        "value": "start",
+        "position": 818,
+        "end": 822
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 980
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 823
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1003
+        "type": "Key",
+        "value": "7",
+        "position": 825,
+        "end": 825
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1009
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 826
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1011
+        "type": "Key",
+        "value": "end",
+        "position": 841,
+        "end": 843
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1012
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 844
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1040
+        "type": "Key",
+        "value": "8",
+        "position": 848,
+        "end": 848
     },
     {
-        "type": "SingleLineComment",
-        "value": "// write code here",
-        "position": 635,
-        "end": 1063
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 849
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1063
+        "type": "Key",
+        "value": "basedOnPeriod",
+        "position": 901,
+        "end": 913
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1065
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 914
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1066
+        "type": "Key",
+        "value": "startTime",
+        "position": 927,
+        "end": 935
     },
     {
-        "type": "SingleLineComment",
-        "value": "// This is just an idea, might be useless",
-        "position": 647,
-        "end": 1108
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 936
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1108
+        "type": "Key",
+        "value": "10",
+        "position": 938,
+        "end": 939
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1136
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 940
     },
     {
-        "type": "SingleLineComment",
-        "value": "// If for some reason the schedule needs to be reused from an existing one",
-        "position": 679,
-        "end": 1215
+        "type": "Key",
+        "value": "endTime",
+        "position": 955,
+        "end": 961
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1215
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 962
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1232
+        "type": "Key",
+        "value": "11",
+        "position": 964,
+        "end": 965
     },
     {
-        "type": "SingleLineComment",
-        "value": "// white stuff that changes the values maybe",
-        "position": 724,
-        "end": 1281
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 966
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1281
+        "type": "Key",
+        "value": "passing",
+        "position": 981,
+        "end": 987
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1283
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 988
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1284
+        "type": "Key",
+        "value": "date",
+        "position": 1392,
+        "end": 1395
     },
     {
-        "type": "SingleLineComment",
-        "value": "// events. you could put this in a seperat file aswell",
-        "position": 744,
-        "end": 1339
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1396
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1339
+        "type": "Key",
+        "value": "message",
+        "position": 1420,
+        "end": 1426
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1340
-    },
-    {
-        "type": "SingleLineComment",
-        "value": "// Message only event",
-        "position": 769,
-        "end": 1362
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1362
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1395
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1423
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1427
     },
     {
         "type": "SingleQuote",
-        "value": "'Test'",
-        "position": 811,
-        "end": 1442
+        "value": "'Test",
+        "position": 1429,
+        "end": 1434
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1444
+        "type": "Key",
+        "value": "date",
+        "position": 1484,
+        "end": 1487
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1446
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1488
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1447
+        "type": "Key",
+        "value": "message",
+        "position": 1512,
+        "end": 1518
     },
     {
-        "type": "SingleLineComment",
-        "value": "// Single day event",
-        "position": 819,
-        "end": 1467
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1467
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1487
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1515
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1519
     },
     {
         "type": "SingleQuote",
-        "value": "'Test'",
-        "position": 858,
-        "end": 1534
+        "value": "'Test",
+        "position": 1521,
+        "end": 1526
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1536
+        "type": "Key",
+        "value": "schedule",
+        "position": 1533,
+        "end": 1540
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1566
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1541
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1568
+        "type": "Key",
+        "value": "message",
+        "position": 1717,
+        "end": 1723
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1569
-    },
-    {
-        "type": "SingleLineComment",
-        "value": "// Group of events that use the same schedule, but different days have different messages",
-        "position": 876,
-        "end": 1659
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1659
-    },
-    {
-        "type": "SingleLineComment",
-        "value": "// write ...",
-        "position": 908,
-        "end": 1672
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1672
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1673
-    },
-    {
-        "type": "SingleLineComment",
-        "value": "// A event that reoccurrs",
-        "position": 918,
-        "end": 1699
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1699
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1720
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1724
     },
     {
         "type": "SingleQuote",
-        "value": "'1 Hour Late Start'",
-        "position": 944,
-        "end": 1752
+        "value": "'1 Hour Late Start",
+        "position": 1726,
+        "end": 1744
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1754
+        "type": "Key",
+        "value": "schedule",
+        "position": 1751,
+        "end": 1758
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1784
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1759
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1798
+        "type": "Key",
+        "value": "occurs",
+        "position": 1781,
+        "end": 1786
     },
     {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1825
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1852
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1859
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1861
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 1862
-    },
-    {
-        "type": "MultiLineCommentStart",
-        "value": "/* JS Output\n    {\n        Schedules: {\n            Normal: {\n                Classes: [\n                    // the type is written in its ts enum form, in reality itll be a number\n                    { type: Advisory, period: null, ... },\n                    { type: Period, period: 1, ... },\n                ]\n            },\n            ...\n        },\n        Events: [\n            ...\n        ]\n    }\n*/",
-        "position": 1016,
-        "end": 2268
-    },
-    {
-        "type": "NewLine",
-        "value": "\n",
-        "position": 2269
+        "type": "ColonKeyValue",
+        "value": ":",
+        "position": 1787
     }
 ]
