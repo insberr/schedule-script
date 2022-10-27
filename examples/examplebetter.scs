@@ -16,7 +16,7 @@ schedule default {
     class dismissal 14:05 14:10;
 
     //lunch <num> <type> <start> <end>
-    // really dont see the need for this complex stuff, per grade lunches would be handled by overrides. 
+    // really dont see the need for this complex stuff, per grade lunches would be handled by overrides. (see override lunch-10)
     lunch {
         based 3 {
             lunch 1 9:55 10:25;
@@ -39,7 +39,11 @@ schedule default {
         override append 2 period 13 <time>;
     }
 
-    overide cambridge-11 {
+    overide lunch-10 {
+        // fuck it tenth graders have fucking 1st lunch
+        only grade 10
+        lunch F lunch <time>; // F takes precdence over all other lunch directives
+        lunch F period <time>;
         // do code
     }
 
