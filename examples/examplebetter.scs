@@ -16,19 +16,15 @@ schedule default {
     class dismissal 14:05 14:10;
 
     //lunch <num> <type> <start> <end>
-    // really dont see the need for this complex stuff, per grade lunches would be handled by overrides. (see override lunch-10)
-    lunch {
-        based 3 {
-            lunch 1 9:55 10:25;
-            lunch 2 10:30 11:00;
-            lunch 3 11:10 11:40;
-        };
-        // if lunch is based on two periods (this was that multilunch idea i had but never implemented)
-        based 4 {
-            lunch 4 11:40 12:10;
-            lunch 5 12:15 12:55;
-        };
-    };
+    lunch 1 lunch 9:55 10:25;
+    lunch 1 period 10:30 11:40;
+
+    lunch 2 period 10:00 10:30;
+    lunch 2 lunch 10:30 11:00;
+    lunch 2 period 11:05 11:40;
+
+    lunch 3 period 10:00 11:10;
+    lunch 3 lunch 11:10 11:40;
 
     overide cambridge-10 {
         only grade 10 
@@ -51,8 +47,8 @@ schedule default {
 
 schedule default-nolunch inherit default {
     lunchBased false; // same as default but with no lunches
-    // override <replace/prepend/append> <index> <type> [num] <start> <end> (index is the 0 based index of the class, first class definied is 0, then 1 etc etc.)
-    override replace 6 dismissal 14:05 14:35 //make dismissal 30 minutes long
+    // override <replace/prepend/append> <index> <data> (index is the 0 based index of the statement, first statement definied is 0, then 1 etc etc.)
+    override replace 7 class dismissal 14:05 14:35 //make dismissal 30 minutes long
 
 };
 
