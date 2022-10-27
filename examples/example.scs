@@ -1,52 +1,27 @@
-// this is an inline comment or whatever
-/* this is a multiline comment */
 
-// Schedules
-Schedule [Normal] {
-    /* Idea ?
-        #Passing [5min, nodisplay];
-    */
-    @Classes;
-    Class [Advisory] {
-        start: 7:30am; // 24 hour time is default unless am/pm is specified
-        end:   8am; // 8:00am would work too
-    }
-    Class [Period, 1] {
-        start: 7:30am;
-        end:   8:00am;
-    }
-    Class [2] { // Period can be ommited, its default. It is not recommended because of readability
-        start: 7:30am;
-        end:   8:00am;
-    }
-    Class [Period, 3] {
-        start: 7:30am;
-        end:   8:00am;
-    }
-    Class [Period, 4] {
-        start: 7:30am;
-        end:   8:00am;
-    }
-    Class [Period, 5] {
-        start: 7:30am;
-        end:   8:00am;
-    }
-    Class [Dismissal] {
-        start: 7:30am;
-        end:   8:00am;
-    }
+// Schedule <name>
+Schedule normal {
+    Description: Default schedule;
+    Class [Advisory] 7:30am | 8am;
+    Class [Period 1] 7:30am | 8:00am;
+    // Can also write just the period number ONLY FOR PERIODS
+    Class [2] 7:30am | 8:00am;
+    Class [3] 7:30am | 8:00am;
+    Class [4] 7:30am | 8:00am;
+    Class [5] 7:30am | 8:00am;
+    Class [Dismissal] 7:30am | 8:00am;
 
-    @Lunches;
-    Lunch [1] {
-        basedOnPeriod: 3;
-        startTime: 10:30am;
-        endTime: 11:00am;
-        passing: 5min;
-    }
+    Lunch [Config] based on period 3 | passing 5min;
+    Lunch [1] 10:30 | 11:00;
+    Lunch [2] 11:00 | 11:30;
 }
 
-Schedule [LateStart1Hour] {
+Schedule LateStart1Hour {
     // write code here
+}
+
+Schedule Pain inherit normal {
+    // do stuff
 }
 
 // This is just an idea, might be useless
