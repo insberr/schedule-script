@@ -31,7 +31,7 @@ schedule default {
 
     { // this block will be absorbed into its parent if all of the conditions inside are met
         only grade 10 
-        only classes contains 11 or 12 or 13 // figure this out later
+        only classes contains periods 11 or 12 or 13 // figure this out later
         // if these conditions pass, the following is injected into the body
         override replace $class+2 period 11 <time>;
         override replace $class+3 period 12  <time>;

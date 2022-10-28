@@ -1,26 +1,24 @@
 
 /* schedule <name> */
 schedule normal {
-    # Default schedule; // Description
+    @description: 'Default schedule';
     
-    class [advisory] 7:30 8:00;
-    class [period 1] 7:30 8; // or just 8 works
-    // Can also write just the period number ONLY FOR PERIODS
-    class [2] 7:30 to 8:00;
+    @class;
+    class [advisory] 7:30 | 8:00;
+    class [period 1] 7:30 | 8; // or just 8 works
+    class [2] 7:30 | 8:00; // Can also write just the period number ONLY FOR PERIODS
     class [3] 7:30 to 8:00;
     class [4] 7:30 to 8:00;
     class [5] 7:30 to 8:00;
-    class [dismissal] 7:30 8:00;
+    class [dismissal] 7:30 to 8:00;
 
-    lunch [config] (basedOnPeriod 3) (passing 5 minutes);
+    @lunch { basedOnPeriod: 3, passing: 5 minutes };
     lunch [1] 10:30 to 11:00;
     lunch [2] 11:00 to 11:30;
     lunch [3] 11:30 to 12:00;
-}
+};
 
-schedule LateStart1Hour {
-    // write code here
-}
+schedule LateStart1Hour {};
 
 /* Inherit Schedule */
 schedule pain inherit normal {
@@ -33,14 +31,16 @@ schedule pain inherit normal {
 
 // Message only event
 // SigngleDay, MessageOnly <date> '<message>'
-event [SingleDay, MessageOnly] October 23, 2022 {
-    Test Event;
+event [MessageOnly] {
+    date: October 23, 2022;
+    message: 'Test Event';
 }
 
 // Single day event
-event [SingleDay] October 23, 2022 {
-    LateStart1Hour;
-    Test Schedule Event;
+event {
+    date: October 23, 2022;
+    schedule LateStart1Hour;
+    message 'Test Schedule Event';
 }
 
 // Group of events that use the same schedule, but different days have different messages
