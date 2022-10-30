@@ -1,12 +1,12 @@
 
-overide defaultZero {
+overide [defaultZero] {
     user classes contains period 0; // only if the user has a period zero
     schedule classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
 
     replace class [arrival] with { [period 0] 6:30 to 7:30 };
 }
 
-overide cambridge {
+overide [cambridge] {
     /*
         Things passed to an overide by default
 
@@ -61,7 +61,7 @@ overide cambridge {
     force lunch [3];
 }
 
-schedule normal {
+schedule [normal] {
     @description 'Normal Schedule';
 
     @classes;
@@ -89,19 +89,18 @@ schedule normal {
 
 teacher [Rick Astley] ABCD-1234-AB34;
 
-event [November 2, 2022] {
-    @type [singleday];
+event [singleday] {
+    @date [November 2, 2022];
     @schedule advisory;
     @message 'Advisory Day';
 }
 
-event [November 2, 2022] to [November 5, 2022] {
-    @type [messageonly];
+event [multiday, messageonly] {
+    @date [November 2, 2022] to [November 5, 2022];
     @message 'Yall Silly';
 }
 
-event {
-    @type [reoccuring];
+event [reoccuring] {
     @schedule lateStart;
     @message 'Late Start';
     @occurs;
@@ -109,13 +108,13 @@ event {
     date [november 9, 2022];
 }
 
-event {
-    @type [group];
-    @starts [November 3, 2022];
-    @ends [November 5, 2022];
+event [eventrange] {
+    @info 'Assemblies';
+    @date [November 3, 2022] to [November 5, 2022];
     @events [messageonly];
-    day [1] 'Something Strange';
-    day [2] 'Something Strange';
+    day [1] 'Something Strange 1';
+    day [2] 'Something Strange 2';
+    day [3] 'Something Strange 3';
 }
 
 // Im tired, going to bed.
