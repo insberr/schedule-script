@@ -1,27 +1,26 @@
-import { scs, TokenType, makeUsefullTokens } from '../src/scs';
-import { writeFileSync } from "fs";
-
-
-const result = scs();
-writeFileSync('./tests/outputtokens.js', "const tokens = " + JSON.stringify(result, (k, v) => {
-    if (k === 'type') return TokenType[v];
+"use strict";
+exports.__esModule = true;
+var scs_1 = require("../src/scs");
+var fs_1 = require("fs");
+var result = (0, scs_1.scs)();
+(0, fs_1.writeFileSync)('./tests/outputtokens.js', "const tokens = " + JSON.stringify(result, function (k, v) {
+    if (k === 'type')
+        return scs_1.TokenType[v];
     return v;
 }, 4));
-
-
-const result2 = makeUsefullTokens(result);
-writeFileSync('./tests/outputusefulltokens.js', "const tokens = " + JSON.stringify(result2, (k, v) => {
-    if (k === 'type') return TokenType[v];
+var result2 = (0, scs_1.makeUsefullTokens)(result);
+(0, fs_1.writeFileSync)('./tests/outputusefulltokens.js', "const tokens = " + JSON.stringify(result2, function (k, v) {
+    if (k === 'type')
+        return scs_1.TokenType[v];
     return v;
 }, 4));
-
-const combinedBecause = result2.map(x => {
-    if (x.type === TokenType.SimiColon) return x.value + '\n';
+var combinedBecause = result2.map(function (x) {
+    if (x.type === scs_1.TokenType.SimiColon)
+        return x.value + '\n';
     return x.value + ' ';
 }).join('');
 console.log(combinedBecause);
-writeFileSync('./tests/theheck.txt', combinedBecause);
-
+(0, fs_1.writeFileSync)('./tests/theheck.txt', combinedBecause);
 // i could write JSON
 /*
 const jsonSchedules = {
@@ -39,7 +38,7 @@ const jsonSchedules = {
                     }
                 }
             }]}}
-// or i could write 
+// or i could write
 
 Schedule [Normal] {
     // ...
@@ -51,4 +50,4 @@ Schedule [Normal] {
         }
     ]
 }
-*/
+*/ 

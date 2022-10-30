@@ -6,293 +6,302 @@ const tokens = [
         "end": 7
     },
     {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 9
+    },
+    {
         "type": "Value",
         "value": "defaultZero",
-        "position": 9,
-        "end": 19
+        "position": 10,
+        "end": 20
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 21
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 21
+        "position": 23
     },
     {
         "type": "Value",
         "value": "user",
-        "position": 27,
-        "end": 30
+        "position": 29,
+        "end": 32
     },
     {
         "type": "Value",
         "value": "classes",
-        "position": 32,
-        "end": 38
+        "position": 34,
+        "end": 40
     },
     {
         "type": "Value",
         "value": "contains",
-        "position": 40,
-        "end": 47
+        "position": 42,
+        "end": 49
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 49,
-        "end": 54
+        "position": 51,
+        "end": 56
     },
     {
         "type": "Number",
         "value": "0",
-        "position": 56,
-        "end": 56
+        "position": 58,
+        "end": 58
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 57
+        "position": 59
     },
     {
         "type": "Value",
         "value": "schedule",
-        "position": 63,
-        "end": 70
+        "position": 65,
+        "end": 72
     },
     {
         "type": "Value",
         "value": "classes",
-        "position": 72,
-        "end": 78
+        "position": 74,
+        "end": 80
     },
     {
         "type": "Value",
         "value": "contains",
-        "position": 80,
-        "end": 87
+        "position": 82,
+        "end": 89
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 89
+        "position": 91
     },
     {
         "type": "Value",
         "value": "arrival",
-        "position": 90,
-        "end": 96
+        "position": 92,
+        "end": 98
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 97
+        "position": 99
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 98
+        "position": 100
     },
     {
         "type": "Value",
         "value": "replace",
-        "position": 105,
-        "end": 111
+        "position": 107,
+        "end": 113
     },
     {
         "type": "Value",
         "value": "class",
-        "position": 113,
-        "end": 117
+        "position": 115,
+        "end": 119
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 119
+        "position": 121
     },
     {
         "type": "Value",
         "value": "arrival",
-        "position": 120,
-        "end": 126
+        "position": 122,
+        "end": 128
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 127
+        "position": 129
     },
     {
         "type": "Value",
         "value": "with",
-        "position": 129,
-        "end": 132
+        "position": 131,
+        "end": 134
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 134
+        "position": 136
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 136
+        "position": 138
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 137,
-        "end": 142
+        "position": 139,
+        "end": 144
     },
     {
         "type": "Number",
         "value": "0",
-        "position": 144,
-        "end": 144
+        "position": 146,
+        "end": 146
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 145
+        "position": 147
     },
     {
         "type": "Number",
         "value": "6",
-        "position": 147,
-        "end": 147
+        "position": 149,
+        "end": 149
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 148
+        "position": 150
     },
     {
         "type": "Number",
         "value": "30",
-        "position": 149,
-        "end": 150
+        "position": 151,
+        "end": 152
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 152,
-        "end": 153
+        "position": 154,
+        "end": 155
     },
     {
         "type": "Number",
         "value": "7",
-        "position": 155,
-        "end": 155
+        "position": 157,
+        "end": 157
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 156
+        "position": 158
     },
     {
         "type": "Number",
         "value": "30",
-        "position": 157,
-        "end": 158
+        "position": 159,
+        "end": 160
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 160
+        "position": 162
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 161
+        "position": 163
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 163
+        "position": 165
     },
     {
         "type": "Value",
         "value": "overide",
-        "position": 166,
-        "end": 172
+        "position": 168,
+        "end": 174
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 176
     },
     {
         "type": "Value",
         "value": "cambridge",
-        "position": 174,
-        "end": 182
+        "position": 177,
+        "end": 185
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 186
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 184
+        "position": 188
     },
     {
         "type": "At",
         "value": "@",
-        "position": 200
+        "position": 204
     },
     {
         "type": "Value",
         "value": "options",
-        "position": 201,
-        "end": 207
+        "position": 205,
+        "end": 211
     },
     {
         "type": "Unknown",
         "value": "(",
-        "position": 209
+        "position": 213
     },
     {
         "type": "Value",
         "value": "times",
-        "position": 210,
-        "end": 214
+        "position": 214,
+        "end": 218
     },
     {
         "type": "Unknown",
         "value": ")",
-        "position": 215
+        "position": 219
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 216
+        "position": 220
     },
     {
         "type": "Value",
         "value": "user",
-        "position": 237,
-        "end": 240
+        "position": 241,
+        "end": 244
     },
     {
         "type": "Value",
         "value": "classes",
-        "position": 242,
-        "end": 248
+        "position": 246,
+        "end": 252
     },
     {
         "type": "Value",
         "value": "contains",
-        "position": 250,
-        "end": 257
+        "position": 254,
+        "end": 261
     },
     {
         "type": "Value",
         "value": "periods",
-        "position": 259,
-        "end": 265
+        "position": 263,
+        "end": 269
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 267,
-        "end": 268
-    },
-    {
-        "type": "Comma",
-        "value": ",",
-        "position": 269
-    },
-    {
-        "type": "Number",
-        "value": "12",
         "position": 271,
         "end": 272
     },
@@ -303,2803 +312,2798 @@ const tokens = [
     },
     {
         "type": "Number",
-        "value": "13",
+        "value": "12",
         "position": 275,
         "end": 276
     },
     {
+        "type": "Comma",
+        "value": ",",
+        "position": 277
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 279,
+        "end": 280
+    },
+    {
         "type": "SimiColon",
         "value": ";",
-        "position": 277
+        "position": 281
     },
     {
         "type": "At",
         "value": "@",
-        "position": 302
+        "position": 306
     },
     {
         "type": "Value",
         "value": "overide",
-        "position": 303,
-        "end": 309
+        "position": 307,
+        "end": 313
     },
     {
         "type": "Value",
         "value": "grade10",
-        "position": 311,
-        "end": 317
+        "position": 315,
+        "end": 321
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 318
+        "position": 322
     },
     {
         "type": "Value",
         "value": "user",
-        "position": 324,
-        "end": 327
+        "position": 328,
+        "end": 331
     },
     {
         "type": "Value",
         "value": "grade",
-        "position": 329,
-        "end": 333
+        "position": 333,
+        "end": 337
     },
     {
         "type": "Number",
         "value": "10",
-        "position": 335,
-        "end": 336
+        "position": 339,
+        "end": 340
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 337
+        "position": 341
     },
     {
         "type": "Value",
         "value": "remove",
-        "position": 348,
-        "end": 353
+        "position": 352,
+        "end": 357
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 355
+        "position": 359
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 356,
-        "end": 361
+        "position": 360,
+        "end": 365
     },
     {
         "type": "Number",
         "value": "1",
-        "position": 363,
-        "end": 363
+        "position": 367,
+        "end": 367
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 364
+        "position": 368
     },
     {
         "type": "Unknown",
         "value": "&",
-        "position": 366
+        "position": 370
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 368
+        "position": 372
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 369,
-        "end": 374
+        "position": 373,
+        "end": 378
     },
     {
         "type": "Number",
         "value": "2",
-        "position": 376,
-        "end": 376
+        "position": 380,
+        "end": 380
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 377
+        "position": 381
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 378
+        "position": 382
     },
     {
         "type": "Value",
         "value": "insert",
-        "position": 384,
-        "end": 389
+        "position": 388,
+        "end": 393
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 391
+        "position": 395
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 393
+        "position": 397
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 394,
-        "end": 399
+        "position": 398,
+        "end": 403
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 401,
-        "end": 402
+        "position": 405,
+        "end": 406
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 403
+        "position": 407
     },
     {
         "type": "Value",
         "value": "times",
-        "position": 405,
-        "end": 409
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 410
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 411
-    },
-    {
-        "type": "Number",
-        "value": "11",
-        "position": 412,
+        "position": 409,
         "end": 413
     },
     {
-        "type": "RightBracket",
-        "value": "]",
+        "type": "Point",
+        "value": ".",
         "position": 414
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 415
-    },
-    {
-        "type": "Value",
-        "value": "start",
-        "position": 416,
-        "end": 420
-    },
-    {
-        "type": "Value",
-        "value": "to",
-        "position": 422,
-        "end": 423
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 425,
-        "end": 429
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 430
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 431
+        "position": 415
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 432,
+        "position": 416,
+        "end": 417
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 418
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 419
+    },
+    {
+        "type": "Value",
+        "value": "start",
+        "position": 420,
+        "end": 424
+    },
+    {
+        "type": "Value",
+        "value": "to",
+        "position": 426,
+        "end": 427
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 429,
         "end": 433
     },
     {
-        "type": "RightBracket",
-        "value": "]",
+        "type": "Point",
+        "value": ".",
         "position": 434
     },
     {
-        "type": "Point",
-        "value": ".",
+        "type": "LeftBracket",
+        "value": "[",
         "position": 435
     },
     {
-        "type": "Value",
-        "value": "end",
-        "position": 436,
-        "end": 438
-    },
-    {
-        "type": "RightCurly",
-        "value": "}",
-        "position": 440
-    },
-    {
-        "type": "Value",
-        "value": "last",
-        "position": 442,
-        "end": 445
-    },
-    {
-        "type": "Value",
-        "value": "operation",
-        "position": 447,
-        "end": 455
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 456
-    },
-    {
-        "type": "Value",
-        "value": "insert",
-        "position": 462,
-        "end": 467
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 469
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 471
-    },
-    {
-        "type": "Value",
-        "value": "period",
-        "position": 472,
-        "end": 477
-    },
-    {
         "type": "Number",
-        "value": "12",
-        "position": 479,
-        "end": 480
+        "value": "11",
+        "position": 436,
+        "end": 437
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 481
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 483,
-        "end": 487
+        "position": 438
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 488
+        "position": 439
+    },
+    {
+        "type": "Value",
+        "value": "end",
+        "position": 440,
+        "end": 442
+    },
+    {
+        "type": "RightCurly",
+        "value": "}",
+        "position": 444
+    },
+    {
+        "type": "Value",
+        "value": "last",
+        "position": 446,
+        "end": 449
+    },
+    {
+        "type": "Value",
+        "value": "operation",
+        "position": 451,
+        "end": 459
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 460
+    },
+    {
+        "type": "Value",
+        "value": "insert",
+        "position": 466,
+        "end": 471
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 473
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 489
+        "position": 475
+    },
+    {
+        "type": "Value",
+        "value": "period",
+        "position": 476,
+        "end": 481
     },
     {
         "type": "Number",
         "value": "12",
-        "position": 490,
+        "position": 483,
+        "end": 484
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 485
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 487,
         "end": 491
     },
     {
-        "type": "RightBracket",
-        "value": "]",
+        "type": "Point",
+        "value": ".",
         "position": 492
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 493
-    },
-    {
-        "type": "Value",
-        "value": "start",
-        "position": 494,
-        "end": 498
-    },
-    {
-        "type": "Value",
-        "value": "to",
-        "position": 500,
-        "end": 501
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 503,
-        "end": 507
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 508
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 509
+        "position": 493
     },
     {
         "type": "Number",
         "value": "12",
-        "position": 510,
-        "end": 511
+        "position": 494,
+        "end": 495
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 512
+        "position": 496
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 513
-    },
-    {
-        "type": "Value",
-        "value": "end",
-        "position": 514,
-        "end": 516
-    },
-    {
-        "type": "RightCurly",
-        "value": "}",
-        "position": 518
-    },
-    {
-        "type": "Value",
-        "value": "after",
-        "position": 520,
-        "end": 524
-    },
-    {
-        "type": "Value",
-        "value": "last",
-        "position": 526,
-        "end": 529
-    },
-    {
-        "type": "Value",
-        "value": "operation",
-        "position": 531,
-        "end": 539
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 540
-    },
-    {
-        "type": "Value",
-        "value": "insert",
-        "position": 546,
-        "end": 551
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 553
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 555
-    },
-    {
-        "type": "Value",
-        "value": "period",
-        "position": 556,
-        "end": 561
-    },
-    {
-        "type": "Number",
-        "value": "13",
-        "position": 563,
-        "end": 564
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 565
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 567,
-        "end": 571
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 572
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 573
-    },
-    {
-        "type": "Number",
-        "value": "13",
-        "position": 574,
-        "end": 575
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 576
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 577
+        "position": 497
     },
     {
         "type": "Value",
         "value": "start",
-        "position": 578,
-        "end": 582
+        "position": 498,
+        "end": 502
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 584,
-        "end": 585
+        "position": 504,
+        "end": 505
     },
     {
         "type": "Value",
         "value": "times",
-        "position": 587,
-        "end": 591
+        "position": 507,
+        "end": 511
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 592
+        "position": 512
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 593
+        "position": 513
     },
     {
         "type": "Number",
-        "value": "13",
-        "position": 594,
-        "end": 595
+        "value": "12",
+        "position": 514,
+        "end": 515
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 596
+        "position": 516
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 597
+        "position": 517
     },
     {
         "type": "Value",
         "value": "end",
-        "position": 598,
-        "end": 600
+        "position": 518,
+        "end": 520
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 602
+        "position": 522
     },
     {
         "type": "Value",
         "value": "after",
-        "position": 604,
-        "end": 608
+        "position": 524,
+        "end": 528
     },
     {
         "type": "Value",
         "value": "last",
-        "position": 610,
-        "end": 613
+        "position": 530,
+        "end": 533
     },
     {
         "type": "Value",
         "value": "operation",
-        "position": 615,
-        "end": 623
+        "position": 535,
+        "end": 543
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 624
+        "position": 544
+    },
+    {
+        "type": "Value",
+        "value": "insert",
+        "position": 550,
+        "end": 555
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 557
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 559
+    },
+    {
+        "type": "Value",
+        "value": "period",
+        "position": 560,
+        "end": 565
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 567,
+        "end": 568
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 569
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 571,
+        "end": 575
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 576
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 577
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 578,
+        "end": 579
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 580
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 581
+    },
+    {
+        "type": "Value",
+        "value": "start",
+        "position": 582,
+        "end": 586
+    },
+    {
+        "type": "Value",
+        "value": "to",
+        "position": 588,
+        "end": 589
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 591,
+        "end": 595
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 596
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 597
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 598,
+        "end": 599
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 600
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 601
+    },
+    {
+        "type": "Value",
+        "value": "end",
+        "position": 602,
+        "end": 604
+    },
+    {
+        "type": "RightCurly",
+        "value": "}",
+        "position": 606
+    },
+    {
+        "type": "Value",
+        "value": "after",
+        "position": 608,
+        "end": 612
+    },
+    {
+        "type": "Value",
+        "value": "last",
+        "position": 614,
+        "end": 617
+    },
+    {
+        "type": "Value",
+        "value": "operation",
+        "position": 619,
+        "end": 627
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 628
     },
     {
         "type": "At",
         "value": "@",
-        "position": 631
+        "position": 635
     },
     {
         "type": "Value",
         "value": "overide",
-        "position": 632,
-        "end": 638
+        "position": 636,
+        "end": 642
     },
     {
         "type": "Value",
         "value": "grade11",
-        "position": 640,
-        "end": 646
+        "position": 644,
+        "end": 650
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 647
+        "position": 651
     },
     {
         "type": "Value",
         "value": "user",
-        "position": 653,
-        "end": 656
+        "position": 657,
+        "end": 660
     },
     {
         "type": "Value",
         "value": "grade",
-        "position": 658,
-        "end": 662
+        "position": 662,
+        "end": 666
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 664,
-        "end": 665
+        "position": 668,
+        "end": 669
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 666
+        "position": 670
     },
     {
         "type": "Value",
         "value": "remove",
-        "position": 673,
-        "end": 678
+        "position": 677,
+        "end": 682
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 680
+        "position": 684
     },
     {
         "type": "Number",
         "value": "2",
-        "position": 681,
-        "end": 681
+        "position": 685,
+        "end": 685
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 682
+        "position": 686
     },
     {
         "type": "Unknown",
         "value": "&",
-        "position": 684
+        "position": 688
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 686
+        "position": 690
     },
     {
         "type": "Number",
         "value": "3",
-        "position": 687,
-        "end": 687
+        "position": 691,
+        "end": 691
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 688
+        "position": 692
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 689
+        "position": 693
     },
     {
         "type": "Value",
         "value": "insert",
-        "position": 695,
-        "end": 700
+        "position": 699,
+        "end": 704
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 702
+        "position": 706
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 704
+        "position": 708
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 705,
-        "end": 706
+        "position": 709,
+        "end": 710
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 707
+        "position": 711
     },
     {
         "type": "Value",
         "value": "times",
-        "position": 709,
-        "end": 713
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 714
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 715
-    },
-    {
-        "type": "Number",
-        "value": "11",
-        "position": 716,
+        "position": 713,
         "end": 717
     },
     {
-        "type": "RightBracket",
-        "value": "]",
+        "type": "Point",
+        "value": ".",
         "position": 718
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 719
-    },
-    {
-        "type": "Value",
-        "value": "start",
-        "position": 720,
-        "end": 724
-    },
-    {
-        "type": "Value",
-        "value": "to",
-        "position": 726,
-        "end": 727
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 729,
-        "end": 733
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 734
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 735
+        "position": 719
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 736,
+        "position": 720,
+        "end": 721
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 722
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 723
+    },
+    {
+        "type": "Value",
+        "value": "start",
+        "position": 724,
+        "end": 728
+    },
+    {
+        "type": "Value",
+        "value": "to",
+        "position": 730,
+        "end": 731
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 733,
         "end": 737
     },
     {
-        "type": "RightBracket",
-        "value": "]",
+        "type": "Point",
+        "value": ".",
         "position": 738
     },
     {
-        "type": "Point",
-        "value": ".",
+        "type": "LeftBracket",
+        "value": "[",
         "position": 739
     },
     {
-        "type": "Value",
-        "value": "end",
-        "position": 740,
-        "end": 742
-    },
-    {
-        "type": "RightCurly",
-        "value": "}",
-        "position": 744
-    },
-    {
-        "type": "Value",
-        "value": "last",
-        "position": 746,
-        "end": 749
-    },
-    {
-        "type": "Value",
-        "value": "operation",
-        "position": 751,
-        "end": 759
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 760
-    },
-    {
-        "type": "Value",
-        "value": "insert",
-        "position": 766,
-        "end": 771
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 773
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 775
-    },
-    {
         "type": "Number",
-        "value": "12",
-        "position": 776,
-        "end": 777
+        "value": "11",
+        "position": 740,
+        "end": 741
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 778
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 780,
-        "end": 784
+        "position": 742
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 785
+        "position": 743
+    },
+    {
+        "type": "Value",
+        "value": "end",
+        "position": 744,
+        "end": 746
+    },
+    {
+        "type": "RightCurly",
+        "value": "}",
+        "position": 748
+    },
+    {
+        "type": "Value",
+        "value": "last",
+        "position": 750,
+        "end": 753
+    },
+    {
+        "type": "Value",
+        "value": "operation",
+        "position": 755,
+        "end": 763
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 764
+    },
+    {
+        "type": "Value",
+        "value": "insert",
+        "position": 770,
+        "end": 775
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 777
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 786
+        "position": 779
     },
     {
         "type": "Number",
         "value": "12",
-        "position": 787,
+        "position": 780,
+        "end": 781
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 782
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 784,
         "end": 788
     },
     {
-        "type": "RightBracket",
-        "value": "]",
+        "type": "Point",
+        "value": ".",
         "position": 789
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 790
-    },
-    {
-        "type": "Value",
-        "value": "start",
-        "position": 791,
-        "end": 795
-    },
-    {
-        "type": "Value",
-        "value": "to",
-        "position": 797,
-        "end": 798
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 800,
-        "end": 804
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 805
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 806
+        "position": 790
     },
     {
         "type": "Number",
         "value": "12",
-        "position": 807,
-        "end": 808
+        "position": 791,
+        "end": 792
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 809
+        "position": 793
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 810
-    },
-    {
-        "type": "Value",
-        "value": "end",
-        "position": 811,
-        "end": 813
-    },
-    {
-        "type": "RightCurly",
-        "value": "}",
-        "position": 815
-    },
-    {
-        "type": "Value",
-        "value": "after",
-        "position": 817,
-        "end": 821
-    },
-    {
-        "type": "Value",
-        "value": "last",
-        "position": 823,
-        "end": 826
-    },
-    {
-        "type": "Value",
-        "value": "operation",
-        "position": 828,
-        "end": 836
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 837
-    },
-    {
-        "type": "Value",
-        "value": "insert",
-        "position": 843,
-        "end": 848
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 850
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 852
-    },
-    {
-        "type": "Number",
-        "value": "13",
-        "position": 853,
-        "end": 854
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 855
-    },
-    {
-        "type": "Value",
-        "value": "times",
-        "position": 857,
-        "end": 861
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 862
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 863
-    },
-    {
-        "type": "Number",
-        "value": "13",
-        "position": 864,
-        "end": 865
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 866
-    },
-    {
-        "type": "Point",
-        "value": ".",
-        "position": 867
+        "position": 794
     },
     {
         "type": "Value",
         "value": "start",
-        "position": 868,
-        "end": 872
+        "position": 795,
+        "end": 799
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 874,
-        "end": 875
+        "position": 801,
+        "end": 802
     },
     {
         "type": "Value",
         "value": "times",
-        "position": 877,
-        "end": 881
+        "position": 804,
+        "end": 808
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 882
+        "position": 809
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 883
+        "position": 810
     },
     {
         "type": "Number",
-        "value": "13",
-        "position": 884,
-        "end": 885
+        "value": "12",
+        "position": 811,
+        "end": 812
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 886
+        "position": 813
     },
     {
         "type": "Point",
         "value": ".",
-        "position": 887
+        "position": 814
     },
     {
         "type": "Value",
         "value": "end",
-        "position": 888,
-        "end": 890
+        "position": 815,
+        "end": 817
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 892
+        "position": 819
     },
     {
         "type": "Value",
         "value": "after",
-        "position": 894,
-        "end": 898
+        "position": 821,
+        "end": 825
     },
     {
         "type": "Value",
         "value": "last",
-        "position": 900,
-        "end": 903
+        "position": 827,
+        "end": 830
     },
     {
         "type": "Value",
         "value": "operation",
-        "position": 905,
-        "end": 913
+        "position": 832,
+        "end": 840
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 914
+        "position": 841
+    },
+    {
+        "type": "Value",
+        "value": "insert",
+        "position": 847,
+        "end": 852
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 854
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 856
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 857,
+        "end": 858
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 859
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 861,
+        "end": 865
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 866
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 867
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 868,
+        "end": 869
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 870
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 871
+    },
+    {
+        "type": "Value",
+        "value": "start",
+        "position": 872,
+        "end": 876
+    },
+    {
+        "type": "Value",
+        "value": "to",
+        "position": 878,
+        "end": 879
+    },
+    {
+        "type": "Value",
+        "value": "times",
+        "position": 881,
+        "end": 885
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 886
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 887
+    },
+    {
+        "type": "Number",
+        "value": "13",
+        "position": 888,
+        "end": 889
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 890
+    },
+    {
+        "type": "Point",
+        "value": ".",
+        "position": 891
+    },
+    {
+        "type": "Value",
+        "value": "end",
+        "position": 892,
+        "end": 894
+    },
+    {
+        "type": "RightCurly",
+        "value": "}",
+        "position": 896
+    },
+    {
+        "type": "Value",
+        "value": "after",
+        "position": 898,
+        "end": 902
+    },
+    {
+        "type": "Value",
+        "value": "last",
+        "position": 904,
+        "end": 907
+    },
+    {
+        "type": "Value",
+        "value": "operation",
+        "position": 909,
+        "end": 917
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 918
     },
     {
         "type": "Value",
         "value": "force",
-        "position": 920,
-        "end": 924
+        "position": 924,
+        "end": 928
     },
     {
         "type": "Value",
         "value": "lunch",
-        "position": 926,
-        "end": 930
+        "position": 930,
+        "end": 934
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 932
+        "position": 936
     },
     {
         "type": "Number",
         "value": "3",
-        "position": 933,
-        "end": 933
+        "position": 937,
+        "end": 937
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 934
+        "position": 938
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 935
+        "position": 939
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 937
+        "position": 941
     },
     {
         "type": "Value",
         "value": "schedule",
-        "position": 940,
-        "end": 947
+        "position": 944,
+        "end": 951
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 953
     },
     {
         "type": "Value",
         "value": "normal",
-        "position": 949,
-        "end": 954
+        "position": 954,
+        "end": 959
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 960
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 956
+        "position": 962
     },
     {
         "type": "At",
         "value": "@",
-        "position": 962
+        "position": 968
     },
     {
         "type": "Value",
         "value": "description",
-        "position": 963,
-        "end": 973
+        "position": 969,
+        "end": 979
     },
     {
         "type": "SingleQuote",
         "value": "'",
-        "position": 975
+        "position": 981
     },
     {
         "type": "Value",
         "value": "Normal",
-        "position": 976,
-        "end": 981
+        "position": 982,
+        "end": 987
     },
     {
         "type": "WhiteSpace",
         "value": " ",
-        "position": 982
+        "position": 988
     },
     {
         "type": "Value",
         "value": "Schedule",
-        "position": 983,
-        "end": 990
+        "position": 989,
+        "end": 996
     },
     {
         "type": "SingleQuote",
         "value": "'",
-        "position": 991
+        "position": 997
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 992
+        "position": 998
     },
     {
         "type": "At",
         "value": "@",
-        "position": 999
+        "position": 1005
     },
     {
         "type": "Value",
         "value": "classes",
-        "position": 1000,
-        "end": 1006
+        "position": 1006,
+        "end": 1012
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1007
+        "position": 1013
     },
     {
         "type": "Value",
         "value": "class",
-        "position": 1017,
-        "end": 1021
+        "position": 1023,
+        "end": 1027
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1023
+        "position": 1029
     },
     {
         "type": "Value",
         "value": "arrival",
-        "position": 1024,
-        "end": 1030
+        "position": 1030,
+        "end": 1036
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1031
+        "position": 1037
     },
     {
         "type": "Number",
         "value": "7",
-        "position": 1034,
-        "end": 1034
+        "position": 1040,
+        "end": 1040
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1035
+        "position": 1041
     },
     {
         "type": "Number",
         "value": "10",
-        "position": 1036,
-        "end": 1037
+        "position": 1042,
+        "end": 1043
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 1039,
-        "end": 1040
+        "position": 1045,
+        "end": 1046
     },
     {
         "type": "Number",
         "value": "7",
-        "position": 1042,
-        "end": 1042
+        "position": 1048,
+        "end": 1048
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1043
+        "position": 1049
     },
     {
         "type": "Number",
         "value": "30",
-        "position": 1044,
-        "end": 1045
+        "position": 1050,
+        "end": 1051
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1046
+        "position": 1052
     },
     {
         "type": "Value",
         "value": "class",
-        "position": 1052,
-        "end": 1056
+        "position": 1058,
+        "end": 1062
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1058
+        "position": 1064
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 1059,
-        "end": 1064
+        "position": 1065,
+        "end": 1070
     },
     {
         "type": "Number",
         "value": "0",
-        "position": 1066,
-        "end": 1066
+        "position": 1072,
+        "end": 1072
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1067
+        "position": 1073
     },
     {
         "type": "Number",
         "value": "6",
-        "position": 1069,
-        "end": 1069
+        "position": 1075,
+        "end": 1075
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1070
+        "position": 1076
     },
     {
         "type": "Number",
         "value": "30",
-        "position": 1071,
-        "end": 1072
+        "position": 1077,
+        "end": 1078
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 1074,
-        "end": 1075
+        "position": 1080,
+        "end": 1081
     },
     {
         "type": "Number",
         "value": "7",
-        "position": 1077,
-        "end": 1077
+        "position": 1083,
+        "end": 1083
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1078
+        "position": 1084
     },
     {
         "type": "Number",
         "value": "30",
-        "position": 1079,
-        "end": 1080
+        "position": 1085,
+        "end": 1086
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1081
+        "position": 1087
     },
     {
         "type": "Value",
         "value": "class",
-        "position": 1087,
-        "end": 1091
+        "position": 1093,
+        "end": 1097
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1093
+        "position": 1099
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 1094,
-        "end": 1099
+        "position": 1100,
+        "end": 1105
     },
     {
         "type": "Number",
         "value": "1",
-        "position": 1101,
-        "end": 1101
+        "position": 1107,
+        "end": 1107
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1102
+        "position": 1108
     },
     {
         "type": "Number",
         "value": "7",
-        "position": 1104,
-        "end": 1104
+        "position": 1110,
+        "end": 1110
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1105
+        "position": 1111
     },
     {
         "type": "Number",
         "value": "35",
-        "position": 1106,
-        "end": 1107
+        "position": 1112,
+        "end": 1113
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 1109,
-        "end": 1110
+        "position": 1115,
+        "end": 1116
     },
     {
         "type": "Number",
         "value": "8",
-        "position": 1112,
-        "end": 1112
+        "position": 1118,
+        "end": 1118
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1113
+        "position": 1119
     },
     {
         "type": "Number",
         "value": "45",
-        "position": 1114,
-        "end": 1115
+        "position": 1120,
+        "end": 1121
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1116
+        "position": 1122
     },
     {
         "type": "Value",
         "value": "class",
-        "position": 1122,
-        "end": 1126
+        "position": 1128,
+        "end": 1132
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1128
+        "position": 1134
     },
     {
         "type": "Number",
         "value": "2",
-        "position": 1129,
-        "end": 1129
+        "position": 1135,
+        "end": 1135
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1130
+        "position": 1136
     },
     {
         "type": "Number",
         "value": "8",
-        "position": 1139,
-        "end": 1139
+        "position": 1145,
+        "end": 1145
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1140
+        "position": 1146
     },
     {
         "type": "Number",
         "value": "50",
-        "position": 1141,
-        "end": 1142
+        "position": 1147,
+        "end": 1148
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 1144,
-        "end": 1145
+        "position": 1150,
+        "end": 1151
     },
     {
         "type": "Number",
         "value": "9",
-        "position": 1147,
-        "end": 1147
+        "position": 1153,
+        "end": 1153
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1148
+        "position": 1154
     },
     {
         "type": "Number",
         "value": "55",
-        "position": 1149,
-        "end": 1150
+        "position": 1155,
+        "end": 1156
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1151
+        "position": 1157
     },
     {
         "type": "Value",
         "value": "class",
-        "position": 1157,
-        "end": 1161
+        "position": 1163,
+        "end": 1167
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1163
+        "position": 1169
     },
     {
         "type": "Number",
         "value": "3",
-        "position": 1164,
-        "end": 1164
+        "position": 1170,
+        "end": 1170
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1165
+        "position": 1171
     },
     {
         "type": "Number",
         "value": "10",
-        "position": 1173,
-        "end": 1174
-    },
-    {
-        "type": "Colon",
-        "value": ":",
-        "position": 1175
-    },
-    {
-        "type": "Number",
-        "value": "00",
-        "position": 1176,
-        "end": 1177
-    },
-    {
-        "type": "Value",
-        "value": "to",
         "position": 1179,
         "end": 1180
     },
     {
+        "type": "Colon",
+        "value": ":",
+        "position": 1181
+    },
+    {
         "type": "Number",
-        "value": "11",
+        "value": "00",
         "position": 1182,
         "end": 1183
     },
     {
-        "type": "Colon",
-        "value": ":",
-        "position": 1184
-    },
-    {
-        "type": "Number",
-        "value": "00",
+        "type": "Value",
+        "value": "to",
         "position": 1185,
         "end": 1186
     },
     {
+        "type": "Number",
+        "value": "11",
+        "position": 1188,
+        "end": 1189
+    },
+    {
+        "type": "Colon",
+        "value": ":",
+        "position": 1190
+    },
+    {
+        "type": "Number",
+        "value": "00",
+        "position": 1191,
+        "end": 1192
+    },
+    {
         "type": "SimiColon",
         "value": ";",
-        "position": 1187
+        "position": 1193
     },
     {
         "type": "At",
         "value": "@",
-        "position": 1194
+        "position": 1200
     },
     {
         "type": "Value",
         "value": "lunches",
-        "position": 1195,
-        "end": 1201
+        "position": 1201,
+        "end": 1207
     },
     {
         "type": "LeftCurly",
         "value": "{",
-        "position": 1203
+        "position": 1209
     },
     {
         "type": "Value",
         "value": "from",
-        "position": 1213,
-        "end": 1216
+        "position": 1219,
+        "end": 1222
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1218
+        "position": 1224
     },
     {
         "type": "Value",
         "value": "period",
-        "position": 1219,
-        "end": 1224
+        "position": 1225,
+        "end": 1230
     },
     {
         "type": "Number",
         "value": "3",
-        "position": 1226,
-        "end": 1226
+        "position": 1232,
+        "end": 1232
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1227
+        "position": 1233
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1228
+        "position": 1234
     },
     {
         "type": "Value",
         "value": "passing",
-        "position": 1238,
-        "end": 1244
+        "position": 1244,
+        "end": 1250
     },
     {
         "type": "Number",
         "value": "5",
-        "position": 1246,
-        "end": 1246
+        "position": 1252,
+        "end": 1252
     },
     {
         "type": "Value",
         "value": "minutes",
-        "position": 1248,
-        "end": 1254
+        "position": 1254,
+        "end": 1260
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1255
+        "position": 1261
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 1261
+        "position": 1267
     },
     {
         "type": "Value",
         "value": "lunch",
-        "position": 1267,
-        "end": 1271
+        "position": 1273,
+        "end": 1277
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1273
-    },
-    {
-        "type": "Number",
-        "value": "1",
-        "position": 1274,
-        "end": 1274
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1275
-    },
-    {
-        "type": "Number",
-        "value": "10",
-        "position": 1277,
-        "end": 1278
-    },
-    {
-        "type": "Colon",
-        "value": ":",
         "position": 1279
     },
     {
         "type": "Number",
-        "value": "30",
+        "value": "1",
         "position": 1280,
-        "end": 1281
+        "end": 1280
     },
     {
-        "type": "Value",
-        "value": "to",
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1281
+    },
+    {
+        "type": "Number",
+        "value": "10",
         "position": 1283,
         "end": 1284
     },
     {
+        "type": "Colon",
+        "value": ":",
+        "position": 1285
+    },
+    {
         "type": "Number",
-        "value": "11",
+        "value": "30",
         "position": 1286,
         "end": 1287
     },
     {
-        "type": "Colon",
-        "value": ":",
-        "position": 1288
-    },
-    {
-        "type": "Number",
-        "value": "00",
+        "type": "Value",
+        "value": "to",
         "position": 1289,
         "end": 1290
     },
     {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1291
-    },
-    {
-        "type": "Value",
-        "value": "lunch",
-        "position": 1297,
-        "end": 1301
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1303
-    },
-    {
-        "type": "Number",
-        "value": "2",
-        "position": 1304,
-        "end": 1304
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1305
-    },
-    {
         "type": "Number",
         "value": "11",
-        "position": 1307,
-        "end": 1308
+        "position": 1292,
+        "end": 1293
     },
     {
         "type": "Colon",
         "value": ":",
+        "position": 1294
+    },
+    {
+        "type": "Number",
+        "value": "00",
+        "position": 1295,
+        "end": 1296
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1297
+    },
+    {
+        "type": "Value",
+        "value": "lunch",
+        "position": 1303,
+        "end": 1307
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
         "position": 1309
     },
     {
         "type": "Number",
-        "value": "00",
+        "value": "2",
         "position": 1310,
-        "end": 1311
+        "end": 1310
     },
     {
-        "type": "Value",
-        "value": "to",
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1311
+    },
+    {
+        "type": "Number",
+        "value": "11",
         "position": 1313,
         "end": 1314
     },
     {
+        "type": "Colon",
+        "value": ":",
+        "position": 1315
+    },
+    {
         "type": "Number",
-        "value": "11",
+        "value": "00",
         "position": 1316,
         "end": 1317
     },
     {
-        "type": "Colon",
-        "value": ":",
-        "position": 1318
-    },
-    {
-        "type": "Number",
-        "value": "30",
+        "type": "Value",
+        "value": "to",
         "position": 1319,
         "end": 1320
     },
     {
+        "type": "Number",
+        "value": "11",
+        "position": 1322,
+        "end": 1323
+    },
+    {
+        "type": "Colon",
+        "value": ":",
+        "position": 1324
+    },
+    {
+        "type": "Number",
+        "value": "30",
+        "position": 1325,
+        "end": 1326
+    },
+    {
         "type": "SimiColon",
         "value": ";",
-        "position": 1321
+        "position": 1327
     },
     {
         "type": "Value",
         "value": "lunch",
-        "position": 1327,
-        "end": 1331
+        "position": 1333,
+        "end": 1337
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1333
-    },
-    {
-        "type": "Number",
-        "value": "3",
-        "position": 1334,
-        "end": 1334
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1335
-    },
-    {
-        "type": "Number",
-        "value": "11",
-        "position": 1337,
-        "end": 1338
-    },
-    {
-        "type": "Colon",
-        "value": ":",
         "position": 1339
     },
     {
         "type": "Number",
-        "value": "30",
+        "value": "3",
         "position": 1340,
-        "end": 1341
+        "end": 1340
     },
     {
-        "type": "Value",
-        "value": "to",
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1341
+    },
+    {
+        "type": "Number",
+        "value": "11",
         "position": 1343,
         "end": 1344
     },
     {
+        "type": "Colon",
+        "value": ":",
+        "position": 1345
+    },
+    {
         "type": "Number",
-        "value": "12",
+        "value": "30",
         "position": 1346,
         "end": 1347
     },
     {
-        "type": "Colon",
-        "value": ":",
-        "position": 1348
-    },
-    {
-        "type": "Number",
-        "value": "00",
+        "type": "Value",
+        "value": "to",
         "position": 1349,
         "end": 1350
     },
     {
+        "type": "Number",
+        "value": "12",
+        "position": 1352,
+        "end": 1353
+    },
+    {
+        "type": "Colon",
+        "value": ":",
+        "position": 1354
+    },
+    {
+        "type": "Number",
+        "value": "00",
+        "position": 1355,
+        "end": 1356
+    },
+    {
         "type": "SimiColon",
         "value": ";",
-        "position": 1351
+        "position": 1357
     },
     {
         "type": "At",
         "value": "@",
-        "position": 1363
+        "position": 1369
     },
     {
         "type": "Value",
         "value": "overides",
-        "position": 1364,
-        "end": 1371
+        "position": 1370,
+        "end": 1377
     },
     {
         "type": "Value",
         "value": "overide",
-        "position": 1377,
-        "end": 1383
+        "position": 1383,
+        "end": 1389
     },
     {
         "type": "Unknown",
         "value": "$",
-        "position": 1385
+        "position": 1391
     },
     {
         "type": "Value",
         "value": "defaultZero",
-        "position": 1386,
-        "end": 1396
+        "position": 1392,
+        "end": 1402
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1397
+        "position": 1403
     },
     {
         "type": "Value",
         "value": "overide",
-        "position": 1407,
-        "end": 1413
+        "position": 1413,
+        "end": 1419
     },
     {
         "type": "Unknown",
         "value": "$",
-        "position": 1415
+        "position": 1421
     },
     {
         "type": "Value",
         "value": "cambridge",
-        "position": 1416,
-        "end": 1424
+        "position": 1422,
+        "end": 1430
     },
     {
         "type": "Unknown",
         "value": "(",
-        "position": 1426
+        "position": 1432
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1427
+        "position": 1433
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 1428,
-        "end": 1429
+        "position": 1434,
+        "end": 1435
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1430
+        "position": 1436
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 1432,
-        "end": 1433
-    },
-    {
-        "type": "Colon",
-        "value": ":",
-        "position": 1434
-    },
-    {
-        "type": "Number",
-        "value": "00",
-        "position": 1435,
-        "end": 1436
-    },
-    {
-        "type": "Value",
-        "value": "to",
         "position": 1438,
         "end": 1439
     },
     {
+        "type": "Colon",
+        "value": ":",
+        "position": 1440
+    },
+    {
         "type": "Number",
-        "value": "11",
+        "value": "00",
         "position": 1441,
         "end": 1442
     },
     {
-        "type": "Colon",
-        "value": ":",
-        "position": 1443
-    },
-    {
-        "type": "Number",
-        "value": "30",
+        "type": "Value",
+        "value": "to",
         "position": 1444,
         "end": 1445
     },
     {
+        "type": "Number",
+        "value": "11",
+        "position": 1447,
+        "end": 1448
+    },
+    {
+        "type": "Colon",
+        "value": ":",
+        "position": 1449
+    },
+    {
+        "type": "Number",
+        "value": "30",
+        "position": 1450,
+        "end": 1451
+    },
+    {
         "type": "Comma",
         "value": ",",
-        "position": 1446
+        "position": 1452
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1448
+        "position": 1454
     },
     {
         "type": "Number",
         "value": "12",
-        "position": 1449,
-        "end": 1450
+        "position": 1455,
+        "end": 1456
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1451
+        "position": 1457
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 1453,
-        "end": 1454
-    },
-    {
-        "type": "Colon",
-        "value": ":",
-        "position": 1455
-    },
-    {
-        "type": "Number",
-        "value": "00",
-        "position": 1456,
-        "end": 1457
-    },
-    {
-        "type": "Value",
-        "value": "to",
         "position": 1459,
         "end": 1460
     },
     {
-        "type": "Number",
-        "value": "11",
-        "position": 1462,
-        "end": 1463
-    },
-    {
         "type": "Colon",
         "value": ":",
-        "position": 1464
-    },
-    {
-        "type": "Number",
-        "value": "30",
-        "position": 1465,
-        "end": 1466
-    },
-    {
-        "type": "Comma",
-        "value": ",",
-        "position": 1467
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1469
-    },
-    {
-        "type": "Number",
-        "value": "13",
-        "position": 1470,
-        "end": 1471
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1472
-    },
-    {
-        "type": "Number",
-        "value": "11",
-        "position": 1474,
-        "end": 1475
-    },
-    {
-        "type": "Colon",
-        "value": ":",
-        "position": 1476
+        "position": 1461
     },
     {
         "type": "Number",
         "value": "00",
-        "position": 1477,
-        "end": 1478
+        "position": 1462,
+        "end": 1463
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 1480,
-        "end": 1481
+        "position": 1465,
+        "end": 1466
     },
     {
         "type": "Number",
         "value": "11",
-        "position": 1483,
-        "end": 1484
+        "position": 1468,
+        "end": 1469
     },
     {
         "type": "Colon",
         "value": ":",
-        "position": 1485
+        "position": 1470
     },
     {
         "type": "Number",
         "value": "30",
-        "position": 1486,
-        "end": 1487
-    },
-    {
-        "type": "Unknown",
-        "value": ")",
-        "position": 1488
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1489
-    },
-    {
-        "type": "RightCurly",
-        "value": "}",
-        "position": 1491
-    },
-    {
-        "type": "Value",
-        "value": "teacher",
-        "position": 1494,
-        "end": 1500
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1502
-    },
-    {
-        "type": "Value",
-        "value": "Rick",
-        "position": 1503,
-        "end": 1506
-    },
-    {
-        "type": "Value",
-        "value": "Astley",
-        "position": 1508,
-        "end": 1513
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1514
-    },
-    {
-        "type": "Value",
-        "value": "ABCD",
-        "position": 1516,
-        "end": 1519
-    },
-    {
-        "type": "Unknown",
-        "value": "-",
-        "position": 1520
-    },
-    {
-        "type": "Number",
-        "value": "1234",
-        "position": 1521,
-        "end": 1524
-    },
-    {
-        "type": "Unknown",
-        "value": "-",
-        "position": 1525
-    },
-    {
-        "type": "Value",
-        "value": "AB34",
-        "position": 1526,
-        "end": 1529
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1530
-    },
-    {
-        "type": "Value",
-        "value": "event",
-        "position": 1533,
-        "end": 1537
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1539
-    },
-    {
-        "type": "Value",
-        "value": "November",
-        "position": 1540,
-        "end": 1547
-    },
-    {
-        "type": "Number",
-        "value": "2",
-        "position": 1549,
-        "end": 1549
+        "position": 1471,
+        "end": 1472
     },
     {
         "type": "Comma",
         "value": ",",
-        "position": 1550
-    },
-    {
-        "type": "Number",
-        "value": "2022",
-        "position": 1552,
-        "end": 1555
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1556
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 1558
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1564
-    },
-    {
-        "type": "Value",
-        "value": "type",
-        "position": 1565,
-        "end": 1568
+        "position": 1473
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1570
+        "position": 1475
     },
     {
-        "type": "Value",
-        "value": "singleday",
-        "position": 1571,
-        "end": 1579
+        "type": "Number",
+        "value": "13",
+        "position": 1476,
+        "end": 1477
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1580
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1581
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1587
-    },
-    {
-        "type": "Value",
-        "value": "schedule",
-        "position": 1588,
-        "end": 1595
-    },
-    {
-        "type": "Value",
-        "value": "advisory",
-        "position": 1597,
-        "end": 1604
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1605
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1611
-    },
-    {
-        "type": "Value",
-        "value": "message",
-        "position": 1612,
-        "end": 1618
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 1620
-    },
-    {
-        "type": "Value",
-        "value": "Advisory",
-        "position": 1621,
-        "end": 1628
-    },
-    {
-        "type": "WhiteSpace",
-        "value": " ",
-        "position": 1629
-    },
-    {
-        "type": "Value",
-        "value": "Day",
-        "position": 1630,
-        "end": 1632
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 1633
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1634
-    },
-    {
-        "type": "RightCurly",
-        "value": "}",
-        "position": 1636
-    },
-    {
-        "type": "Value",
-        "value": "event",
-        "position": 1639,
-        "end": 1643
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1645
-    },
-    {
-        "type": "Value",
-        "value": "November",
-        "position": 1646,
-        "end": 1653
+        "position": 1478
     },
     {
         "type": "Number",
-        "value": "2",
-        "position": 1655,
-        "end": 1655
+        "value": "11",
+        "position": 1480,
+        "end": 1481
     },
     {
-        "type": "Comma",
-        "value": ",",
-        "position": 1656
+        "type": "Colon",
+        "value": ":",
+        "position": 1482
     },
     {
         "type": "Number",
-        "value": "2022",
-        "position": 1658,
-        "end": 1661
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1662
+        "value": "00",
+        "position": 1483,
+        "end": 1484
     },
     {
         "type": "Value",
         "value": "to",
-        "position": 1664,
-        "end": 1665
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1667
-    },
-    {
-        "type": "Value",
-        "value": "November",
-        "position": 1668,
-        "end": 1675
+        "position": 1486,
+        "end": 1487
     },
     {
         "type": "Number",
-        "value": "5",
-        "position": 1677,
-        "end": 1677
+        "value": "11",
+        "position": 1489,
+        "end": 1490
     },
     {
-        "type": "Comma",
-        "value": ",",
-        "position": 1678
+        "type": "Colon",
+        "value": ":",
+        "position": 1491
     },
     {
         "type": "Number",
-        "value": "2022",
-        "position": 1680,
-        "end": 1683
+        "value": "30",
+        "position": 1492,
+        "end": 1493
     },
     {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1684
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 1686
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1692
-    },
-    {
-        "type": "Value",
-        "value": "type",
-        "position": 1693,
-        "end": 1696
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1698
-    },
-    {
-        "type": "Value",
-        "value": "messageonly",
-        "position": 1699,
-        "end": 1709
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1710
+        "type": "Unknown",
+        "value": ")",
+        "position": 1494
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1711
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1717
-    },
-    {
-        "type": "Value",
-        "value": "message",
-        "position": 1718,
-        "end": 1724
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 1726
-    },
-    {
-        "type": "Value",
-        "value": "Yall",
-        "position": 1727,
-        "end": 1730
-    },
-    {
-        "type": "WhiteSpace",
-        "value": " ",
-        "position": 1731
-    },
-    {
-        "type": "Value",
-        "value": "Silly",
-        "position": 1732,
-        "end": 1736
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 1737
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1738
+        "position": 1495
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 1740
+        "position": 1497
     },
     {
         "type": "Value",
-        "value": "event",
-        "position": 1743,
-        "end": 1747
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 1749
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1755
-    },
-    {
-        "type": "Value",
-        "value": "type",
-        "position": 1756,
-        "end": 1759
+        "value": "teacher",
+        "position": 1500,
+        "end": 1506
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1761
+        "position": 1508
     },
     {
         "type": "Value",
-        "value": "reoccuring",
-        "position": 1762,
-        "end": 1771
+        "value": "Rick",
+        "position": 1509,
+        "end": 1512
+    },
+    {
+        "type": "Value",
+        "value": "Astley",
+        "position": 1514,
+        "end": 1519
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1772
+        "position": 1520
+    },
+    {
+        "type": "Value",
+        "value": "ABCD",
+        "position": 1522,
+        "end": 1525
+    },
+    {
+        "type": "Unknown",
+        "value": "-",
+        "position": 1526
+    },
+    {
+        "type": "Number",
+        "value": "1234",
+        "position": 1527,
+        "end": 1530
+    },
+    {
+        "type": "Unknown",
+        "value": "-",
+        "position": 1531
+    },
+    {
+        "type": "Value",
+        "value": "AB34",
+        "position": 1532,
+        "end": 1535
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1773
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1779
+        "position": 1536
     },
     {
         "type": "Value",
-        "value": "schedule",
-        "position": 1780,
-        "end": 1787
-    },
-    {
-        "type": "Value",
-        "value": "lateStart",
-        "position": 1789,
-        "end": 1797
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1798
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1804
-    },
-    {
-        "type": "Value",
-        "value": "message",
-        "position": 1805,
-        "end": 1811
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 1813
-    },
-    {
-        "type": "Value",
-        "value": "Late",
-        "position": 1814,
-        "end": 1817
-    },
-    {
-        "type": "WhiteSpace",
-        "value": " ",
-        "position": 1818
-    },
-    {
-        "type": "Value",
-        "value": "Start",
-        "position": 1819,
-        "end": 1823
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 1824
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1825
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1831
-    },
-    {
-        "type": "Value",
-        "value": "occurs",
-        "position": 1832,
-        "end": 1837
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1838
-    },
-    {
-        "type": "Value",
-        "value": "date",
-        "position": 1844,
-        "end": 1847
+        "value": "event",
+        "position": 1539,
+        "end": 1543
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1849
+        "position": 1545
+    },
+    {
+        "type": "Value",
+        "value": "singleday",
+        "position": 1546,
+        "end": 1554
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1555
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 1557
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1563
+    },
+    {
+        "type": "Value",
+        "value": "date",
+        "position": 1564,
+        "end": 1567
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1569
     },
     {
         "type": "Value",
         "value": "November",
-        "position": 1850,
-        "end": 1857
+        "position": 1570,
+        "end": 1577
     },
     {
         "type": "Number",
         "value": "2",
-        "position": 1859,
-        "end": 1859
+        "position": 1579,
+        "end": 1579
     },
     {
         "type": "Comma",
         "value": ",",
-        "position": 1860
+        "position": 1580
     },
     {
         "type": "Number",
         "value": "2022",
-        "position": 1862,
-        "end": 1865
+        "position": 1582,
+        "end": 1585
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 1866
+        "position": 1586
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1867
+        "position": 1587
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1593
     },
     {
         "type": "Value",
-        "value": "date",
-        "position": 1873,
-        "end": 1876
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1878
+        "value": "schedule",
+        "position": 1594,
+        "end": 1601
     },
     {
         "type": "Value",
-        "value": "november",
-        "position": 1879,
-        "end": 1886
-    },
-    {
-        "type": "Number",
-        "value": "9",
-        "position": 1888,
-        "end": 1888
-    },
-    {
-        "type": "Comma",
-        "value": ",",
-        "position": 1889
-    },
-    {
-        "type": "Number",
-        "value": "2022",
-        "position": 1891,
-        "end": 1894
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1895
+        "value": "advisory",
+        "position": 1603,
+        "end": 1610
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 1896
+        "position": 1611
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1617
+    },
+    {
+        "type": "Value",
+        "value": "message",
+        "position": 1618,
+        "end": 1624
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1626
+    },
+    {
+        "type": "Value",
+        "value": "Advisory",
+        "position": 1627,
+        "end": 1634
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 1635
+    },
+    {
+        "type": "Value",
+        "value": "Day",
+        "position": 1636,
+        "end": 1638
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1639
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1640
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 1898
+        "position": 1642
     },
     {
         "type": "Value",
         "value": "event",
-        "position": 1901,
-        "end": 1905
-    },
-    {
-        "type": "LeftCurly",
-        "value": "{",
-        "position": 1907
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1913
-    },
-    {
-        "type": "Value",
-        "value": "type",
-        "position": 1914,
-        "end": 1917
+        "position": 1645,
+        "end": 1649
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 1919
+        "position": 1651
     },
     {
         "type": "Value",
-        "value": "group",
-        "position": 1920,
-        "end": 1924
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1925
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1926
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1932
-    },
-    {
-        "type": "Value",
-        "value": "starts",
-        "position": 1933,
-        "end": 1938
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1940
-    },
-    {
-        "type": "Value",
-        "value": "November",
-        "position": 1941,
-        "end": 1948
-    },
-    {
-        "type": "Number",
-        "value": "3",
-        "position": 1950,
-        "end": 1950
+        "value": "multiday",
+        "position": 1652,
+        "end": 1659
     },
     {
         "type": "Comma",
         "value": ",",
-        "position": 1951
-    },
-    {
-        "type": "Number",
-        "value": "2022",
-        "position": 1953,
-        "end": 1956
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1957
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1958
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1964
-    },
-    {
-        "type": "Value",
-        "value": "ends",
-        "position": 1965,
-        "end": 1968
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 1970
-    },
-    {
-        "type": "Value",
-        "value": "November",
-        "position": 1971,
-        "end": 1978
-    },
-    {
-        "type": "Number",
-        "value": "5",
-        "position": 1980,
-        "end": 1980
-    },
-    {
-        "type": "Comma",
-        "value": ",",
-        "position": 1981
-    },
-    {
-        "type": "Number",
-        "value": "2022",
-        "position": 1983,
-        "end": 1986
-    },
-    {
-        "type": "RightBracket",
-        "value": "]",
-        "position": 1987
-    },
-    {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 1988
-    },
-    {
-        "type": "At",
-        "value": "@",
-        "position": 1994
-    },
-    {
-        "type": "Value",
-        "value": "events",
-        "position": 1995,
-        "end": 2000
-    },
-    {
-        "type": "LeftBracket",
-        "value": "[",
-        "position": 2002
+        "position": 1660
     },
     {
         "type": "Value",
         "value": "messageonly",
-        "position": 2003,
-        "end": 2013
+        "position": 1662,
+        "end": 1672
     },
     {
         "type": "RightBracket",
         "value": "]",
-        "position": 2014
+        "position": 1673
     },
     {
-        "type": "SimiColon",
-        "value": ";",
-        "position": 2015
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 1675
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1681
     },
     {
         "type": "Value",
-        "value": "day",
-        "position": 2021,
-        "end": 2023
+        "value": "date",
+        "position": 1682,
+        "end": 1685
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 2025
+        "position": 1687
+    },
+    {
+        "type": "Value",
+        "value": "November",
+        "position": 1688,
+        "end": 1695
     },
     {
         "type": "Number",
-        "value": "1",
-        "position": 2026,
+        "value": "2",
+        "position": 1697,
+        "end": 1697
+    },
+    {
+        "type": "Comma",
+        "value": ",",
+        "position": 1698
+    },
+    {
+        "type": "Number",
+        "value": "2022",
+        "position": 1700,
+        "end": 1703
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1704
+    },
+    {
+        "type": "Value",
+        "value": "to",
+        "position": 1706,
+        "end": 1707
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1709
+    },
+    {
+        "type": "Value",
+        "value": "November",
+        "position": 1710,
+        "end": 1717
+    },
+    {
+        "type": "Number",
+        "value": "5",
+        "position": 1719,
+        "end": 1719
+    },
+    {
+        "type": "Comma",
+        "value": ",",
+        "position": 1720
+    },
+    {
+        "type": "Number",
+        "value": "2022",
+        "position": 1722,
+        "end": 1725
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1726
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1727
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1733
+    },
+    {
+        "type": "Value",
+        "value": "message",
+        "position": 1734,
+        "end": 1740
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1742
+    },
+    {
+        "type": "Value",
+        "value": "Yall",
+        "position": 1743,
+        "end": 1746
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 1747
+    },
+    {
+        "type": "Value",
+        "value": "Silly",
+        "position": 1748,
+        "end": 1752
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1753
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1754
+    },
+    {
+        "type": "RightCurly",
+        "value": "}",
+        "position": 1756
+    },
+    {
+        "type": "Value",
+        "value": "event",
+        "position": 1759,
+        "end": 1763
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1765
+    },
+    {
+        "type": "Value",
+        "value": "reoccuring",
+        "position": 1766,
+        "end": 1775
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1776
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 1778
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1784
+    },
+    {
+        "type": "Value",
+        "value": "schedule",
+        "position": 1785,
+        "end": 1792
+    },
+    {
+        "type": "Value",
+        "value": "lateStart",
+        "position": 1794,
+        "end": 1802
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1803
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1809
+    },
+    {
+        "type": "Value",
+        "value": "message",
+        "position": 1810,
+        "end": 1816
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1818
+    },
+    {
+        "type": "Value",
+        "value": "Late",
+        "position": 1819,
+        "end": 1822
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 1823
+    },
+    {
+        "type": "Value",
+        "value": "Start",
+        "position": 1824,
+        "end": 1828
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1829
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1830
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1836
+    },
+    {
+        "type": "Value",
+        "value": "occurs",
+        "position": 1837,
+        "end": 1842
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1843
+    },
+    {
+        "type": "Value",
+        "value": "date",
+        "position": 1849,
+        "end": 1852
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1854
+    },
+    {
+        "type": "Value",
+        "value": "November",
+        "position": 1855,
+        "end": 1862
+    },
+    {
+        "type": "Number",
+        "value": "2",
+        "position": 1864,
+        "end": 1864
+    },
+    {
+        "type": "Comma",
+        "value": ",",
+        "position": 1865
+    },
+    {
+        "type": "Number",
+        "value": "2022",
+        "position": 1867,
+        "end": 1870
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1871
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1872
+    },
+    {
+        "type": "Value",
+        "value": "date",
+        "position": 1878,
+        "end": 1881
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1883
+    },
+    {
+        "type": "Value",
+        "value": "november",
+        "position": 1884,
+        "end": 1891
+    },
+    {
+        "type": "Number",
+        "value": "9",
+        "position": 1893,
+        "end": 1893
+    },
+    {
+        "type": "Comma",
+        "value": ",",
+        "position": 1894
+    },
+    {
+        "type": "Number",
+        "value": "2022",
+        "position": 1896,
+        "end": 1899
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1900
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1901
+    },
+    {
+        "type": "RightCurly",
+        "value": "}",
+        "position": 1903
+    },
+    {
+        "type": "Value",
+        "value": "event",
+        "position": 1906,
+        "end": 1910
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1912
+    },
+    {
+        "type": "Value",
+        "value": "eventrange",
+        "position": 1913,
+        "end": 1922
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1923
+    },
+    {
+        "type": "LeftCurly",
+        "value": "{",
+        "position": 1925
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1931
+    },
+    {
+        "type": "Value",
+        "value": "info",
+        "position": 1932,
+        "end": 1935
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1937
+    },
+    {
+        "type": "Value",
+        "value": "Assemblies",
+        "position": 1938,
+        "end": 1947
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 1948
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 1949
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 1955
+    },
+    {
+        "type": "Value",
+        "value": "date",
+        "position": 1956,
+        "end": 1959
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1961
+    },
+    {
+        "type": "Value",
+        "value": "November",
+        "position": 1962,
+        "end": 1969
+    },
+    {
+        "type": "Number",
+        "value": "3",
+        "position": 1971,
+        "end": 1971
+    },
+    {
+        "type": "Comma",
+        "value": ",",
+        "position": 1972
+    },
+    {
+        "type": "Number",
+        "value": "2022",
+        "position": 1974,
+        "end": 1977
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 1978
+    },
+    {
+        "type": "Value",
+        "value": "to",
+        "position": 1980,
+        "end": 1981
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 1983
+    },
+    {
+        "type": "Value",
+        "value": "November",
+        "position": 1984,
+        "end": 1991
+    },
+    {
+        "type": "Number",
+        "value": "5",
+        "position": 1993,
+        "end": 1993
+    },
+    {
+        "type": "Comma",
+        "value": ",",
+        "position": 1994
+    },
+    {
+        "type": "Number",
+        "value": "2022",
+        "position": 1996,
+        "end": 1999
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 2000
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 2001
+    },
+    {
+        "type": "At",
+        "value": "@",
+        "position": 2007
+    },
+    {
+        "type": "Value",
+        "value": "events",
+        "position": 2008,
+        "end": 2013
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 2015
+    },
+    {
+        "type": "Value",
+        "value": "messageonly",
+        "position": 2016,
         "end": 2026
     },
     {
@@ -3108,58 +3112,64 @@ const tokens = [
         "position": 2027
     },
     {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 2029
-    },
-    {
-        "type": "Value",
-        "value": "Something",
-        "position": 2030,
-        "end": 2038
-    },
-    {
-        "type": "WhiteSpace",
-        "value": " ",
-        "position": 2039
-    },
-    {
-        "type": "Value",
-        "value": "Strange",
-        "position": 2040,
-        "end": 2046
-    },
-    {
-        "type": "SingleQuote",
-        "value": "'",
-        "position": 2047
-    },
-    {
         "type": "SimiColon",
         "value": ";",
-        "position": 2048
+        "position": 2028
     },
     {
         "type": "Value",
         "value": "day",
-        "position": 2054,
-        "end": 2056
+        "position": 2034,
+        "end": 2036
     },
     {
         "type": "LeftBracket",
         "value": "[",
-        "position": 2058
+        "position": 2038
     },
     {
         "type": "Number",
-        "value": "2",
-        "position": 2059,
-        "end": 2059
+        "value": "1",
+        "position": 2039,
+        "end": 2039
     },
     {
         "type": "RightBracket",
         "value": "]",
+        "position": 2040
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 2042
+    },
+    {
+        "type": "Value",
+        "value": "Something",
+        "position": 2043,
+        "end": 2051
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 2052
+    },
+    {
+        "type": "Value",
+        "value": "Strange",
+        "position": 2053,
+        "end": 2059
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
         "position": 2060
+    },
+    {
+        "type": "Number",
+        "value": "1",
+        "position": 2061,
+        "end": 2061
     },
     {
         "type": "SingleQuote",
@@ -3167,35 +3177,143 @@ const tokens = [
         "position": 2062
     },
     {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 2063
+    },
+    {
         "type": "Value",
-        "value": "Something",
-        "position": 2063,
+        "value": "day",
+        "position": 2069,
         "end": 2071
     },
     {
-        "type": "WhiteSpace",
-        "value": " ",
-        "position": 2072
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 2073
     },
     {
-        "type": "Value",
-        "value": "Strange",
-        "position": 2073,
-        "end": 2079
+        "type": "Number",
+        "value": "2",
+        "position": 2074,
+        "end": 2074
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 2075
     },
     {
         "type": "SingleQuote",
         "value": "'",
-        "position": 2080
+        "position": 2077
+    },
+    {
+        "type": "Value",
+        "value": "Something",
+        "position": 2078,
+        "end": 2086
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 2087
+    },
+    {
+        "type": "Value",
+        "value": "Strange",
+        "position": 2088,
+        "end": 2094
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 2095
+    },
+    {
+        "type": "Number",
+        "value": "2",
+        "position": 2096,
+        "end": 2096
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 2097
     },
     {
         "type": "SimiColon",
         "value": ";",
-        "position": 2081
+        "position": 2098
+    },
+    {
+        "type": "Value",
+        "value": "day",
+        "position": 2104,
+        "end": 2106
+    },
+    {
+        "type": "LeftBracket",
+        "value": "[",
+        "position": 2108
+    },
+    {
+        "type": "Number",
+        "value": "3",
+        "position": 2109,
+        "end": 2109
+    },
+    {
+        "type": "RightBracket",
+        "value": "]",
+        "position": 2110
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 2112
+    },
+    {
+        "type": "Value",
+        "value": "Something",
+        "position": 2113,
+        "end": 2121
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 2122
+    },
+    {
+        "type": "Value",
+        "value": "Strange",
+        "position": 2123,
+        "end": 2129
+    },
+    {
+        "type": "WhiteSpace",
+        "value": " ",
+        "position": 2130
+    },
+    {
+        "type": "Number",
+        "value": "3",
+        "position": 2131,
+        "end": 2131
+    },
+    {
+        "type": "SingleQuote",
+        "value": "'",
+        "position": 2132
+    },
+    {
+        "type": "SimiColon",
+        "value": ";",
+        "position": 2133
     },
     {
         "type": "RightCurly",
         "value": "}",
-        "position": 2083
+        "position": 2135
     }
 ]

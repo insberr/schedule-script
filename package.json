@@ -22,7 +22,8 @@
     "scripts": {
         "build": "parcel build",
         "dev": "parcel watch",
-        "test": "jest --coverage"
+        "test": "jest --coverage",
+        "run:pain": "tsc ./tests/pain.ts && node ./tests/pain.js"
     },
     "packageManager": "yarn@3.2.4",
     "dependencies": {
