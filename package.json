@@ -24,7 +24,7 @@
         "dev": "parcel watch",
         "test": "jest --coverage",
         "run:pain": "tsc ./tests/pain.ts && node ./tests/pain.js",
-        "installhighlighting:macos": "cp -r .vscode/extensions/scs $HOME/.vscode/extensions && echo 'Please Restart VSCode'"
+        "install:scs-syntax": "echo 'vscode install visx from repo or something'"
     },
     "packageManager": "yarn@3.2.4",
     "dependencies": {
