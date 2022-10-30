@@ -81,7 +81,8 @@ enum TokenType {
     IdentifierName,
     EventType,
     ClassType,
-    TimeNumber
+    TimeNumber,
+    IdentifierInnerParam
 }
 
 function scs(): Token[] {
@@ -329,6 +330,14 @@ function makeUsefullTokens(tokens: Token[]): Token[] {
 
         if (token.type === TokenType.SimiColon) {
             useFullTokens.push({ type: TokenType.SimiColon, value: token.value, position: token.position, end: token.end });
+            index++;
+            continue;
+        }
+
+        if (token.type === TokenType.At) {
+            expectNextMajorType = { expected: TokenType.Value, changeTo: TokenType.IdentifierInnerParam };
+            index++;
+            continue;
         }
 
         index++;

@@ -74,6 +74,7 @@ var TokenType;
     TokenType[TokenType["EventType"] = 54] = "EventType";
     TokenType[TokenType["ClassType"] = 55] = "ClassType";
     TokenType[TokenType["TimeNumber"] = 56] = "TimeNumber";
+    TokenType[TokenType["IdentifierInnerParam"] = 57] = "IdentifierInnerParam";
 })(TokenType || (TokenType = {}));
 exports.TokenType = TokenType;
 function scs() {
@@ -313,6 +314,13 @@ function makeUsefullTokens(tokens) {
         }
         if (token.type === TokenType.SimiColon) {
             useFullTokens.push({ type: TokenType.SimiColon, value: token.value, position: token.position, end: token.end });
+            index++;
+            continue;
+        }
+        if (token.type === TokenType.At) {
+            expectNextMajorType = { expected: TokenType.Value, changeTo: TokenType.IdentifierInnerParam };
+            index++;
+            continue;
         }
         index++;
     }

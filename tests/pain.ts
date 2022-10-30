@@ -15,8 +15,12 @@ writeFileSync('./tests/outputusefulltokens.js', "const tokens = " + JSON.stringi
     return v;
 }, 4));
 
-const combinedBecause = result2.map(x => {
+const combinedBecause =
+    '// Values inside ~ ~ are values that are added by this function, for visual identification of whats going on.\n'
+    +
+    result2.map(x => {
     if (x.type === TokenType.SimiColon) return x.value + '\n';
+    if (x.type === TokenType.IdentifierInnerParam) return '~@~' + x.value;
     return x.value + ' ';
 }).join('');
 console.log(combinedBecause);

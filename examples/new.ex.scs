@@ -1,12 +1,12 @@
 
-overide [defaultZero] {
+overide defaultZero {
     user classes contains period 0; // only if the user has a period zero
     schedule classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
 
     replace class [arrival] with { [period 0] 6:30 to 7:30 };
 }
 
-overide [cambridge] {
+overide cambridge {
     /*
         Things passed to an overide by default
 
@@ -41,9 +41,9 @@ overide [cambridge] {
     // user classes contains { period 3 with teacher [Rick Astley] }
 
 
-    // @overide bassically an overide condition, but allows multiple overides to be in one labled overide.
-    // @overide ?[label]
-    @overide grade10;
+    // @section bassically an overide condition, but allows multiple overides to be in one labled overide.
+    // @section ?[label]
+    @section grade10;
     user grade 10;
     
     remove [period 1] & [period 2];
@@ -51,7 +51,7 @@ overide [cambridge] {
     insert { [period 12] times.[12].start to times.[12].end } after last operation;
     insert { [period 13] times.[13].start to times.[13].end } after last operation;
 
-    @overide grade11;
+    @section grade11;
     user grade 11;
 
     remove [2] & [3];
@@ -61,7 +61,7 @@ overide [cambridge] {
     force lunch [3];
 }
 
-schedule [normal] {
+schedule normal {
     @description 'Normal Schedule';
 
     @classes;
@@ -85,6 +85,12 @@ schedule [normal] {
     overide $defaultZero;
     // pass in args
     overide $cambridge ([11] 11:00 to 11:30, [12] 11:00 to 11:30, [13] 11:00 to 11:30); // too lazy to do times correctly
+}
+
+// inherited schedule
+schedule testInherit {
+    @description 'Test Inherit Schedule';
+    @inherit normal;
 }
 
 teacher [Rick Astley] ABCD-1234-AB34;
@@ -116,5 +122,3 @@ event [eventrange] {
     day [2] 'Something Strange 2';
     day [3] 'Something Strange 3';
 }
-
-// Im tired, going to bed.

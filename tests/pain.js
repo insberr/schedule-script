@@ -14,11 +14,15 @@ var result2 = (0, scs_1.makeUsefullTokens)(result);
         return scs_1.TokenType[v];
     return v;
 }, 4));
-var combinedBecause = result2.map(function (x) {
-    if (x.type === scs_1.TokenType.SimiColon)
-        return x.value + '\n';
-    return x.value + ' ';
-}).join('');
+var combinedBecause = '// Values inside ~ ~ are values that are added by this function, for visual identification of whats going on.\n'
+    +
+        result2.map(function (x) {
+            if (x.type === scs_1.TokenType.SimiColon)
+                return x.value + '\n';
+            if (x.type === scs_1.TokenType.IdentifierInnerParam)
+                return '~@~' + x.value;
+            return x.value + ' ';
+        }).join('');
 console.log(combinedBecause);
 (0, fs_1.writeFileSync)('./tests/theheck.txt', combinedBecause);
 // i could write JSON
