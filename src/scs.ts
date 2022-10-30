@@ -73,11 +73,11 @@ export enum TokenType {
 }
 
 export function scs(): Token[] {
-    const file = readFileSync('./examples/example.scs', 'utf-8');
-
+    const file = readFileSync('./examples/new.ex.scs', 'utf-8');
+    const newFile = file.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
     // Temporary for pos checking
-    writeFileSync('./tests/pos.scs', file.replace(/\n/gi, ' '));
-    return something(file);
+    writeFileSync('./tests/pos.scs', newFile.replace(/\n/gm, ' '));
+    return something(newFile);
 };
 
 // makes tokens
@@ -86,6 +86,7 @@ export function something(text: string): Token[] {
     const chars = text.split('');
     const things: Token[] = [];
     let working: Token | Record<string, unknown> = {};
+    let isString = false;
     let index = 0;
     for (index; index < chars.length; null) {
         const last = chars[index - 1];
@@ -95,6 +96,20 @@ export function something(text: string): Token[] {
         if (working.type !== undefined) {
             if (working.type === TokenType.Value) {
                 if (char.match(/[a-z0-9]/i) === null) {
+                    // no longer a value
+                    things.push(Object.assign({}, working as Token));
+                    working = {};
+                    // do not index++; because then it would skip this value that isnt text
+                    continue;
+                    // whatsdfs
+                } else {
+                    working.value += char;
+                    working.end = index;
+                    index++;
+                    continue;
+                }
+            } else if (working.type === TokenType.Number) {
+                if (char.match(/[0-9]/i) === null) {
                     // no longer a value
                     things.push(Object.assign({}, working as Token));
                     working = {};
@@ -140,14 +155,17 @@ export function something(text: string): Token[] {
             }
 
             case (char === '\''): {
+                isString = !isString;
                 things.push({ type: TokenType.SingleQuote, value: char, position: index });
                 break;
             }
             case (char === '"'): {
+                isString = !isString;
                 things.push({ type: TokenType.DoubleQuote, value: char, position: index });
                 break;
             }
             case (char === '`'): {
+                isString = !isString;
                 things.push({ type: TokenType.TemplateQuote, value: char, position: index });
                 break;
             }
@@ -179,25 +197,26 @@ export function something(text: string): Token[] {
             }
 
             case (char === ' '): {
+                if (!isString) break;
                 things.push({ type: TokenType.WhiteSpace, value: char, position: index });
                 break;
             }
             case (char === '\n'): {
+                if (!isString) break;
                 things.push({ type: TokenType.NewLine, value: char, position: index });
                 break;
             }
 
-            case (char.match(/[a-z0-9]/i) !== null): {
+            case (char.match(/[a-z]/i) !== null): {
                 working = { type: TokenType.Value, value: '', position: index, end: index };
                 continue;
             }
-            /*
-            // TEMPORARY NUMBERS ARE JUST VALUES
+            
             case (char.match(/[0-9]/i) !== null): {
                 working = { type: TokenType.Number, value: '', position: index, end: index };
                 continue;
             }
-            */
+            
             default: {
                 // If this runs, theres a problem
                 things.push({ type: TokenType.Unknown, value: char, position: index });
@@ -374,7 +393,7 @@ continue;
             index++;
             continue;
         } else if (token.type === TokenType.Colon) {
-            if (last.type !== TokenType.Value) {
+            if (last.type !== TokenType.Value && last.type !== TokenType.Number) {
                 //because im too lazy to figure out whats before the whitespace
                 throw new Error(`Unexpected ${TokenType[last.type]} before colon at position ${token.position}`);
             }
