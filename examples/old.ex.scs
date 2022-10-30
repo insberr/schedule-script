@@ -1,0 +1,167 @@
+
+/* schedule <name> */
+schedule normal {
+    @description: 'Default schedule';
+    
+    @class;
+    class [advisory] 7:30 | 8:00;
+    class [period 1] 7:30 | 8; // or just 8 works
+    class [2] 7:30 | 8:00; // Can also write just the period number ONLY FOR PERIODS
+    class [3] 7:30 to 8:00;
+    class [4] 7:30 to 8:00;
+    class [5] 7:30 to 8:00;
+    class [dismissal] 7:30 to 8:00;
+
+    @lunch { basedOnPeriod: 3, passing: 5 minutes };
+    lunch [1] 10:30 to 11:00;
+    lunch [2] 11:00 to 11:30;
+    lunch [3] 11:30 to 12:00;
+};
+
+schedule LateStart1Hour {};
+
+/* Inherit Schedule */
+schedule pain inherit normal {
+    // do stuff
+}
+
+// Events. You could put this in a seperat file aswell
+// event [<config>] <date> ...<args>
+
+
+// Message only event
+// SigngleDay, MessageOnly <date> '<message>'
+event [MessageOnly] {
+    date: October 23, 2022;
+    message: 'Test Event';
+}
+
+// Single day event
+event {
+    date: October 23, 2022;
+    schedule LateStart1Hour;
+    message 'Test Schedule Event';
+}
+
+// Group of events that use the same schedule, but different days have different messages
+// write ...
+
+// A event that reoccurrs
+event [Reocurring] { 1 Hour Late Start };
+    schedule: LateStart1Hour;
+    occurs: [
+        November 10, 2022;
+        December 15, 2022;
+    ];
+}
+
+/* JS Output
+    {
+        Schedules: {
+            Normal: {
+                classes: [
+                    // the type is written in its ts enum form, in reality itll be a number
+                    { type: Advisory, period: null, ... },
+                    { type: Period, period: 1, ... },
+                ]
+            },
+            ...
+        },
+        Events: [
+            ...
+        ]
+    }
+*/
+
+
+/* ===== newexample.scs ===== */
+// maybe
+
+@overide cambridge {
+    // values passed to this are the class list and the display day schedule and the event if there is any
+    if (classes.periods.includes(11 12 or 13)) {
+        if (user.grade === 10) {
+            return grade10overide;
+        }
+        if (user.grade === 11) {
+            return grade11overide;
+        }
+        return some error;
+    }
+    return null;
+}
+
+///
+
+if user is cambridge {                                                          // if (user.cambridge) {
+    schedule is (find schedule.name + "-cambridge" from schedules) or schedule; //      schedule = schedules.get(schedule.name+"-cambridge") || schedule
+}                                                                               // }
+
+
+/* ===== examplebetter.scs ===== */
+
+// <term> [arguments]
+
+
+
+// curly braces represent blocks of statements, blocks can be passed into statements (schedule, or event)
+// blocks not passed into statements are "absorbed" into their parents, unless one of the conditions inside them are not met
+
+// schedule <id> <data block>
+schedule default {
+    desc Regular Bell Schedule; // desc <info> (shown below schedule)
+
+    // classes
+    // class <type> [num] <start> <end>
+    $class; // label for use in overrides
+    class zero 6:35 7:30;
+    class period 1 7:35 8:45;
+    class period 2 8:50 9:55;
+    class period 3 9:55 11:40;
+    class period 4 11:45 12:55;
+    class period 5 13:00 14:05;
+    class dismissal 14:05 14:10;
+
+    // lunch <num> <type> <start> <end>
+    // Only the lunch times are needed, we can use the based on period and split it/modify the times to display it correctly
+    lunch 1 lunch 9:55 10:25;
+
+    lunch 2 lunch 10:30 11:00;
+
+    lunch 3 lunch 11:10 11:40;
+
+    { // this block will be absorbed into its parent if all of the conditions inside are met
+        only grade 10 
+        only classes contains periods 11 or 12 or 13 // figure this out later
+        // if these conditions pass, the following is injected into the body
+        override replace $class+2 period 11 <time>;
+        override replace $class+3 period 12  <time>;
+        override append $class+3 period 13 <time>;
+    }
+
+    {
+        // fuck it tenth graders have fucking 1st lunch
+        only grade 10
+        lunch F lunch <time>; // F takes precdence over all other lunch directives
+        lunch F period <time>;
+        // do code
+    }
+
+};
+
+schedule default-nolunch inherit default {
+    lunchBased false; // same as default but with no lunches
+    // override <replace/prepend/append> <index> <data> (index is the 0 based index of the statement ( or a relative to label statement ($label+offset) ), first statement definied is 0, then 1 etc etc.)
+    override replace $class+7 class dismissal 14:05 14:35 //make dismissal 30 minutes long
+
+};
+
+
+// event <id> <data block>
+event adv {
+    // every <dayofweek>
+    every tue;
+    every thu;
+    schedule adv;
+    date 12-27-2022; // specify specific date
+};
