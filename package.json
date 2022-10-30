@@ -24,7 +24,7 @@
         "dev": "parcel watch",
         "test": "jest --coverage",
         "run:pain": "tsc ./tests/pain.ts && node ./tests/pain.js",
-        "install-scs-syntax": "curl -O https://github.com/insberr/scs-syntax-highlighting/raw/main/scs-syntax-highlighting-0.0.1.vsix"
+        "install-scs-syntax": "curl -H \"Accept: application/vnd.github.VERSION.raw\" https://api.github.com/repos/insberr/scs-syntax-highlighting/contents/scs-syntax-highlighting-0.0.1.vsix\\?ref\\=main --output scs-syntax-highlighting-0.0.1.vsix && code --install-extension scs-syntax-highlighting-0.0.1.vsix"
     },
     "packageManager": "yarn@3.2.4",
     "dependencies": {
