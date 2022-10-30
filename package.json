@@ -23,7 +23,8 @@
         "build": "parcel build",
         "dev": "parcel watch",
         "test": "jest --coverage",
-        "run:pain": "tsc ./tests/pain.ts && node ./tests/pain.js"
+        "run:pain": "tsc ./tests/pain.ts && node ./tests/pain.js",
+        "installhighlighting:macos": "cp -r .vscode/extensions/scs $HOME/.vscode/extensions && echo 'Please Restart VSCode'"
     },
     "packageManager": "yarn@3.2.4",
     "dependencies": {
