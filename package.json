@@ -24,7 +24,7 @@
         "dev": "parcel watch",
         "test": "jest --coverage",
         "run:pain": "tsc ./tests/pain.ts && node ./tests/pain.js",
-        "install:scs-syntax": "echo 'vscode install visx from repo or something'"
+        "install-scs-syntax": "curl -O https://github.com/insberr/scs-syntax-highlighting/raw/main/scs-syntax-highlighting-0.0.1.vsix"
     },
     "packageManager": "yarn@3.2.4",
     "dependencies": {
