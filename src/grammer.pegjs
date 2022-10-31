@@ -44,5 +44,5 @@ quotedarg = "\"" d:char* "\"" { return d.join("") }
 
 block = "{" "\n"? state:statement+ "\n"? "}" { return state.filter(s => s) }
 
-arg = block / quotedarg / text / bracketed
+arg = (o:block { return { type: "block", data: o } }) / (o:quotedarg { return {type: "quote", data: o } }) / (o:text { return {type: "text", data: o } }) / (o:bracketed { return {type: "bracket", data: o } })
 command = statement:text args:(ws arg)* eol { return {statement, args:args.map(r => r[1])} }

@@ -1,10 +1,51 @@
-import { readFileSync, writeFileSync } from "fs"
+ //import { inspect } from "util";
+ /// <reference path="grammer.d.ts"/>
+import { parse as pe } from "./grammer.pegjs";
+import { Block, Statement } from "./types";
+export * from "./types";
 
-//import { inspect } from "util";
-import { parse } from "./grammer.pegjs";
-const r = parse(readFileSync(__dirname+"/../examples/main.ex.scs","utf-8"))
-writeFileSync(__dirname+"/out.ignore.ts","import type { Block } from './types'\nexport const data: Block = "+JSON.stringify(r, null, 2))
-console.dir(r,{depth:32})
+
+function isStatement(s: Statement | Block): s is Statement {
+    return (s as Statement).statement !== undefined;
+}
+
+export class SCS {
+    parsed: Block
+    constructor(data: string) {
+        this.parsed = pe(data);
+    }
+    #minifyStatement(statement: Statement | Block): string {
+        let out = ""
+        if (isStatement(statement)) {
+            // statement
+            out += statement.statement + " " + statement.args.map((arg) => {
+                if (arg.type == "block") {
+                    return this.#minifyStatement(arg.data)
+                } else if (arg.type == "quote") {
+                    return "\"" + arg.data + "\""
+                } else if (arg.type == "text") {
+                    return arg.data
+                } else if (arg.type == "bracket") {
+                    return "[" + arg.data + "]"
+                }
+            }).join(" ")
+            out += ";"
+        } else {
+            // block
+            return "{" + statement.map(this.#minifyStatement.bind(this)).join("") + "}"
+        }
+        return out
+    }
+    minify(): string {
+        let out = ""
+        for (const statement of this.parsed) {
+            out += this.#minifyStatement(statement);
+        }
+        return out
+    }
+}
+
+
 /*
 process.exit(0);
 type Token = {

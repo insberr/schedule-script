@@ -1,25 +1,23 @@
-import { scs, toObject, TokenType, makeUsefullTokens } from '../src/scs';
-import {writeFileSync} from "fs";
+import { SCS } from "../dist/scs"
+import {existsSync, mkdirSync, readFileSync, writeFileSync} from "fs";
+import { join } from "path";
 
-test('uh', () => {
-    const result = scs();
-    writeFileSync('./tests/outputtokens.ignore.js', "const tokens = " + JSON.stringify(result, (k, v) => {
-        if (k === 'type') return TokenType[v];
-        return v;
-        }, 4));
-    // console.log(result);
+const testFile = readFileSync(__dirname+"/../examples/main.ex.scs", "utf8");
+const testDir = __dirname + "/../testOut/"
+if (!existsSync(testDir)) {
+    mkdirSync(testDir);
+}
+
+test("parse", () => {
+    const scs = new SCS(testFile);
+    writeFileSync(join(testDir,"test.ignore.json"), JSON.stringify(scs.parsed, null, 2));
 })
 
-test('make useful', () => {
-    const result = makeUsefullTokens(scs());
-    writeFileSync('./tests/outputusefulltokens.ignore.js', "const tokens = " + JSON.stringify(result, (k, v) => {
-        if (k === 'type') return TokenType[v];
-        return v;
-    }, 4));
-    // console.log(result);
-})
-
-test('to object', () => {
-    const result = scs();
-    //console.log(toObject(result));
+test("minify", () => {
+    const scs = new SCS(testFile);
+    const minified = scs.minify();
+    writeFileSync(join(testDir,"test.min.scs"), minified);
+    const minscs = new SCS(minified);
+    writeFileSync(join(testDir,"test.min.ignore.json"), JSON.stringify(minscs.parsed, null, 2));
+    expect(minscs.parsed).toEqual(scs.parsed);
 })
