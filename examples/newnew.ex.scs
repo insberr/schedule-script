@@ -71,9 +71,9 @@ overide cambridge(times) { // its like a function!
 
         remove [2] [3];
         insert { 
-            class [11] times.[11].start to times.[11].end 
-            class [12] times.[12].start to times.[12].end
-            class [13] times.[13].start to times.[13].end
+            class [11] times.[11].start to times.[11].end;
+            class [12] times.[12].start to times.[12].end;
+            class [13] times.[13].start to times.[13].end;
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
         force lunch 3;
     }
