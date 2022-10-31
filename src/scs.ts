@@ -2,9 +2,9 @@ import { readFileSync, writeFileSync } from "fs"
 
 //import { inspect } from "util";
 import { parse } from "./grammer.pegjs";
-console.dir(parse(readFileSync(__dirname+"/testg","utf-8")),{depth: 32})
-
-
+const r = parse(readFileSync(__dirname+"/testg","utf-8"))
+writeFileSync(__dirname+"/out.ignore.ts","import type { Block } from './types'\nexport const data: Block = "+JSON.stringify(r, null, 2))
+console.dir(r,{depth:32})
 process.exit(0);
 type Token = {
     type: TokenType;
