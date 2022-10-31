@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync } from "fs"
 
-import { inspect } from "util";
+//import { inspect } from "util";
 import { parse } from "./grammer.pegjs";
-console.log(inspect(parse("// gamer comment\nstatement;statement2 arg1 arg2;"), false, 32 ,true))
+console.dir(parse(readFileSync(__dirname+"/testg","utf-8")),{depth: 32})
 
 
-process.exit(0)
+process.exit(0);
 type Token = {
     type: TokenType;
     value: string | number;
