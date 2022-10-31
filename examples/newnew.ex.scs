@@ -188,7 +188,7 @@ terms { // define all 3 terms
 // this can be overridden in events/schedules, any command that needs it searches up the "block tree"
 // if a teacher is missing, we keep searching up the tree until we find one or we hit the top (in which case we scream and die).
 
-teacherLunch {
+lunches {
     {
         only term 1; // if we arnt in term 1, we cancel processing.
         // teacher <name> <id> <lunch>
