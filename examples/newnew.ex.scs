@@ -187,4 +187,5 @@ event {
     }
 }
 // Still need to add lunch configs
-
+// pain. how will we define the lunch configs
+// like how will we define the term teacher lists + any other lists like for if theres 4th period lunch instead of 3rd or something?
