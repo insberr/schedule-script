@@ -2,9 +2,10 @@ import { readFileSync, writeFileSync } from "fs"
 
 //import { inspect } from "util";
 import { parse } from "./grammer.pegjs";
-const r = parse(readFileSync(__dirname+"/testg","utf-8"))
+const r = parse(readFileSync(__dirname+"/../examples/main.ex.scs","utf-8"))
 writeFileSync(__dirname+"/out.ignore.ts","import type { Block } from './types'\nexport const data: Block = "+JSON.stringify(r, null, 2))
 console.dir(r,{depth:32})
+/*
 process.exit(0);
 type Token = {
     type: TokenType;
@@ -289,7 +290,7 @@ function findExpectedNextMajorType(type: TokenType): { expected: TokenType, chan
             return { expected: TokenType.Value, changeTo: TokenType.LunchParam };
         }
         case TokenType.RangeIdentifier: {
-            return { expected: TokenType.Number /* or date somehow implement */, changeTo: TokenType.TimeNumber };
+            return { expected: TokenType.Number /* or date somehow implement, changeTo: TokenType.TimeNumber };
         }
         default: {
             return null;
@@ -361,3 +362,4 @@ function toObject(tokens: Token[]): unknown {
 }
 
 export { scs, something, toObject, makeUsefullTokens, TokenType };
+*/
