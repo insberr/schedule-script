@@ -7,4 +7,4 @@ comment = "//" ((" "+)? text (" "+)?)+ "\n" {}
 
 text = [a-z0-9]i+ { return text() }
 
-command = text (" " text)* ";"
+command = statment:text (" " text)* ";" { return {statement} }
