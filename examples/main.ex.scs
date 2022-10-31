@@ -88,6 +88,7 @@ schedule normal {
     class [period 1] 7:35 to 8:45;
     class [2]        8:50 to 9:55;
     class [3]       10:00 to 11:00;
+    class [dismissal] 11:00 to 11:05;
 
 
     // how do we do this ...
@@ -102,7 +103,8 @@ schedule normal {
     overide defaultZero;
     // pass in args
     // arguments are not parsed yet
-    //overide cambridge ([11] 11:00 to 11:30, [12] 11:00 to 11:30, [13] 11:00 to 11:30); // too lazy to do times correctly
+    // pain
+    // overide cambridge ([11] 11:00 to 11:30, [12] 11:00 to 11:30, [13] 11:00 to 11:30);
 };
 
 // inherited schedule
@@ -163,7 +165,7 @@ event {
             // you could even do weird stuff like changing the event range
             // although why would you do that?
         };
-        day [2 to 3] {
+        day [2] to [3] {
             message "Something Strange 2 and 3";
         };
     };
