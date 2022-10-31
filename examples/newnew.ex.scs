@@ -106,16 +106,6 @@ schedule normal {
         lunch [3] 11:30 to 12:00;
     }
     
-
-    /*
-    lunch [1] {
-        class [lunch] bleh to blah
-        class [period] blah to bleh    
-    }
-    */ // maybe something like this?
-    // NO BECAUSE WASTE. Why do you want to write the class times too? just write the lunch times and then calculate the class times, way easier to write
-    
-
     overide defaultZero;
     // pass in args
     overide cambridge ([11] 11:00 to 11:30, [12] 11:00 to 11:30, [13] 11:00 to 11:30); // too lazy to do times correctly
