@@ -173,7 +173,7 @@ event {
 
 event {
     message 'override lunch'
-    teacherLunch { // any command below or at this block will use these lunches instead. (includes the schedule.)
+    lunches { // any command below or at this block will use these lunches instead. (includes the schedule.)
         teacher [Rick Astley] ABCD-1234-AB34 2;
     };
     schedule normal;
