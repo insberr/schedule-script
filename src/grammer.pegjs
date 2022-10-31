@@ -1,30 +1,10 @@
-// Simple Arithmetics Grammar
-// ==========================
-//
-// Accepts expressions like "2 * (3 + 4)" and computes their value.
+start = statement *
 
-Expression
-  = head:Term tail:(_ ("+" / "-") _ Term)* {
-      return tail.reduce(function(result, element) {
-        if (element[1] === "+") { return result + element[3]; }
-        if (element[1] === "-") { return result - element[3]; }
-      }, head);
-    }
+statement = comment / command
 
-Term
-  = head:Factor tail:(_ ("*" / "/") _ Factor)* {
-      return tail.reduce(function(result, element) {
-        if (element[1] === "*") { return result * element[3]; }
-        if (element[1] === "/") { return result / element[3]; }
-      }, head);
-    }
+comment = "//" ((" "+)? text (" "+)?)+ "\n" {}
+ 
 
-Factor
-  = "(" _ expr:Expression _ ")" { return expr; }
-  / Integer
+text = [a-z0-9]i+ { return text() }
 
-Integer "integer"
-  = _ [0-9]+ { return parseInt(text(), 10); }
-
-_ "whitespace"
-  = [ \t\n\r]*
+command = text (" " text)* ";"
