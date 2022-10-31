@@ -1,0 +1,210 @@
+
+// ideas used:
+// [] <- allows one "argument" to contain multiple things.
+// {} <- contains statements (its a block!!1)
+// you could even think the entire file is inside a block, makes logic a bit easier.
+// statements "act" on the block they are in, adding/removing/replacing data, etc etc
+// you could even pass a block to a statement~!
+// (i love blocks)
+
+
+// matchers are cool things that match statements/periods. a matcher with value [period 2] would match a class with type period and number 2
+// or just [2] lmafo.
+// maybe complex matcherxs like [period 2, teacher [Rick Astley]] or some shit
+// then functions or conditions that contain matchers can do complex matching
+
+overide defaultZero {
+    user classes contains [period 0]; // only if the user has a period zero
+    schedule classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
+    // replace class <matcher> with <block>
+    // basically find the class that matches the matcher (type or period or both) and replace it with the statements in the block
+    replace class [arrival] with { class [period 0] 6:30 to 7:30; };  //replaces arrival with the statements in the block (allows multiple statements)
+};
+
+overide cambridge(times) { // its like a function!
+    /*
+        Things passed to an overide by default
+
+        user
+        - classes
+        - grade
+
+        schedule - reference to the schedule in which this overide is in
+    */
+
+    // options, yk so you dont have to rewrite an overide a bunch of times just because of defferent schedules
+
+    /*
+        Has and Contains
+        - With a list of items
+            has - All the items exist
+            contains - At least one of the items exist
+        
+        - With one item
+            They are the same lol
+        
+        Equals
+        - Has only the item or items, nothing more, nothing less.
+    */
+
+    // only continue doing conditions if this is true
+    // if period 11, 12, or 13 is in the users classses
+    user classes contains [11] [12] [13]; // maybe be able to specifiy and/or? (also matchers!)
+
+    // imagine
+    // user classes contains { period 3 with teacher [Rick Astley] }
+
+    { // blocks not passed into a statement are "absorbed" into their parent if all contitions match, like an if statement
+        user grade 10;
+
+        // these are matchers, remove can take many arguments
+        remove [period 1] [period 2];
+        // with the power of blocks!
+        // insert <block> <location>
+        insert { 
+            class [period 11] times[11]; // dont get me fucking started on dot accessers, good fucking luck
+            class [period 12] times[12]; // How about just times[12] instead
+            class [period 13] times[13]; 
+        } last operation; // last operation; in this example, puts this in place of where [period 2] was
+    }
+    {
+        user grade 11;
+
+        remove [2] [3];
+        insert { 
+            class [11] times[11];
+            class [12] times[12];
+            class [13] times[13];
+        } last operation; // last operation; in this example, puts this in place of where [period 2] was
+        force lunch 3;
+    }
+};
+
+schedule normal {
+    description "Normal Schedule";
+    //  class [calss type] <time> to <time>, {options};
+    class [arrival]  7:10 to 7:30;
+    class [period 0] 6:30 to 7:30;
+    class [period 1] 7:35 to 8:45;
+    class [2]        8:50 to 9:55;
+    class [3]       10:00 to 11:00;
+
+
+    // how do we do this ...
+    lunchConfig {
+        from [period 3];
+        passing [5 minutes];
+    }
+    lunch [1] 10:30 to 11:00; // how the fuck do you 
+    lunch [2] 11:00 to 11:30; // maybe use blocks? 
+    lunch [3] 11:30 to 12:00;
+    
+    overide defaultZero;
+    // pass in args
+    // arguments are not parsed yet
+    //overide cambridge ([11] 11:00 to 11:30, [12] 11:00 to 11:30, [13] 11:00 to 11:30); // too lazy to do times correctly
+};
+
+// inherited schedule
+schedule testInherit inherit normal {
+    description "Test Inherit Schedule"; // all the @ signs are unnessicary 
+};
+// why store this in the schedule file? i mean its fine ig? maybe add importing so we could split the files...
+// We store it here because if it changes then it pushes the update quicker.
+// Also importing maybe? might be a pain in the ass tho. 
+
+// the things inside the [] can be infered 
+// maybe replace it with an id?
+event {
+    date [November 2, 2022];
+    schedule advisory;
+    message "Advisory Day";
+};
+
+event {
+    from [November 2, 2022] to [November 5, 2022]; 
+    message "Yall Silly";
+};
+
+event {
+    schedule lateStart;
+    message "Late Start";
+    date [November 2, 2022]; 
+    date [november 9, 2022]; // multiple date arguments stack
+};
+
+event {
+    info "Assemblies";
+    from [November 3, 2022] to [November 5, 2022];
+    events {
+        day [1] {
+            message "Something Strange 1"; // day specific overrides go here.
+            // they should be merged into the event on that day.
+            // you could even do weird stuff like changing the event range
+            // although why would you do that?
+        };
+        day [2] {
+            message "Something Strange 2";
+        };
+        day [3] {
+            message "Something Strange 3"; 
+        }; // blocks save the day again!
+
+    };
+};
+
+event {
+    info "Assemblies";
+    from [November 3, 2022] to [November 5, 2022];
+    events {
+        day [1] {
+            message "Something Strange 1"; // day specific overrides go here.
+            // they should be merged into the event on that day.
+            // you could even do weird stuff like changing the event range
+            // although why would you do that?
+        };
+        day [2 to 3] {
+            message "Something Strange 2 and 3";
+        };
+    };
+};
+// Still need to add lunch configs
+// pain. how will we define the lunch configs
+// like how will we define the term teacher lists + any other lists like for if theres 4th period lunch instead of 3rd or something?
+
+event {
+    message "override lunch"
+    lunches { // any command below or at this block will use these lunches instead. (includes the schedule.)
+        teacher [Rick Astley] ABCD-1234-AB34 2;
+    };
+    schedule normal;
+};
+
+
+terms { // define all 3 terms
+    term 1 [date1 to date2];
+    term 2 [date1 to date2];
+    term 3 [date1 to date2];
+};
+// this can be overridden in events/schedules, any command that needs it searches up the "block tree"
+// if a teacher is missing, we keep searching up the tree until we find one or we hit the top (in which case we scream and die).
+
+lunches {
+    {
+        only term 1; // if we arnt in term 1, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 1;
+    }
+    {
+        only term 2; // if we arnt in term 2, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 2;
+    }
+    {
+        only term 3; // if we arnt in term 3, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 3;
+    }
+};
+
+// better
