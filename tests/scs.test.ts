@@ -1,4 +1,4 @@
-import { scs, toObject, TokenType, makeUsefullTokens } from '../dist/scs';
+import { scs, toObject, TokenType, makeUsefullTokens } from '../src/scs';
 import {writeFileSync} from "fs";
 
 test('uh', () => {

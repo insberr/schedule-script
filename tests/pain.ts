@@ -3,14 +3,14 @@ import { writeFileSync } from "fs";
 
 
 const result = scs();
-writeFileSync('./tests/outputtokens.js', "const tokens = " + JSON.stringify(result, (k, v) => {
+writeFileSync('./tests/outputtokens.ignore.js', "const tokens = " + JSON.stringify(result, (k, v) => {
     if (k === 'type') return TokenType[v];
     return v;
 }, 4));
 
 
 const result2 = makeUsefullTokens(result);
-writeFileSync('./tests/outputusefulltokens.js', "const tokens = " + JSON.stringify(result2, (k, v) => {
+writeFileSync('./tests/outputusefulltokens.ignore.js', "const tokens = " + JSON.stringify(result2, (k, v) => {
     if (k === 'type') return TokenType[v];
     return v;
 }, 4));

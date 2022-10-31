@@ -130,3 +130,7 @@ dist
 .pnp.*
 
 scs-syntax-highlighting-*.vsix
+
+*.ignore.js
+
+theheck.txt
