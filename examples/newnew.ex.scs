@@ -56,14 +56,15 @@ overide cambridge(times) { // its like a function!
 
     { // blocks not passed into a statement are "absorbed" into their parent if all contitions match, like an if statement
         user grade 10;
-    
-        remove [period 1] [period 2]; // these are matchers, remove can take many arguments
+
+        // these are matchers, remove can take many arguments
+        remove [period 1] [period 2];
         // with the power of blocks!
         // insert <block> <location>
         insert { 
-            class [period 11] times.[11].start to times.[11].end; // dont get me fucking started on dot accessers, good fucking luck
-            class [period 12] times.[12].start to times.[12].end;
-            class [period 13] times.[13].start to times.[13].end;
+            class [period 11] times[11]; // dont get me fucking started on dot accessers, good fucking luck
+            class [period 12] times[12]; // How about just times[12] instead
+            class [period 13] times[13]; 
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
     }
     {
@@ -83,18 +84,28 @@ schedule normal {
     description 'Normal Schedule';
     //  class [calss type] <time> to <time>, {options};
     class [arrival]  7:10 to 7:30;
-    class [period 0] 6:30 to 7:30; // figure out displaying zero hour only if user has zero hour and then also removing arrival
+    class [period 0] 6:30 to 7:30;
     class [period 1] 7:35 to 8:45;
     class [2]        8:50 to 9:55;
     class [3]       10:00 to 11:00;
 
-    lunches {
-        from [period 3];
-        passing [5 minutes];
-    }
+    lunch from [period 3];
+    lunch passing [5 minutes];
+    lunch use 
     lunch [1] 10:30 to 11:00; // how the fuck do you 
     lunch [2] 11:00 to 11:30; // maybe use blocks? 
     lunch [3] 11:30 to 12:00;
+    
+
+    lunches {
+        from [period 3];
+        passing [5 minutes];
+
+        lunch [1] 10:30 to 11:00; // how the fuck do you 
+        lunch [2] 11:00 to 11:30; // maybe use blocks? 
+        lunch [3] 11:30 to 12:00;
+    }
+    
 
     /*
     lunch [1] {
@@ -102,6 +113,7 @@ schedule normal {
         class [period] blah to bleh    
     }
     */ // maybe something like this?
+    // NO BECAUSE WASTE. Why do you want to write the class times too? just write the lunch times and then calculate the class times, way easier to write
     
 
     overide defaultZero;
@@ -114,8 +126,10 @@ schedule testInherit inherit normal {
     description 'Test Inherit Schedule'; // all the @ signs are unnessicary 
 }
 
-teacher [Rick Astley] ABCD-1234-AB34; // why store this in the schedule file? i mean its fine ig? maybe add importing so we could split the files...
-
+teacher [Rick Astley] ABCD-1234-AB34;
+// why store this in the schedule file? i mean its fine ig? maybe add importing so we could split the files...
+// We store it here because if it changes then it pushes the update quicker.
+// Also importing maybe? might be a pain in the ass tho. 
 
 // the things inside the [] can be infered 
 // maybe replace it with an id?
@@ -156,3 +170,21 @@ event {
 
     }
 }
+
+event {
+    info 'Assemblies';
+    from [November 3, 2022] to [November 5, 2022];
+    events {
+        day [1] {
+            message 'Something Strange 1'; // day specific overrides go here.
+            // they should be merged into the event on that day.
+            // you could even do weird stuff like changing the event range
+            // although why would you do that?
+        };
+        day [2 to 3] {
+            message 'Something Strange 2 and 3';
+        };
+    }
+}
+// Still need to add lunch configs
+
