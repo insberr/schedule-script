@@ -37,7 +37,7 @@ DIGIT  = [0-9]
 HEXDIG = [0-9a-f]i
 
 text = [0-9a-z:]i+ { return text() }
-bracketed = "[" j:[0-9a-z ]+ "]" { return j.join("") }
+bracketed = "[" j:[0-9a-z, :]i+ "]" { return j.join("") }
 eol = ";" "\n"?
 
 quotedarg = "\"" d:char* "\"" { return d.join("") }
