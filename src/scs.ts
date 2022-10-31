@@ -1,5 +1,10 @@
 import { readFileSync, writeFileSync } from "fs"
 
+
+import { parse } from "./grammer.pegjs";
+parse("cringe")
+
+
 type Token = {
     type: TokenType;
     value: string | number;
