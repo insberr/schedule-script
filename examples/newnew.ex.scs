@@ -125,8 +125,6 @@ schedule normal {
 schedule testInherit inherit normal {
     description 'Test Inherit Schedule'; // all the @ signs are unnessicary 
 }
-
-teacher [Rick Astley] ABCD-1234-AB34;
 // why store this in the schedule file? i mean its fine ig? maybe add importing so we could split the files...
 // We store it here because if it changes then it pushes the update quicker.
 // Also importing maybe? might be a pain in the ass tho. 
@@ -189,3 +187,18 @@ event {
 // Still need to add lunch configs
 // pain. how will we define the lunch configs
 // like how will we define the term teacher lists + any other lists like for if theres 4th period lunch instead of 3rd or something?
+
+event {
+    message 'override lunch'
+    teacherLunch { // any command below or at this block will use these lunches instead. (includes the schedule.)
+        teacher [Rick Astley] ABCD-1234-AB34 2;
+    };
+    schedule normal;
+}
+
+// this can be overridden in events/schedules, any command that needs it searches up the "block tree"
+// if a teacher is missing, we keep searching up the tree until we find one or we hit the top (in which case we scream and die).
+teacherLunch {
+    // teacher <name> <id> <lunch>
+    teacher [Rick Astley] ABCD-1234-AB34 1;
+}
