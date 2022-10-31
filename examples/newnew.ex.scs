@@ -89,22 +89,15 @@ schedule normal {
     class [2]        8:50 to 9:55;
     class [3]       10:00 to 11:00;
 
-    lunch from [period 3];
-    lunch passing [5 minutes];
-    lunch use 
+
+    // how do we do this ...
+    lunchConfig {
+        from [period 3];
+        passing [5 minutes];
+    }
     lunch [1] 10:30 to 11:00; // how the fuck do you 
     lunch [2] 11:00 to 11:30; // maybe use blocks? 
     lunch [3] 11:30 to 12:00;
-    
-
-    lunches {
-        from [period 3];
-        passing [5 minutes];
-
-        lunch [1] 10:30 to 11:00; // how the fuck do you 
-        lunch [2] 11:00 to 11:30; // maybe use blocks? 
-        lunch [3] 11:30 to 12:00;
-    }
     
     overide defaultZero;
     // pass in args
@@ -188,7 +181,10 @@ event {
 
 // this can be overridden in events/schedules, any command that needs it searches up the "block tree"
 // if a teacher is missing, we keep searching up the tree until we find one or we hit the top (in which case we scream and die).
-teacherLunch {
-    // teacher <name> <id> <lunch>
-    teacher [Rick Astley] ABCD-1234-AB34 1;
+lunches {
+    term [1] {
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 1;
+    }
 }
+// WHAT ABOUT TERMS
