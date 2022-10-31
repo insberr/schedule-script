@@ -2,7 +2,7 @@ start = prog:statement* { return prog.filter((p) => p) }
 ws "whitespace" = [ \t\n\r]*
 statement = ws v:(comment / multilinecomment / block / command ) ws { return v }
 
-comment = "//" unescaped* "\n" { return null }
+comment = "//" [^\n]* "\n" { return null }
 multilinecomment = "/*" [^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return null }
 
 /*
