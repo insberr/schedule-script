@@ -16,6 +16,16 @@ export function executeBlock(data: Block, initcontext: Context): Context {
     let context = clone(initcontext)
     for (const item of data) {
         if (isStatement(item)) {
+            if (item.statement == "function") {
+                let args: string[] = []
+                if (item.args.length == 3) {
+                    args = (item.args.splice(1,1)[0].data as string).split(" ")
+                }
+                const name = item.args[0].data as string
+                const body = item.args[1].data as Block
+                context["func_"+name] = { args, body }
+                continue;
+            }
             const parsedArgs: PArgs = []
             item.args.forEach(element => {
                 if (element.type == "block") {
