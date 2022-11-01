@@ -55,7 +55,7 @@ overide cambridge [eleven twelve thirteen] { // its like a function!
     // user classes contains { period 3 with teacher [Rick Astley] }
 
     { // blocks not passed into a statement are "absorbed" into their parent if all contitions match, like an if statement
-        user grade 10;
+        only grade 10; // the only command searches for an item in the context, and compares it, IE passing variables from JS
 
         // these are matchers, remove can take many arguments
         remove [period 1] [period 2];
@@ -68,7 +68,7 @@ overide cambridge [eleven twelve thirteen] { // its like a function!
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
     }
     {
-        user grade 11;
+        only grade 11;
 
         remove [2] [3];
         insert { 

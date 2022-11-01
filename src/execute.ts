@@ -22,6 +22,7 @@ export function executeBlock(data: Block, initcontext: Context): Context {
                     const blk = produce(executeBlock(element.data, {parent: context, statement: item.statement}), (r) => {
                         delete r.parent;
                         delete r.statement;
+                        delete r.stop;
                     })
                     parsedArgs.push(blk)
                 } else {

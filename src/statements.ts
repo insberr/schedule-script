@@ -1,5 +1,6 @@
 import type { Context, PArgs } from "./execute"
-
+import { find } from "./lib";
+import { isAfter, isBefore, isSameDay } from 'date-fns'
 type StatementFunc = (args: PArgs, context: Context) => void
 
 
@@ -26,7 +27,21 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.events.push(args[0])
     })
     .set("terms", (args, c) => {
-        c.terms = (args[0] as Context).terms
+        const t: { termIndex: number, start:Date, end:Date }[] =  (args[0] as Context).terms
+        c.terms = t
+        const displayDate = find(c, "displayDate") || new Date()
+        let newTerm = t.filter((term) => {
+            return (
+                (isAfter(displayDate, term.start) || isSameDay(displayDate, term.start)) &&
+                (isBefore(displayDate, term.end) || isSameDay(displayDate, term.end))
+            );
+        });
+        if (newTerm.length == 0) {
+            c.term = 0
+        }
+        else {
+            c.term = newTerm[0].termIndex + 1
+        }
     })
     .set("term", (args, c) => {
         const termIndex = parseInt(args[0] as string)-1
@@ -34,7 +49,29 @@ export const StatementMap = new Map<string, StatementFunc>()
         const end = new Date(args[2] as string)
         c.terms = (c.terms || [])
         c.terms.push({ termIndex, start, end })
-
+    })
+    .set("only", (args, c) => { // only <item> <compare> searches the context for the item "item" and compares it, 
+        // @TODO allow many types of comparisons
+        const [item, compare] = args as string[]
+        const toc = find(c, item)
+        if (toc == undefined) {
+            console.warn("Unable to find item",item,"in context, this is probably an issue")
+        }
+        c.stop = toc?.toString() != compare
+    })
+    .set("lunches", (args, c) => {
+        const tech = args[0] as Context
+        c.lunches = {}
+        tech.teachers.forEach((element: any) => {
+            c.lunches[element.id] = element.lunch
+        });
+        c.teachers = tech.teachers
+    })
+    .set("teacher", (args, c) => {
+        const [name, id, _lunch] = args as string[]
+        const lunch = parseInt(_lunch)
+        c.teachers = c.teachers || []
+        c.teachers.push({name,id,lunch})
     })
 
 // you could import statements from other files and add them to the map.
