@@ -13,7 +13,7 @@
         "@parcel/config-default": "^2.7.0",
         "@parcel/core": "^2.7.0",
         "@parcel/packager-ts": "2.7.0",
-        "@parcel/transformer-typescript-types": "2.7.0",
+        "@parcel/transformer-typescript-types": "^2.7.0",
         "@types/jest": "^29.2.0",
         "@types/node": "^18.11.8",
         "@types/ungap__structured-clone": "^0.3.0",
@@ -30,7 +30,7 @@
         "runc": "parcel build && node --enable-source-maps dist/scs.js",
         "install-scs-syntax": "curl -H \"Accept: application/vnd.github.VERSION.raw\" https://api.github.com/repos/insberr/scs-syntax-highlighting/contents/scs-syntax-highlighting-0.0.3.vsix\\?ref\\=main --output scs-syntax-highlighting-0.0.3.vsix && code --install-extension scs-syntax-highlighting-0.0.3.vsix"
     },
-    "packageManager": "yarn@3.2.4",
+    "packageManager": "yarn@4.0.0-rc.27",
     "dependencies": {
         "@ungap/structured-clone": "^1.0.1",
         "immer": "^9.0.16",
