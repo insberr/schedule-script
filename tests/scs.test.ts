@@ -44,5 +44,7 @@ test("minify pretty", () => {
 
 test("exec", () => {
     const scs = new SCS(testFile)
-    console.log(scs.exec())
+    const execed = scs.exec()
+    //console.dir(execed,{depth:32})
+    writeFileSync(join(testDir, "test.exec.json"), JSON.stringify(execed, null, 2))
 })

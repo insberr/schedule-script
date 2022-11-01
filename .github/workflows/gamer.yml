@@ -31,6 +31,8 @@ jobs:
       run: cat testOut/test.pretty.scs
     - name: parsed
       run: cat testOut/test.ignore.json
+    - name: exec output
+      run: cat testOut/test.exec.json
     - name: Upload output
       uses: actions/upload-artifact@v3
       with:

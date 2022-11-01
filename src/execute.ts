@@ -1,8 +1,12 @@
 import type { Block } from "./types"
-import clone from "@ungap/structured-clone"
 import { isStatement } from "./scs"
+import produce from "immer"
+import { StatementMap } from "./statements"
+import clone from "@ungap/structured-clone"
 export type Context = {
     parent?: Context
+    stop?: boolean
+    statement?: string
     [key: string]: any
 }
 
@@ -28,13 +32,20 @@ export function executeBlock(data: Block, initcontext: Context): Context {
             const parsedArgs: PArgs = []
             item.args.forEach(element => {
                 if (element.type == "block") {
-                    parsedArgs.push(executeBlock(element.data, {parent: context}))
+                    const blk = produce(executeBlock(element.data, {parent: context, statement: item.statement}), (r) => {
+                        delete r.parent;
+                        delete r.statement;
+                    })
+                    parsedArgs.push(blk)
                 } else {
                     parsedArgs.push(element.data)
                 }
             });
             //console.log("executing",item.statement,"with", parsedArgs)
             context = executeStatement(item.statement, parsedArgs, context)
+            if (context.stop) {
+                return initcontext
+            }
         } else {
             context = executeBlock(item, context)
         }
@@ -43,7 +54,9 @@ export function executeBlock(data: Block, initcontext: Context): Context {
 }
 
 function executeStatement(statement: string, args: PArgs, icontext: Context): Context {
-    const context = clone(icontext)
-    // use Map for lookup
-    return context;
+    const def = () => { /*console.warn("Statement "+statement+" not found") */ }
+    return produce(icontext, (c) => {
+        const exec = StatementMap.get(statement) || def;
+        exec(args, c)
+    })
 }
