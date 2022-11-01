@@ -1,7 +1,7 @@
 import { SCS } from "../src/scs"
 import {existsSync, mkdirSync, readFileSync, writeFileSync} from "fs";
 import { join } from "path";
-
+//mport { serialize } from "@ungap/structured-clone";
 const testFile = readFileSync(__dirname+"/../examples/main.ex.scs", "utf8");
 const testDir = __dirname + "/../testOut/"
 if (!existsSync(testDir)) {

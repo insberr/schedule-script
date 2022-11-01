@@ -13,7 +13,8 @@ export function find(context: Context, item: string): any {
         if (context.parent) {
             return find(context.parent, item)
         } else {
-            throw new Error("Unable to find item "+item+" in context.")
+            //throw new Error("Unable to find item "+item+" in context.")
+            return undefined;
         }
     }
 }

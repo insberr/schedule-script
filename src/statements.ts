@@ -25,5 +25,16 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.events = (c.events || [])
         c.events.push(args[0])
     })
+    .set("terms", (args, c) => {
+        c.terms = (args[0] as Context).terms
+    })
+    .set("term", (args, c) => {
+        const termIndex = parseInt(args[0] as string)-1
+        const start = new Date(args[1] as string)
+        const end = new Date(args[2] as string)
+        c.terms = (c.terms || [])
+        c.terms.push({ termIndex, start, end })
+
+    })
 
 // you could import statements from other files and add them to the map.

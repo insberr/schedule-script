@@ -184,9 +184,9 @@ event {
 
 
 terms { // define all 3 terms
-    term 1 [date1 to date2];
-    term 2 [date1 to date2];
-    term 3 [date1 to date2];
+    term 1 [September 6, 2022] [December 6, 2022];
+    term 2 [December 8, 2022]  [March 27, 2023];
+    term 3 [March 28, 2023]    [June 23, 2023];
 };
 // this can be overridden in events/schedules, any command that needs it searches up the "block tree"
 // if a teacher is missing, we keep searching up the tree until we find one or we hit the top (in which case we scream and die).
