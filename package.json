@@ -10,6 +10,8 @@
     "author": "insberr & wackery",
     "license": "MIT",
     "devDependencies": {
+        "@parcel/config-default": "^2.7.0",
+        "@parcel/core": "^2.7.0",
         "@parcel/packager-ts": "2.7.0",
         "@parcel/transformer-typescript-types": "2.7.0",
         "@types/jest": "^29.2.0",

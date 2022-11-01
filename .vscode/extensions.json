@@ -1,5 +1,6 @@
 {
-    "recommendations": [
-        "PeggyJS.peggy-language"
-    ]
+  "recommendations": [
+    "PeggyJS.peggy-language",
+    "arcanis.vscode-zipfs"
+  ]
 }
