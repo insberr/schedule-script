@@ -54,7 +54,7 @@ export function executeBlock(data: Block, initcontext: Context): Context {
 }
 
 function executeStatement(statement: string, args: PArgs, icontext: Context): Context {
-    const def = () => { /*console.warn("Statement "+statement+" not found") */ }
+    const def = () => { console.warn("Statement "+statement+" not found") }
     return produce(icontext, (c) => {
         const exec = StatementMap.get(statement) || def;
         exec(args, c)
