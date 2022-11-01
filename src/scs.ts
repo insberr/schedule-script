@@ -1,13 +1,10 @@
  //import { inspect } from "util";
 import { Context, executeBlock } from "./execute";
-import { parse as pe } from "./grammer";
+import { parse as pe, parseTime } from "./grammer";
 import { Block, Statement } from "./types";
 export * from "./types";
+import { isStatement } from "./lib";
 
-
-export function isStatement(s: Statement | Block): s is Statement {
-    return (s as Statement).statement !== undefined;
-}
 
 export class SCS {
     parsed: Block

@@ -1,5 +1,5 @@
 import type { Block } from "./types"
-import { isStatement } from "./scs"
+import { isStatement } from "./lib"
 import produce from "immer"
 import { StatementMap } from "./statements"
 import clone from "@ungap/structured-clone"
@@ -11,19 +11,6 @@ export type Context = {
 }
 
 export type PArgs = (string | Context)[]
-
-function find(context: Context, item: string): any {
-    const dt = context[item]
-    if (dt != undefined) {
-        return dt
-    } else {
-        if (context.parent) {
-            return find(context.parent, item)
-        } else {
-            throw new Error("Unable to find item "+item+" in context.")
-        }
-    }
-}
 
 export function executeBlock(data: Block, initcontext: Context): Context {
     let context = clone(initcontext)
