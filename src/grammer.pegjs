@@ -2,8 +2,8 @@ start = prog:statement* { return prog.filter((p) => p) }
 ws "whitespace" = [ \t\n\r]*
 statement = ws v:(comment / multilinecomment / block / command ) ws { return v }
 
-comment = "//" [^\n]* "\n"? { return null }
-multilinecomment = "/*" [^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return null }
+comment = "//" d:[^\n]* "\n"? { return null }
+multilinecomment = "/*" d:[^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return null }
 
 /*
 string "string"
@@ -36,8 +36,8 @@ unescaped
 DIGIT  = [0-9]
 HEXDIG = [0-9a-f]i
 
-text = [0-9a-z:()-]i+ { return text() } // add the rest of the symbols?
-bracketed = "[" j:[0-9a-z, :]i+ "]" { return j.join("") }
+text = [0-9a-z:()\-$]i+ { return text() } // add the rest of the symbols?
+bracketed = "[" j:[0-9a-z$\-, :]i+ "]" { return j.join("") }
 eol "semicolon" = ";"
 
 quotedarg = "\"" d:char* "\"" { return d.join("") }

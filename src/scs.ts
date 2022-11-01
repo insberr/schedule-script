@@ -11,35 +11,94 @@ function isStatement(s: Statement | Block): s is Statement {
 
 export class SCS {
     parsed: Block
+    parsedwithComments: Block
     constructor(data: string) {
         this.parsed = pe(data);
-    }
-    #minifyStatement(statement: Statement | Block): string {
-        let out = ""
-        if (isStatement(statement)) {
-            // statement
-            out += statement.statement + " " + statement.args.map((arg) => {
-                if (arg.type == "block") {
-                    return this.#minifyStatement(arg.data)
-                } else if (arg.type == "quote") {
-                    return "\"" + arg.data + "\""
-                } else if (arg.type == "text") {
-                    return arg.data
-                } else if (arg.type == "bracket") {
-                    return "[" + arg.data + "]"
-                }
-            }).join(" ")
-            out += ";"
-        } else {
-            // block
-            return "{" + statement.map(this.#minifyStatement.bind(this)).join("") + "}"
-        }
-        return out
+        this.parsedwithComments = this.parsed;
     }
     minify(): string {
         let out = ""
+        function minifyStatement(statement: Statement | Block): string {
+            let out = ""
+            if (isStatement(statement)) {
+                // statement
+                let args = " " + statement.args.map((arg) => {
+                    if (arg.type == "block") {
+                        return minifyStatement(arg.data).trim()
+                    } else if (arg.type == "quote") {
+                        return "\"" + arg.data + "\""
+                    } else if (arg.type == "text") {
+                        return arg.data
+                    } else if (arg.type == "bracket") {
+                        return "[" + arg.data + "]"
+                    }
+                }).join(" ")
+                if (statement.args.length == 0) {
+                    args = "";
+                }
+                out += statement.statement + args
+                out += ";"
+            } else {
+                // block
+                return "{" + statement.map(minifyStatement).join("") + "}"
+            }
+            return out
+        }
         for (const statement of this.parsed) {
-            out += this.#minifyStatement(statement);
+            out += minifyStatement(statement);
+        }
+        return out
+    }
+    pretty(): string {
+        let deep = 0
+        let out = ""
+        function doPretty(statement: Statement | Block): string {
+            let o = ""
+            const indent = " ".repeat(deep*4)
+            if (isStatement(statement)) {
+                // statement
+                let args = " " + statement.args.map((arg) => {
+                    if (arg.type == "block") {
+                        return doPretty(arg.data).trim()
+                    } else if (arg.type == "quote") {
+                        return "\"" + arg.data + "\""
+                    } else if (arg.type == "text") {
+                        return arg.data
+                    } else if (arg.type == "bracket") {
+                        return "[" + arg.data + "]"
+                    }
+                }).join(" ")
+                if (statement.args.length == 0) {
+                    args = "";
+                }
+                if (statement.comment) {
+                    if (statement.statement == "comment") {
+                        o += indent + statement.comment
+                    } else {
+                        o += statement.comment.split("\n").map((r) => indent + r.trim()).join("\n") + "\n"
+                    }
+                } else {
+                    o += indent + statement.statement + args
+                    if (o.endsWith("}")) {
+                        o += ";\n\n"
+                    } else {
+                        o += ";\n"
+                    }
+                }
+            } else {
+                // block
+                o += indent+"{\n"
+                deep++;
+                for (const statemen of statement) {
+                    o += doPretty(statemen)
+                }
+                deep--;
+                o += indent+"}\n"
+            }
+            return o
+        }
+        for (const statement of this.parsed) {
+            out += doPretty(statement);
         }
         return out
     }

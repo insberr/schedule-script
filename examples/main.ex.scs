@@ -21,7 +21,7 @@ overide defaultZero {
     replace class [arrival] with { class [period 0] 6:30 to 7:30; };  //replaces arrival with the statements in the block (allows multiple statements)
 };
 
-overide cambridge(times) { // its like a function!
+overide cambridge [eleven twelve thirteen] { // its like a function!
     /*
         Things passed to an overide by default
 
@@ -62,9 +62,9 @@ overide cambridge(times) { // its like a function!
         // with the power of blocks!
         // insert <block> <location>
         insert { 
-            class [period 11] times[11]; // dont get me fucking started on dot accessers, good fucking luck
-            class [period 12] times[12]; // How about just times[12] instead
-            class [period 13] times[13]; 
+            class [period 11] $eleven; // dont get me fucking started on dot accessers, good fucking luck
+            class [period 12] $twelve; // How about just times[12] instead
+            class [period 13] $thirteen; 
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
     }
     {
@@ -72,9 +72,9 @@ overide cambridge(times) { // its like a function!
 
         remove [2] [3];
         insert { 
-            class [11] times[11];
-            class [12] times[12];
-            class [13] times[13];
+            class [11] $eleven;
+            class [12] $twelve;
+            class [13] $thirteen;
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
         force lunch 3;
     }
@@ -95,7 +95,7 @@ schedule normal {
     lunchConfig {
         from [period 3];
         passing [5 minutes];
-    }
+    };
     lunch [1] 10:30 to 11:00; // how the fuck do you 
     lunch [2] 11:00 to 11:30; // maybe use blocks? 
     lunch [3] 11:30 to 12:00;
@@ -104,7 +104,7 @@ schedule normal {
     // pass in args
     // arguments are not parsed yet
     // pain
-    // overide cambridge ([11] 11:00 to 11:30, [12] 11:00 to 11:30, [13] 11:00 to 11:30);
+    overide cambridge [11:00 to 11:30] [11:00 to 11:30] [11:00 to 11:30];
 };
 
 // inherited schedule
@@ -209,4 +209,6 @@ lunches {
     }
 };
 
+
+test;
 // better

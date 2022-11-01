@@ -3,6 +3,7 @@ export type Block = (Statement | Block)[]
 export type Statement = {
     statement: string,
     args: Arg[]
+    comment?: string
 }
 
 export type Arg = BlockArg | QuoteArg | TextArg | BracketArg

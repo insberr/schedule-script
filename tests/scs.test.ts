@@ -21,3 +21,23 @@ test("minify", () => {
     writeFileSync(join(testDir,"test.min.ignore.json"), JSON.stringify(minscs.parsed, null, 2));
     expect(minscs.parsed).toEqual(scs.parsed);
 })
+
+test("pretty", () => {
+    const scs = new SCS(testFile);
+    const pretty = scs.pretty();
+    writeFileSync(join(testDir,"test.pretty.scs"), pretty);
+    const minscs = new SCS(pretty);
+    writeFileSync(join(testDir,"test.pretty.ignore.json"), JSON.stringify(minscs.parsed, null, 2));
+    expect(minscs.parsed).toEqual(scs.parsed);
+})
+
+test("minify pretty", () => {
+    const scs = new SCS(testFile);
+    const minified = scs.minify();
+    const scsMin = new SCS(minified);
+    const pretty = scsMin.pretty();
+    writeFileSync(join(testDir,"test.min.pretty.scs"), pretty);
+    const minscs = new SCS(pretty);
+    writeFileSync(join(testDir,"test.min.pretty.ignore.json"), JSON.stringify(minscs.parsed, null, 2));
+    expect(minscs.parsed).toEqual(scs.parsed);
+})
