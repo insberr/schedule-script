@@ -1794,6 +1794,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/ungap__structured-clone@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "@types/ungap__structured-clone@npm:0.3.0"
+  checksum: 1502276e64645c2157e7a6d0dc6b572787b99f5a4e64d11711fcc05edb9c5be5d0a7827939d269746a29f24ae96c9581b16f12d00604dacfbfdc6b62ba6025c5
+  languageName: node
+  linkType: hard
+
 "@types/yargs-parser@npm:*":
   version: 21.0.0
   resolution: "@types/yargs-parser@npm:21.0.0"
@@ -1807,6 +1814,13 @@ __metadata:
   dependencies:
     "@types/yargs-parser": "*"
   checksum: 0ab269abc2da2223cf0a8c16d578850fbe327d40fb85724b5c3f9f6cf38d03656ef699518c05d4df3bc337339ec6d0aad7df01682a9dca4783ad1ccc7336cf12
+  languageName: node
+  linkType: hard
+
+"@ungap/structured-clone@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@ungap/structured-clone@npm:1.0.1"
+  checksum: cd614e038fa63dcd5da0070d9ed5214d74d1f72b04d88e884d5a6563bb77d52a566fdd26b889f09c534fb72ab1d6ad8efe6bb678a56a5ccd3f0d6946234d1113
   languageName: node
   linkType: hard
 
@@ -4644,6 +4658,8 @@ __metadata:
     "@parcel/transformer-typescript-types": 2.7.0
     "@types/jest": ^29.2.0
     "@types/node": ^18.11.8
+    "@types/ungap__structured-clone": ^0.3.0
+    "@ungap/structured-clone": ^1.0.1
     jest: ^29.2.2
     parcel: ^2.7.0
     parcel-transformer-peggy: ^1.0.0

@@ -1,20 +1,21 @@
  //import { inspect } from "util";
  /// <reference path="grammer.d.ts"/>
+import { Context, executeBlock } from "./execute";
 import { parse as pe } from "./grammer.pegjs";
 import { Block, Statement } from "./types";
 export * from "./types";
 
 
-function isStatement(s: Statement | Block): s is Statement {
+export function isStatement(s: Statement | Block): s is Statement {
     return (s as Statement).statement !== undefined;
 }
 
 export class SCS {
     parsed: Block
-    parsedwithComments: Block
+    //parsedwithComments: Block
     constructor(data: string) {
         this.parsed = pe(data);
-        this.parsedwithComments = this.parsed;
+        //this.parsedwithComments = this.parsed;
     }
     minify(): string {
         let out = ""
@@ -101,6 +102,11 @@ export class SCS {
             out += doPretty(statement);
         }
         return out
+    }
+    exec(initalContext?: Context): any {
+        const ret = executeBlock(this.parsed, initalContext || {})
+        // transform the context into the right data format here
+        return ret
     }
 }
 

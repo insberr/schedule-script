@@ -41,3 +41,8 @@ test("minify pretty", () => {
     writeFileSync(join(testDir,"test.min.pretty.ignore.json"), JSON.stringify(minscs.parsed, null, 2));
     expect(minscs.parsed).toEqual(scs.parsed);
 })
+
+test("exec", () => {
+    const scs = new SCS(testFile)
+    console.log(scs.exec())
+})
