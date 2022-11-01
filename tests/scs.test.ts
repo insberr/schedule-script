@@ -1,4 +1,4 @@
-import { SCS } from "../dist/scs"
+import { SCS } from "../src/scs"
 import {existsSync, mkdirSync, readFileSync, writeFileSync} from "fs";
 import { join } from "path";
 

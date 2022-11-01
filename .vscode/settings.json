@@ -6,4 +6,10 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "jest.jestCommandLine": "yarn test",
+  "jest.autoRun": {
+      "watch": false,
+      "onStartup": ["all-tests"],
+      "onSave": "test-src-file"
+  },
+  "jest.showCoverageOnLoad": true
 }

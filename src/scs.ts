@@ -1,7 +1,6 @@
  //import { inspect } from "util";
- /// <reference path="grammer.d.ts"/>
 import { Context, executeBlock } from "./execute";
-import { parse as pe } from "./grammer.pegjs";
+import { parse as pe } from "./grammer";
 import { Block, Statement } from "./types";
 export * from "./types";
 
@@ -72,20 +71,13 @@ export class SCS {
                 if (statement.args.length == 0) {
                     args = "";
                 }
-                if (statement.comment) {
-                    if (statement.statement == "comment") {
-                        o += indent + statement.comment
-                    } else {
-                        o += statement.comment.split("\n").map((r) => indent + r.trim()).join("\n") + "\n"
-                    }
+                o += indent + statement.statement + args
+                if (o.endsWith("}")) {
+                    o += ";\n\n"
                 } else {
-                    o += indent + statement.statement + args
-                    if (o.endsWith("}")) {
-                        o += ";\n\n"
-                    } else {
-                        o += ";\n"
-                    }
+                    o += ";\n"
                 }
+                
             } else {
                 // block
                 o += indent+"{\n"
