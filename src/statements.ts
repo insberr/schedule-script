@@ -1,5 +1,5 @@
 import type { Context, PArgs } from "./execute"
-import { find } from "./lib";
+import { find, copyInto } from "./lib";
 import { isAfter, isBefore, isSameDay } from 'date-fns'
 type StatementFunc = (args: PArgs, context: Context) => void
 
@@ -72,6 +72,18 @@ export const StatementMap = new Map<string, StatementFunc>()
         const lunch = parseInt(_lunch)
         c.teachers = c.teachers || []
         c.teachers.push({name,id,lunch})
+    })
+    .set("inherit", (args, c) => {
+        const toHer = args[0] as string
+        const schs = find(c, "schedules")
+        if (!schs) {
+            throw new Error("No schedules in file!")
+        }
+        const t = schs[toHer]
+        if (!t) {
+            throw new Error("Schedule "+toHer+" doesnt exist!")
+        }
+        copyInto(t, c)
     })
 
 // you could import statements from other files and add them to the map.

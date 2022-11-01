@@ -108,7 +108,8 @@ schedule normal {
 };
 
 // inherited schedule
-schedule testInherit inherit normal {
+schedule testInherit {
+    inherit normal;
     description "Test Inherit Schedule"; // all the @ signs are unnessicary 
 };
 // why store this in the schedule file? i mean its fine ig? maybe add importing so we could split the files...

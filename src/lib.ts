@@ -18,3 +18,9 @@ export function find(context: Context, item: string): any {
         }
     }
 }
+
+export function copyInto(src: any, dest: any) {
+    Object.keys(src).forEach(element => {
+        dest[element] = src[element]
+    });
+}
