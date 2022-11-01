@@ -1,5 +1,5 @@
 import type { Block } from "./types"
-import { isStatement } from "./lib"
+import { find, isStatement } from "./lib"
 import produce from "immer"
 import { StatementMap } from "./statements"
 import clone from "@ungap/structured-clone"
@@ -17,13 +17,15 @@ export function executeBlock(data: Block, initcontext: Context): Context {
     for (const item of data) {
         if (isStatement(item)) {
             if (item.statement == "function") {
-                let args: string[] = []
-                if (item.args.length == 3) {
-                    args = (item.args.splice(1,1)[0].data as string).split(" ")
-                }
-                const name = item.args[0].data as string
-                const body = item.args[1].data as Block
-                context["func_"+name] = { args, body }
+                context = produce(context, (c) => {
+                    let args: string[] = []
+                    if (item.args.length == 3) {
+                        args = (item.args.splice(1,1)[0].data as string).split(" ")
+                    }
+                    const name = item.args[0].data as string
+                    const body = item.args[1].data as Block
+                    c["func_"+name] = { args, body }   
+                })
                 continue;
             }
             const parsedArgs: PArgs = []
@@ -36,9 +38,33 @@ export function executeBlock(data: Block, initcontext: Context): Context {
                     })
                     parsedArgs.push(blk)
                 } else {
+                    if (element.data.startsWith("$")) {
+                        const name = element.data.substring(1)
+                        const val = find(context, name)
+                        if (val == undefined) {
+                            throw new Error(`Variable ${name} not found`)
+                        }
+                        parsedArgs.push(val)
+                        return;
+                    }
                     parsedArgs.push(element.data)
                 }
             });
+            if (item.statement == "call") {
+                const tocall = parsedArgs.shift() as string
+                const args = parsedArgs;
+                const func = find(context, "func_"+tocall)
+                if (!func) {
+                    throw new Error(`Function ${tocall} not found`)
+                }
+                const argMapping: {[key:string]: any} = {}
+                args.forEach((arg, i) => {
+                    argMapping[func.args[i]] = arg
+                })
+                //console.log("calling function "+tocall+" with args "+JSON.stringify(argMapping))
+                context = executeBlock(func.body, {...context, ...argMapping})
+                continue;
+            }
             //console.log("executing",item.statement,"with", parsedArgs)
             context = executeStatement(item.statement, parsedArgs, context)
             if (context.stop) {

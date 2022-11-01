@@ -13,12 +13,47 @@
 // maybe complex matcherxs like [period 2, teacher [Rick Astley]] or some shit
 // then functions or conditions that contain matchers can do complex matching
 
+
+// file order should go 
+// imports (just in case)
+// defines (lunches, terms, constant stuff)
+// functions
+// schedules
+// events
+
+// why? because a command only has access to what is above it
+// if you were to place the terms {} below a schedule, that schedule would not have access to the terms.
+
+terms { // define all 3 terms
+    term 1 [September 6, 2022] [December 6, 2022];
+    term 2 [December 8, 2022]  [March 27, 2023];
+    term 3 [March 28, 2023]    [June 23, 2023];
+};
+// this can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
+lunches {
+    {
+        only term 1; // if we arnt in term 1, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 1;
+    }
+    {
+        only term 2; // if we arnt in term 2, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 2;
+    }
+    {
+        only term 3; // if we arnt in term 3, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 3;
+    }
+};
+
 function defaultZero {
     user classes contains [period 0]; // only if the user has a period zero
     schedule classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
     // replace class <matcher> with <block>
     // basically find the class that matches the matcher (type or period or both) and replace it with the statements in the block
-    replace class [arrival] with { class [period 0] 6:30 to 7:30; };  //replaces arrival with the statements in the block (allows multiple statements)
+    replace class [arrival] with { class [period 0] [6:30 to 7:30]; };  //replaces arrival with the statements in the block (allows multiple statements)
 };
 
 function cambridge [eleven twelve thirteen] { // its like a function!
@@ -82,13 +117,13 @@ function cambridge [eleven twelve thirteen] { // its like a function!
 
 schedule normal {
     description "Normal Schedule";
-    //  class [calss type] <time> to <time>, {options};
-    class [arrival]  7:10 to 7:30;
-    class [period 0] 6:30 to 7:30;
-    class [period 1] 7:35 to 8:45;
-    class [2]        8:50 to 9:55;
-    class [3]       10:00 to 11:00;
-    class [dismissal] 11:00 to 11:05;
+    //  class [calss type] [<time> to <time>], {options};
+    class [arrival]   [7:10 to 7:30];
+    class [period 0]  [6:30 to 7:30];
+    class [period 1]  [7:35 to 8:45];
+    class [2]         [8:50 to 9:55];
+    class [3]         [10:00 to 11:00];
+    class [dismissal] [11:00 to 11:05];
 
 
     // how do we do this ...
@@ -96,9 +131,9 @@ schedule normal {
         from [period 3];
         passing [5 minutes];
     };
-    lunch [1] 10:30 to 11:00; // how the fuck do you 
-    lunch [2] 11:00 to 11:30; // maybe use blocks? 
-    lunch [3] 11:30 to 12:00;
+    lunch [1] [10:30 to 11:00]; // how the fuck do you 
+    lunch [2] [11:00 to 11:30]; // maybe use blocks? 
+    lunch [3] [11:30 to 12:00];
     
     call defaultZero;
     // pass in args
@@ -176,40 +211,12 @@ event {
 // like how will we define the term teacher lists + any other lists like for if theres 4th period lunch instead of 3rd or something?
 
 event {
-    message "override lunch"
+    message "override lunch";
     lunches { // any command below or at this block will use these lunches instead. (includes the schedule.)
-        teacher [Rick Astley] ABCD-1234-AB34 2;
+        teacher [Rick Astley] ABCD-1234-AB34 69;
     };
     schedule normal;
 };
-
-
-terms { // define all 3 terms
-    term 1 [September 6, 2022] [December 6, 2022];
-    term 2 [December 8, 2022]  [March 27, 2023];
-    term 3 [March 28, 2023]    [June 23, 2023];
-};
-// this can be overridden in events/schedules, any command that needs it searches up the "block tree"
-// if a teacher is missing, we keep searching up the tree until we find one or we hit the top (in which case we scream and die).
-
-lunches {
-    {
-        only term 1; // if we arnt in term 1, we cancel processing.
-        // teacher <name> <id> <lunch>
-        teacher [Rick Astley] ABCD-1234-AB34 1;
-    }
-    {
-        only term 2; // if we arnt in term 2, we cancel processing.
-        // teacher <name> <id> <lunch>
-        teacher [Rick Astley] ABCD-1234-AB34 2;
-    }
-    {
-        only term 3; // if we arnt in term 3, we cancel processing.
-        // teacher <name> <id> <lunch>
-        teacher [Rick Astley] ABCD-1234-AB34 3;
-    }
-};
-
 
 test;
 // better
