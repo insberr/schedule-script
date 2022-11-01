@@ -25,4 +25,10 @@ jobs:
     - run: yarn
     - run: yarn build
     - run: yarn test
+    - name: minified file
+      run: cat testOut/test.min.scs
+    - name: prettified
+      run: cat testOut/test.pretty.scs
+    - name: parsed
+      run: cat testOut/test.ignore.json
         
