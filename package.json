@@ -33,6 +33,7 @@
     },
     "packageManager": "yarn@4.0.0-rc.27",
     "dependencies": {
+        "@parcel/resolver-default": "2.7.0",
         "@ungap/structured-clone": "^1.0.1",
         "date-fns": "^2.29.3",
         "immer": "^9.0.16",

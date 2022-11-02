@@ -4660,6 +4660,7 @@ __metadata:
     "@parcel/config-default": "npm:^2.7.0"
     "@parcel/core": "npm:^2.7.0"
     "@parcel/packager-ts": "npm:2.7.0"
+    "@parcel/resolver-default": "npm:2.7.0"
     "@parcel/transformer-typescript-types": "npm:^2.7.0"
     "@types/jest": "npm:^29.2.0"
     "@types/node": "npm:^18.11.8"
