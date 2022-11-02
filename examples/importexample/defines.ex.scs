@@ -1,0 +1,23 @@
+terms { // define all 3 terms
+    term 1 [September 6, 2022] [December 6, 2022];
+    term 2 [December 8, 2022]  [March 27, 2023];
+    term 3 [March 28, 2023]    [June 23, 2023];
+};
+// this can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
+lunches {
+    {
+        only term 1; // if we arnt in term 1, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 1;
+    }
+    {
+        only term 2; // if we arnt in term 2, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 2;
+    }
+    {
+        only term 3; // if we arnt in term 3, we cancel processing.
+        // teacher <name> <id> <lunch>
+        teacher [Rick Astley] ABCD-1234-AB34 3;
+    }
+};

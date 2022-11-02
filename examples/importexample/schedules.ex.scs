@@ -1,0 +1,32 @@
+schedule normal {
+    description "Normal Schedule";
+    //  class [calss type] [<time> to <time>], {options};
+    class [arrival]   [7:10 to 7:30];
+    class [period 0]  [6:30 to 7:30];
+    class [period 1]  [7:35 to 8:45];
+    class [2]         [8:50 to 9:55];
+    class [3]         [10:00 to 11:00];
+    class [dismissal] [11:00 to 11:05];
+
+
+    // how do we do this ...
+    lunchConfig {
+        from [period 3];
+        passing [5 minutes];
+    };
+    lunch [1] [10:30 to 11:00]; // how the fuck do you 
+    lunch [2] [11:00 to 11:30]; // maybe use blocks? 
+    lunch [3] [11:30 to 12:00];
+    
+    call defaultZero;
+    // pass in args
+    // arguments are not parsed yet
+    // pain
+    call cambridge [11:00 to 11:30] [11:00 to 11:30] [11:00 to 11:30];
+};
+
+// inherited schedule
+schedule testInherit {
+    inherit normal;
+    description "Test Inherit Schedule"; // all the @ signs are unnessicary 
+};

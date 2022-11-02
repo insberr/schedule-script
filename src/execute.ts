@@ -3,6 +3,7 @@ import { find, isStatement } from "./lib"
 import produce from "immer"
 import { StatementMap } from "./statements"
 import clone from "@ungap/structured-clone"
+import { SCS } from "./scs"
 export type Context = {
     parent?: Context
     stop?: boolean
@@ -12,7 +13,7 @@ export type Context = {
 
 export type PArgs = (string | Context)[]
 
-export function executeBlock(data: Block, initcontext: Context): Context {
+export function executeBlock(data: Block, initcontext: Context, resolver: (filename: string) => string): Context {
     let context = clone(initcontext)
     for (const item of data) {
         if (isStatement(item)) {
@@ -27,11 +28,17 @@ export function executeBlock(data: Block, initcontext: Context): Context {
                     c["func_"+name] = { args, body }   
                 })
                 continue;
+            } else if (item.statement == "import") {
+                const name = item.args[0].data as string
+                const data = resolver(name)
+                const parsed = new SCS(data, resolver)
+                context = executeBlock(parsed.parsed, context, resolver)
+                continue;
             }
             const parsedArgs: PArgs = []
             item.args.forEach(element => {
                 if (element.type == "block") {
-                    const blk = produce(executeBlock(element.data, {parent: context, statement: item.statement}), (r) => {
+                    const blk = produce(executeBlock(element.data, {parent: context, statement: item.statement}, resolver), (r) => {
                         delete r.parent;
                         delete r.statement;
                         delete r.stop;
@@ -62,7 +69,7 @@ export function executeBlock(data: Block, initcontext: Context): Context {
                     argMapping[func.args[i]] = arg
                 })
                 //console.log("calling function "+tocall+" with args "+JSON.stringify(argMapping))
-                context = executeBlock(func.body, {...context, ...argMapping})
+                context = executeBlock(func.body, {...context, ...argMapping}, resolver)
                 continue;
             }
             //console.log("executing",item.statement,"with", parsedArgs)
@@ -71,7 +78,7 @@ export function executeBlock(data: Block, initcontext: Context): Context {
                 return initcontext
             }
         } else {
-            context = executeBlock(item, context)
+            context = executeBlock(item, context, resolver)
         }
     }
     return context

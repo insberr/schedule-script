@@ -8,9 +8,11 @@ import { isStatement } from "./lib";
 
 export class SCS {
     parsed: Block
+    resolver: (name: string) => string
     //parsedwithComments: Block
-    constructor(data: string) {
+    constructor(data: string, resolver?: (name: string) => string) {
         this.parsed = pe(data);
+        this.resolver = resolver || ((name) => {throw new Error("Cannot resolve without a resolver")})
         //this.parsedwithComments = this.parsed;
     }
     minify(): string {
@@ -93,12 +95,13 @@ export class SCS {
         return out
     }
     exec(initalContext?: Context): any {
-        const ret = executeBlock(this.parsed, initalContext || {})
+        const ret = executeBlock(this.parsed, initalContext || {}, this.resolver)
         // transform the context into the right data format here
         return ret
     }
 }
 
+export { SCSFS } from "./scsfs"
 
 /*
 process.exit(0);
