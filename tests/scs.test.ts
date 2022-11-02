@@ -1,6 +1,7 @@
-import { SCS } from "../src/scs"
+import { SCS, SCSFS } from "../src/scs"
 import {existsSync, mkdirSync, readFileSync, writeFileSync} from "fs";
 import { join } from "path";
+import { readFile } from "fs/promises";
 //mport { serialize } from "@ungap/structured-clone";
 const testFile = readFileSync(__dirname+"/../examples/main.ex.scs", "utf8");
 const testDir = __dirname + "/../testOut/"
@@ -47,4 +48,20 @@ test("exec", () => {
     const execed = scs.exec()
     //console.dir(execed,{depth:32})
     writeFileSync(join(testDir, "test.exec.json"), JSON.stringify(execed, null, 2))
+})
+
+test("scsfs", async () => {
+    const fs = new SCSFS;
+    const manifest = { // key: filename, value: value passed to fetcher to get the content (ie url)
+        "main.ex.scs": "entrypoint.ex.scs",
+        "defines.ex.scs": "defines.ex.scs",
+        "events.ex.scs": "events.ex.scs",
+        "functions.ex.scs": "functions.ex.scs",
+        "schedules.ex.scs": "schedules.ex.scs",
+    }
+    await fs.addAsync(manifest, (fl) => {
+        return readFile(join(__dirname, "../examples", "importexample", fl), "utf8") // read from the funny directory
+    })
+    const execed = fs.exec("main.ex.scs")
+    writeFileSync(join(testDir,"test.fs.exec.json"), JSON.stringify(execed, null, 2))
 })
