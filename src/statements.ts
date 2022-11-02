@@ -116,6 +116,10 @@ export const StatementMap = new Map<string, StatementFunc>()
     .set("from", (args, c) => {
         if (c.statement == "event") {
             const from = args[0] as string
+            const tost = args[1] as string
+            if (tost != "to") {
+                console.warn("(from) Expected 'to' but got", tost)
+            }
             const to = args[2] as string
             c.dates = c.dates || []
             c.dates.push(...getDaysArray(new Date(from), new Date(to)))
