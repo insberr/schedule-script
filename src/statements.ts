@@ -1,5 +1,5 @@
 import type { Context, PArgs } from "./execute"
-import { find, copyInto } from "./lib";
+import { find, copyInto, parseTimeRange } from "./lib";
 import { isAfter, isBefore, isSameDay } from 'date-fns'
 type StatementFunc = (args: PArgs, context: Context) => void
 
@@ -20,7 +20,28 @@ export const StatementMap = new Map<string, StatementFunc>()
     })
     .set("class", (args, c) => {
         c.classes = (c.classes || [])
-        c.classes.push(args)
+        let outc: any = {}
+        const typeM = args[0] as string
+        const timeRange = args[1] as string
+        const ptimerange = parseTimeRange(timeRange)
+        outc = {...ptimerange}
+        const ptyper = typeM.split(" ")
+        let num: number | null = null
+        let type = "period"
+        if (ptyper.length == 1) {
+            const isNum = /^\d+$/.test(ptyper[0])
+            if (isNum) {
+                num = parseInt(ptyper[0])
+            } else {
+                type = ptyper[0]
+            }
+        } else {
+            const [rtype, rnum] = ptyper
+            num = parseInt(rnum)
+            type = rtype;
+        }
+        outc = {...outc, type, num}
+        c.classes.push(outc)
     })
     .set("event", (args, c) => {
         c.events = (c.events || [])
@@ -85,5 +106,14 @@ export const StatementMap = new Map<string, StatementFunc>()
         }
         copyInto(t, c)
     })
+    .set("description", setSimple("description"))
+    .set("info", setSimple("info"))
+    .set("message", setSimple("message"))
 
+
+function setSimple(name: string) {
+    return (args: PArgs, c: Context) => {
+        c[name] = args.join(" ")
+    }
+}
 // you could import statements from other files and add them to the map.

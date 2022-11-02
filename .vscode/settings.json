@@ -3,13 +3,15 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
   "jest.jestCommandLine": "yarn test",
   "jest.autoRun": {
-      "watch": false,
-      "onStartup": ["all-tests"],
-      "onSave": "test-src-file"
+    "watch": false,
+    "onStartup": [
+      "all-tests"
+    ],
+    "onSave": "test-src-file"
   },
-  "jest.showCoverageOnLoad": true
+  "jest.showCoverageOnLoad": true,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.tsdk": ".yarn/sdks/typescript/lib"
 }

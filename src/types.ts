@@ -24,3 +24,14 @@ export type BracketArg = {
     type: 'bracket',
     data: string
 }
+
+export type Time = {
+    h: number
+    m: number
+    s: number
+}
+
+export type TimeRange = {
+    start: Time,
+    end: Time
+}
