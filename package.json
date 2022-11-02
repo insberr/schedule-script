@@ -1,6 +1,6 @@
 {
     "name": "schedule-script",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Schedule? Scripted.",
     "source": "src/scs.ts",
     "main": "dist/scs.js",

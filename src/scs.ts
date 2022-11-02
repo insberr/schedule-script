@@ -1,6 +1,6 @@
  //import { inspect } from "util";
 import { Context, executeBlock } from "./execute";
-import { parse as pe, parseTime } from "./grammer";
+import { parse as pe } from "./grammer";
 import { Block, Statement } from "./types";
 export * from "./types";
 import { isStatement } from "./lib";
