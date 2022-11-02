@@ -1,5 +1,5 @@
 import type { Context, PArgs } from "./execute"
-import { find, copyInto, parseTimeRange } from "./lib";
+import { find, copyInto, parseTimeRange, getDaysArray } from "./lib";
 import { isAfter, isBefore, isSameDay } from 'date-fns'
 type StatementFunc = (args: PArgs, context: Context) => void
 
@@ -109,7 +109,20 @@ export const StatementMap = new Map<string, StatementFunc>()
     .set("description", setSimple("description"))
     .set("info", setSimple("info"))
     .set("message", setSimple("message"))
-
+    .set("date", (args, c) => {
+        c.dates = c.dates || []
+        c.dates.push(new Date(args[0] as string))
+    })
+    .set("from", (args, c) => {
+        if (c.statement == "event") {
+            const from = args[0] as string
+            const to = args[2] as string
+            c.dates = c.dates || []
+            c.dates.push(...getDaysArray(new Date(from), new Date(to)))
+        } else {
+            c.from = args;
+        }
+    })
 
 function setSimple(name: string) {
     return (args: PArgs, c: Context) => {
