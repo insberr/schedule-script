@@ -33,6 +33,8 @@ jobs:
       run: cat testOut/test.ignore.json
     - name: exec output
       run: cat testOut/test.exec.json
+    - name: import test
+      run: cat testOut/test.fs.exec.json
     - name: Upload output
       uses: actions/upload-artifact@v3
       with:
