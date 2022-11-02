@@ -58,6 +58,7 @@ test("scsfs", async () => {
         "events.ex.scs": "events.ex.scs",
         "functions.ex.scs": "functions.ex.scs",
         "schedules.ex.scs": "schedules.ex.scs",
+        "lunches": "lunches.ex.scs",
     }
     await fs.addAsync(manifest, (fl) => {
         return readFile(join(__dirname, "../examples", "importexample", fl), "utf8") // read from the funny directory

@@ -50,6 +50,7 @@ async function testSCSFS() {
         "events.ex.scs": "events.ex.scs",
         "functions.ex.scs": "functions.ex.scs",
         "schedules.ex.scs": "schedules.ex.scs",
+        "lunches": "lunches.ex.scs",
     }, (fl) => {
         return readFile(join(__dirname, "../examples", "importexample", fl), "utf8") // read from the funny directory
     }) // files are fetched using the function in parallel and loaded into the virtual file system
@@ -65,3 +66,4 @@ async function testSCSFS() {
     writeFileSync(join(testDir,"test.fs.exec.json"), JSON.stringify(execfs, null, 2))
 }
 testSCSFS()
+
