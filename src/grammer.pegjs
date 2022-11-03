@@ -1,8 +1,10 @@
 start = prog:statement* { return prog.filter((p) => p) }
 ws "whitespace" = [ \t\n\r]*
-statement = ws v:(comment / multilinecomment / block / command ) ws { return v }
+statement = ws v:(commentonline / comment / multilinecomment / block / command ) ws { return v }
 
-comment = "//" d:[^\n]* "\n"? { return {statement: "comment", "args":d.map((e) => {return {type:"quote", data:e}}) } }
+// comment on line no work i give up pls fix todo hfgl
+commentonline = eol "//" d:[^\n]* "\n"? { return {statement: "commentonline", "args":d.map((e) => {return {type:"quote", data:e}}) } }
+comment = ws "//" d:[^\n]* "\n"? { return {statement: "comment", "args":d.map((e) => {return {type:"quote", data:e}}) } }
 multilinecomment = "/*" d:[^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return {statement: "multicomment", "args":d.map((e) => {return {type:"quote", data:e}}) } }
 
 /*

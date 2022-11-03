@@ -52,7 +52,7 @@ export class SCS {
                 if (statement.args.length == 0) {
                     args = '';
                 }
-                if (statement.statement == 'comment' || statement.statement == 'multicomment') {
+                if (statement.statement == 'comment' || statement.statement == 'multicomment' || statement.statement == 'commentonline') {
                     return '';
                 }
                 out += statement.statement + args;
@@ -104,6 +104,9 @@ export class SCS {
                             .map((d) => indent + d.trim())
                             .join('\n') +
                         '\n';
+                } else if (statement.statement == 'commentonline') {
+                    o = o.trimEnd().slice(0, o.length - 1);
+                    o += '//' + statement.args.map((d) => d.data).join('') + '\n';
                 } else {
                     o += indent + statement.statement + args;
                     if (o.endsWith('}')) {

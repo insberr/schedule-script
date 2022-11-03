@@ -37,7 +37,7 @@ lunches {
         teacher [Rick Astley] ABCD-1234-AB34 1;
     }
     {
-        only term 2; // if we arnt in term 2, we cancel processing.
+        only term 2;// if we arnt in term 2, we cancel processing.
         // teacher <name> <id> <lunch>
         teacher [Rick Astley] ABCD-1234-AB34 2;
     }
