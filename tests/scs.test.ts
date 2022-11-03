@@ -66,3 +66,161 @@ test("scsfs", async () => {
     const execed = fs.exec("main.ex.scs")
     writeFileSync(join(testDir,"test.fs.exec.json"), JSON.stringify(execed, null, 2))
 })
+
+describe('quotes: message', () => {
+    describe('no quotes insde', () => {
+        test("single", () => {
+            const scs = new SCS(`message 'single quotes';`);
+            expect(scs.pretty()).toEqual(`message 'single quotes';\n`);
+        });
+
+        test("double", () => {
+            const scs = new SCS(`message "double quotes";`);
+            expect(scs.pretty()).toEqual(`message 'double quotes';\n`);
+        });
+    });
+
+    describe('single quotes inside single quotes (\'msg \\\'hi\\\' more\')', () => {
+        test("both escaped single", () => {
+            const scs = new SCS(`message 'Test \\'single quotes\\' message';`);
+            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+        });
+
+        test("first escaped single", () => {
+            expect(() => {
+                new SCS(`message 'Test \\'single quotes' message';`);
+            }).toThrowError();
+        });
+
+        test("last escaped single", () => {
+            expect(() => {
+                new SCS(`message 'Test 'single quotes\\' message';`);
+            }).toThrowError();
+        });
+
+        test("none escaped single", () => {
+            /*
+                the non escaped quotes makes it so you get:
+                message 'Test ' single quotes ' message'; when prettyfied
+                as in <string> <value> <string>
+
+                and
+                message: 'Test  single quotes  message' when execed
+
+                Love the quirks of this language already
+            */
+            const value = new SCS(`message 'Test 'single quotes' message';`);
+            expect(value.exec()).toEqual({ message: 'Test  single quotes  message' });
+            expect(value.pretty()).toEqual(`message 'Test ' single quotes ' message';\n`);
+
+            // cringe
+            const value2 = new SCS(value.pretty());
+            expect(value2.exec()).toEqual({ message: 'Test  single quotes  message' });
+            expect(value2.pretty()).toEqual(`message 'Test ' single quotes ' message';\n`);
+        });
+
+        test("not closed single escaped", () => {
+            const scs = new SCS(`message 'Test \\'single quotes message';`);
+            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes message';\n`);
+        });
+    });
+    
+    describe('double quotes inside double quotes ("msg \\"hi\\" more")', () => {
+        test("both escaped double", () => {
+            const scs = new SCS(`message "Test \\"double quotes\\" message";`);
+            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+        });
+
+        test("first escaped double", () => {
+            expect(() => {
+                new SCS(`message "Test \\"double quotes" message";`);
+            }).toThrowError();
+        });
+
+        test("last escaped double", () => {
+            expect(() => {
+                new SCS(`message "Test "double quotes\\" message";`);
+            }).toThrowError();
+        });
+
+        test("none escaped double", () => {
+            /*
+                the non escaped quotes makes it so you get:
+                message "Test " double quotes " message"; when prettyfied
+                as in <string> <value> <string>
+
+                and
+                message: 'Test  double quotes  message' when execed
+
+                Love the quirks of this language already
+            */
+            const value = new SCS(`message "Test "double quotes" message";`);
+            expect(value.exec()).toEqual({ message: 'Test  double quotes  message' });
+            expect(value.pretty()).toEqual(`message 'Test ' double quotes ' message';\n`);
+
+            // cringe
+            const value2 = new SCS(value.pretty());
+            expect(value2.exec()).toEqual({ message: 'Test  double quotes  message' });
+            expect(value2.pretty()).toEqual(`message 'Test ' double quotes ' message';\n`);
+        });
+
+        test("not closed double escaped", () => {
+            const scs = new SCS(`message "Test \\"double quotes message";`);
+            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes message';\n`);
+        });
+    });
+
+    describe('single quotes inside double quotes ("msg \\\'hi\\\' more")', () => {
+        test("both escaped", () => {
+            const scs = new SCS(`message "Test \\'single quotes\\' message";`);
+            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+        });
+
+        test("first escaped", () => {
+            const scs = new SCS(`message "Test \\'single quotes' message";`);
+            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+        });
+
+        test("last escaped", () => {
+            const scs = new SCS(`message "Test 'single quotes\\' message";`);
+            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+        });
+
+        test("none escaped", () => {
+            const value = new SCS(`message "Test 'single quotes' message";`);
+            expect(value.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+        });
+
+        test("not closed escaped", () => {
+            const scs = new SCS(`message "Test \\'single quotes message";`);
+            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes message';\n`);
+        });
+    });
+
+    describe('double quotes inside single quotes (\'msg \\"hi\\" more\')', () => {
+        test("both escaped", () => {
+            const scs = new SCS(`message 'Test \\"double quotes\\" message';`);
+            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+        });
+
+        test("first escaped", () => {
+            const scs = new SCS(`message 'Test \\"double quotes" message';`);
+            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+        });
+
+        test("last escaped", () => {
+            const scs = new SCS(`message 'Test "double quotes\\" message';`);
+            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+        });
+
+        test("none escaped", () => {
+            const value = new SCS(`message 'Test "double quotes" message';`);
+            expect(value.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+        });
+
+        test("not closed escaped", () => {
+            const scs = new SCS(`message 'Test \\"double quotes message';`);
+            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes message';\n`);
+        });
+    });
+})

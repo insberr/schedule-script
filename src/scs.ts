@@ -5,7 +5,16 @@ import { Block, Statement } from "./types";
 export * from "./types";
 import { isStatement } from "./lib";
 
+function quoteEscape(str: string): string {
+    let newStr = str;
+    newStr = newStr.replace(/"/g, '\\"');
+    newStr = newStr.replace(/'/g, "\\'");
+    return newStr;
+}
 
+function stringArgToString(str: string): string {
+    return `'${quoteEscape(str)}'`;
+}
 export class SCS {
     parsed: Block
     resolver: (name: string) => string
@@ -25,7 +34,7 @@ export class SCS {
                     if (arg.type == "block") {
                         return minifyStatement(arg.data).trim()
                     } else if (arg.type == "quote") {
-                        return "\"" + arg.data + "\""
+                        return stringArgToString(arg.data);
                     } else if (arg.type == "text") {
                         return arg.data
                     } else if (arg.type == "bracket") {
@@ -60,7 +69,7 @@ export class SCS {
                     if (arg.type == "block") {
                         return doPretty(arg.data).trim()
                     } else if (arg.type == "quote") {
-                        return "\"" + arg.data + "\""
+                        return stringArgToString(arg.data);
                     } else if (arg.type == "text") {
                         return arg.data
                     } else if (arg.type == "bracket") {

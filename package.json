@@ -1,12 +1,12 @@
 {
-    "name": "schedule-script",
-    "version": "0.0.2",
+    "name": "@insberr/schedule-script",
+    "version": "0.0.4",
     "description": "Schedule? Scripted.",
     "source": "src/scs.ts",
     "main": "dist/scs.js",
     "module": "dist/scs.mjs",
     "types": "dist/scs.d.ts",
-    "repository": "https://github.com/insberr/schedule-script",
+    "repository": "https://github.com/insberr/schedule-script.git",
     "author": "insberr & wackery",
     "license": "MIT",
     "devDependencies": {
@@ -38,5 +38,9 @@
         "date-fns": "^2.29.3",
         "immer": "^9.0.16",
         "peggy": "^2.0.1"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com",
+        "access": "public"
     }
 }

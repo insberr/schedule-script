@@ -212,12 +212,12 @@ event {
 // like how will we define the term teacher lists + any other lists like for if theres 4th period lunch instead of 3rd or something?
 
 event {
-    message "override lunch";
+    message 'override lunch';
     lunches { // any command below or at this block will use these lunches instead. (includes the schedule.)
         teacher [Rick Astley] ABCD-1234-AB34 69;
     };
     schedule normal;
 };
 
-test;
-// better
+test 'what';
+// Better

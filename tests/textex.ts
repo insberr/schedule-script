@@ -65,5 +65,4 @@ async function testSCSFS() {
     
     writeFileSync(join(testDir,"test.fs.exec.json"), JSON.stringify(execfs, null, 2))
 }
-testSCSFS()
-
+testSCSFS();
