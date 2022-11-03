@@ -138,3 +138,5 @@ scs-syntax-highlighting-*.vsix
 theheck.txt
 
 testOut
+
+cli/cli.js
