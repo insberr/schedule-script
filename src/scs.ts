@@ -52,6 +52,9 @@ export class SCS {
                 if (statement.args.length == 0) {
                     args = '';
                 }
+                if (statement.statement == 'comment' || statement.statement == 'multicomment') {
+                    return '';
+                }
                 out += statement.statement + args;
                 out += ';';
             } else {
@@ -91,11 +94,23 @@ export class SCS {
                 if (statement.args.length == 0) {
                     args = '';
                 }
-                o += indent + statement.statement + args;
-                if (o.endsWith('}')) {
-                    o += ';\n\n';
+                if (statement.statement == 'comment') {
+                    o += indent + '//' + statement.args.map((d) => d.data).join('') + '\n';
+                } else if (statement.statement == 'multicomment') {
+                    o +=
+                        indent +
+                        ('/*' + statement.args.map((d) => d.data).join('') + '*/')
+                            .split('\n')
+                            .map((d) => indent + d.trim())
+                            .join('\n') +
+                        '\n';
                 } else {
-                    o += ';\n';
+                    o += indent + statement.statement + args;
+                    if (o.endsWith('}')) {
+                        o += ';\n\n';
+                    } else {
+                        o += ';\n';
+                    }
                 }
             } else {
                 // block
