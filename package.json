@@ -35,7 +35,7 @@
         "install-scs-syntax": "curl -H \"Accept: application/vnd.github.VERSION.raw\" https://api.github.com/repos/insberr/scs-syntax-highlighting/contents/scs-syntax-highlighting-0.0.3.vsix\\?ref\\=main --output scs-syntax-highlighting-0.0.3.vsix && code --install-extension scs-syntax-highlighting-0.0.3.vsix",
         "format": "prettier --write ."
     },
-    "packageManager": "yarn@4.0.0-rc.27",
+    "packageManager": "yarn@3.2.4",
     "dependencies": {
         "@parcel/resolver-default": "2.7.0",
         "@ungap/structured-clone": "^1.0.1",
