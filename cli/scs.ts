@@ -42,6 +42,7 @@ function usage() {
 async function main(command?: string) {
     if (!commands.includes(command || "undefined")) {
         usage()
+        return;
     }
 }
 
