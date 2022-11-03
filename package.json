@@ -59,7 +59,9 @@
         "access": "public"
     },
     "lint-staged": {
-        "*.ts": "eslint --cache --fix; prettier --write"
+        "*.ts": [
+            "yarn eslint --cache --fix",
+            "yarn prettier --write"
+        ]
     }
 }
-

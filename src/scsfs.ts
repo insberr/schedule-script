@@ -6,9 +6,6 @@ export class SCSFS {
     add(name: string, data: string) {
         this.files[name] = data;
     }
-    addMany(files: { [key: string]: string }) {
-        this.files = { ...this.files, ...files };
-    }
     addAsync(files: { [key: string]: string }, fetcher: (name: string) => Promise<string>) {
         return Promise.all(
             Object.keys(files).map(async (f) => {
