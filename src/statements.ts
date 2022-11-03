@@ -125,7 +125,18 @@ export const StatementMap = new Map<string, StatementFunc>()
         } else {
             c.from = args;
         }
-    });
+    })
+    .set("set", (args, c) => {
+        const key = args.shift() as string;
+        const value = args.shift()
+        c[key] = value;
+    })
+    .set("config", (args, c) => {
+        c.config = c.config || {}
+        const key = args.shift() as string;
+        const value = args.shift()
+        c.config[key] = value;
+    })
 
 function setSimple(name: string) {
     return (args: PArgs, c: Context) => {

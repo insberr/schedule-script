@@ -7,3 +7,10 @@ terms { // define all 3 terms
 lunches {
     import "lunches";
 };
+
+
+set testValue test; // sets a value in context, its a variable
+
+set sentryDSN blah;
+
+config sentry $sentryDSN; // sets config.[key] = value
