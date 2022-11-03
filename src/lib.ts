@@ -32,8 +32,8 @@ export function parseTimeRange(range: string): TimeRange {
     //console.log(based)
     const [start, end] = range.split(' to '); // ok
     //console.log(start,end)
-    let startp = parse(start, 'H:mm', new Date());
-    let endp = parse(end, 'H:mm', new Date());
+    const startp = parse(start, 'H:mm', new Date());
+    const endp = parse(end, 'H:mm', new Date());
     //console.log(startp, endp)
     return {
         start: dateToTime(startp),
@@ -50,7 +50,8 @@ export function dateToTime(time: Date): Time {
 }
 // https://stackoverflow.com/a/50398144
 export function getDaysArray(start: Date, end: Date) {
-    for (var arr = [], dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+    const arr = [];
+    for (let dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
         arr.push(new Date(dt));
     }
     return arr;

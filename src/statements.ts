@@ -50,7 +50,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         const t: { termIndex: number; start: Date; end: Date }[] = (args[0] as Context).terms;
         c.terms = t;
         const displayDate = find(c, 'displayDate') || new Date();
-        let newTerm = t.filter((term) => {
+        const newTerm = t.filter((term) => {
             return (
                 (isAfter(displayDate, term.start) || isSameDay(displayDate, term.start)) &&
                 (isBefore(displayDate, term.end) || isSameDay(displayDate, term.end))
@@ -126,17 +126,17 @@ export const StatementMap = new Map<string, StatementFunc>()
             c.from = args;
         }
     })
-    .set("set", (args, c) => {
+    .set('set', (args, c) => {
         const key = args.shift() as string;
-        const value = args.shift()
+        const value = args.shift();
         c[key] = value;
     })
-    .set("config", (args, c) => {
-        c.config = c.config || {}
+    .set('config', (args, c) => {
+        c.config = c.config || {};
         const key = args.shift() as string;
-        const value = args.shift()
+        const value = args.shift();
         c.config[key] = value;
-    })
+    });
 
 function setSimple(name: string) {
     return (args: PArgs, c: Context) => {

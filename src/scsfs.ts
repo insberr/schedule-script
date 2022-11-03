@@ -3,7 +3,6 @@ import { SCS } from './scs';
 
 export class SCSFS {
     files: { [key: string]: string } = {};
-    constructor() {}
     add(name: string, data: string) {
         this.files[name] = data;
     }

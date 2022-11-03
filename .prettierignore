@@ -136,3 +136,13 @@ dist
 testOut/
 coverage/
 dist/
+
+scs-syntax-highlighting-*.vsix
+
+*.ignore.js
+*.ignore.ts
+*.ignore.json
+
+theheck.txt
+
+testOut
