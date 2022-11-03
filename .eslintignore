@@ -129,14 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-
-.DS_Store
-.github
-.yarn
-testOut/
-coverage/
-dist/
-
 scs-syntax-highlighting-*.vsix
 
 *.ignore.js
@@ -146,6 +138,4 @@ scs-syntax-highlighting-*.vsix
 theheck.txt
 
 testOut
-
-.eslintrc.js
-jest.config.js
+**/*.js
