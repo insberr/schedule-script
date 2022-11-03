@@ -1,17 +1,15 @@
 {
-  "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
-  },
-  "jest.jestCommandLine": "yarn test",
-  "jest.autoRun": {
-    "watch": false,
-    "onStartup": [
-      "all-tests"
-    ],
-    "onSave": "test-src-file"
-  },
-  "jest.showCoverageOnLoad": true,
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": ".yarn/sdks/typescript/lib"
+    "search.exclude": {
+        "**/.yarn": true,
+        "**/.pnp.*": true
+    },
+    "jest.jestCommandLine": "yarn test",
+    "jest.autoRun": {
+        "watch": false,
+        "onStartup": ["all-tests"],
+        "onSave": "test-src-file"
+    },
+    "jest.showCoverageOnLoad": true,
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.tsdk": ".yarn/sdks/typescript/lib"
 }

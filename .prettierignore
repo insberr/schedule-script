@@ -121,7 +121,7 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
-.vscode
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
@@ -129,15 +129,10 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-scs-syntax-highlighting-*.vsix
 
-*.ignore.js
-*.ignore.ts
-*.ignore.json
-
-theheck.txt
-testOut
-tests
-examples
-!dist
-.gitpod.yml
+.DS_Store
+.github
+.yarn
+testOut/
+coverage/
+dist/

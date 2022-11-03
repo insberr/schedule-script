@@ -1,9 +1,9 @@
- //import { inspect } from "util";
-import { Context, executeBlock } from "./execute";
-import { parse as pe } from "./grammer";
-import { Block, Statement } from "./types";
-export * from "./types";
-import { isStatement } from "./lib";
+//import { inspect } from "util";
+import { Context, executeBlock } from './execute';
+import { parse as pe } from './grammer';
+import { Block, Statement } from './types';
+export * from './types';
+import { isStatement } from './lib';
 
 function quoteEscape(str: string): string {
     let newStr = str;
@@ -16,101 +16,112 @@ function stringArgToString(str: string): string {
     return `'${quoteEscape(str)}'`;
 }
 export class SCS {
-    parsed: Block
-    resolver: (name: string) => string
+    parsed: Block;
+    resolver: (name: string) => string;
     //parsedwithComments: Block
     constructor(data: string, resolver?: (name: string) => string) {
         this.parsed = pe(data);
-        this.resolver = resolver || ((name) => {throw new Error("Cannot resolve without a resolver")})
+        this.resolver =
+            resolver ||
+            ((name) => {
+                throw new Error('Cannot resolve without a resolver');
+            });
         //this.parsedwithComments = this.parsed;
     }
     minify(): string {
-        let out = ""
+        let out = '';
         function minifyStatement(statement: Statement | Block): string {
-            let out = ""
+            let out = '';
             if (isStatement(statement)) {
                 // statement
-                let args = " " + statement.args.map((arg) => {
-                    if (arg.type == "block") {
-                        return minifyStatement(arg.data).trim()
-                    } else if (arg.type == "quote") {
-                        return stringArgToString(arg.data);
-                    } else if (arg.type == "text") {
-                        return arg.data
-                    } else if (arg.type == "bracket") {
-                        return "[" + arg.data + "]"
-                    }
-                }).join(" ")
+                let args =
+                    ' ' +
+                    statement.args
+                        .map((arg) => {
+                            if (arg.type == 'block') {
+                                return minifyStatement(arg.data).trim();
+                            } else if (arg.type == 'quote') {
+                                return stringArgToString(arg.data);
+                            } else if (arg.type == 'text') {
+                                return arg.data;
+                            } else if (arg.type == 'bracket') {
+                                return '[' + arg.data + ']';
+                            }
+                        })
+                        .join(' ');
                 if (statement.args.length == 0) {
-                    args = "";
+                    args = '';
                 }
-                out += statement.statement + args
-                out += ";"
+                out += statement.statement + args;
+                out += ';';
             } else {
                 // block
-                return "{" + statement.map(minifyStatement).join("") + "}"
+                return '{' + statement.map(minifyStatement).join('') + '}';
             }
-            return out
+            return out;
         }
         for (const statement of this.parsed) {
             out += minifyStatement(statement);
         }
-        return out
+        return out;
     }
     pretty(): string {
-        let deep = 0
-        let out = ""
+        let deep = 0;
+        let out = '';
         function doPretty(statement: Statement | Block): string {
-            let o = ""
-            const indent = " ".repeat(deep*4)
+            let o = '';
+            const indent = ' '.repeat(deep * 4);
             if (isStatement(statement)) {
                 // statement
-                let args = " " + statement.args.map((arg) => {
-                    if (arg.type == "block") {
-                        return doPretty(arg.data).trim()
-                    } else if (arg.type == "quote") {
-                        return stringArgToString(arg.data);
-                    } else if (arg.type == "text") {
-                        return arg.data
-                    } else if (arg.type == "bracket") {
-                        return "[" + arg.data + "]"
-                    }
-                }).join(" ")
+                let args =
+                    ' ' +
+                    statement.args
+                        .map((arg) => {
+                            if (arg.type == 'block') {
+                                return doPretty(arg.data).trim();
+                            } else if (arg.type == 'quote') {
+                                return stringArgToString(arg.data);
+                            } else if (arg.type == 'text') {
+                                return arg.data;
+                            } else if (arg.type == 'bracket') {
+                                return '[' + arg.data + ']';
+                            }
+                        })
+                        .join(' ');
                 if (statement.args.length == 0) {
-                    args = "";
+                    args = '';
                 }
-                o += indent + statement.statement + args
-                if (o.endsWith("}")) {
-                    o += ";\n\n"
+                o += indent + statement.statement + args;
+                if (o.endsWith('}')) {
+                    o += ';\n\n';
                 } else {
-                    o += ";\n"
+                    o += ';\n';
                 }
-                
             } else {
                 // block
-                o += indent+"{\n"
+                o += indent + '{\n';
                 deep++;
                 for (const statemen of statement) {
-                    o += doPretty(statemen)
+                    o += doPretty(statemen);
                 }
                 deep--;
-                o += indent+"}\n"
+                o += indent + '}\n';
             }
-            return o
+            return o;
         }
         for (const statement of this.parsed) {
             out += doPretty(statement);
         }
-        return out
+        return out;
     }
     exec(initalContext?: Context): any {
-        const ret = executeBlock(this.parsed, initalContext || {}, this.resolver)
+        const ret = executeBlock(this.parsed, initalContext || {}, this.resolver);
         // transform the context into the right data format here
-        return ret
+        return ret;
     }
 }
 
-export { SCSFS } from "./scsfs"
+export { SCSFS } from './scsfs';
 
 /*
 process.exit(0);
