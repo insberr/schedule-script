@@ -1,22 +1,22 @@
 {
     "$schema": "http://json.schemastore.org/swcrc",
     "jsc": {
-      "parser": {
-        "syntax": "typescript",
-        "tsx": false,
-        "decorators": false,
-        "dynamicImport": false
-      },
-      "target": "es2018",
-      "minify": {
-        "compress": {
-          "unused": true
+        "parser": {
+            "syntax": "typescript",
+            "tsx": false,
+            "decorators": false,
+            "dynamicImport": false
         },
-        "mangle": true
-      }
+        "target": "es2018",
+        "minify": {
+            "compress": {
+                "unused": true
+            },
+            "mangle": true
+        }
     },
     "module": {
-        "type": "commonjs",
-    }
-    "minify": true,
-  }
+        "type": "commonjs"
+    },
+    "minify": true
+}

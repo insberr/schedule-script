@@ -1,7 +1,7 @@
 //import { inspect } from "util";
 import { Context, executeBlock } from './execute';
 import { parse as pe } from './grammer';
-import { Block, Statement } from './types';
+import { Block, minifyOptions, Statement } from './types';
 export * from './types';
 import { isStatement } from './lib';
 
@@ -15,6 +15,7 @@ function quoteEscape(str: string): string {
 function stringArgToString(str: string): string {
     return `'${quoteEscape(str)}'`;
 }
+
 export class SCS {
     parsed: Block;
     resolver: (name: string) => string;
@@ -29,6 +30,8 @@ export class SCS {
         //this.parsedwithComments = this.parsed;
     }
     minify(): string {
+        // TODO: options
+
         let out = '';
         function minifyStatement(statement: Statement | Block): string {
             let out = '';
@@ -52,7 +55,7 @@ export class SCS {
                 if (statement.args.length == 0) {
                     args = '';
                 }
-                if (statement.statement == 'comment' || statement.statement == 'multicomment' || statement.statement == 'commentonline') {
+                if (statement.statement == 'comment' || statement.statement == 'multicomment' || statement.statement == 'commentstayonline') {
                     return '';
                 }
                 out += statement.statement + args;
@@ -76,45 +79,60 @@ export class SCS {
             const indent = ' '.repeat(deep * 4);
             if (isStatement(statement)) {
                 // statement
-                let args =
-                    ' ' +
-                    statement.args
-                        .map((arg) => {
-                            if (arg.type == 'block') {
-                                return doPretty(arg.data).trim();
-                            } else if (arg.type == 'quote') {
-                                return stringArgToString(arg.data);
-                            } else if (arg.type == 'text') {
-                                return arg.data;
-                            } else if (arg.type == 'bracket') {
-                                return '[' + arg.data + ']';
-                            }
-                        })
-                        .join(' ');
-                if (statement.args.length == 0) {
-                    args = '';
+                let args = '';
+
+                if (statement.args.length > 0) {
+                    args =
+                        ' ' +
+                        statement.args
+                            .map((arg) => {
+                                if (arg.type == 'block') {
+                                    return doPretty(arg.data).trim();
+                                } else if (arg.type == 'quote') {
+                                    return stringArgToString(arg.data);
+                                } else if (arg.type == 'text') {
+                                    return arg.data;
+                                } else if (arg.type == 'bracket') {
+                                    return '[' + arg.data + ']';
+                                }
+                            })
+                            .join(' ');
                 }
+
                 if (statement.statement == 'comment') {
                     o += indent + '//' + statement.args.map((d) => d.data).join('') + '\n';
                 } else if (statement.statement == 'multicomment') {
                     o +=
                         indent +
-                        ('/*' + statement.args.map((d) => d.data).join('') + '*/')
-                            .split('\n')
-                            .map((d) => indent + d.trim())
-                            .join('\n') +
-                        '\n';
-                } else if (statement.statement == 'commentonline') {
-                    o = o.trimEnd().slice(0, o.length - 1);
-                    o += '//' + statement.args.map((d) => d.data).join('') + '\n';
+                        '/*\n' +
+                        statement.args
+                            .map((d) => d.data)
+                            .join('')
+                            .trimStart()
+                            .replace(/^/, '\n' + indent)
+                            .replace('\n', indent) +
+                        '*/\n';
+                } else if (statement.statement == 'commentstayonline') {
+                    // cringe backspace character
+                    o = '\x08//*' + statement.args.map((d) => d.data).join('') + '\n';
                 } else {
                     o += indent + statement.statement + args;
+                    let endNewLine = '\n';
                     if (o.endsWith('}')) {
-                        o += ';\n\n';
+                        o += ';';
+                        endNewLine = '\n\n';
                     } else {
-                        o += ';\n';
+                        o += ';';
+                        endNewLine = '\n';
                     }
+
+                    if (statement.comment) {
+                        o += ' //' + statement.comment.args.map((a) => a.data).join('');
+                    }
+
+                    o += endNewLine;
                 }
+                // maybe put comment here idk ??
             } else {
                 // block
                 o += indent + '{\n';
@@ -128,8 +146,38 @@ export class SCS {
             return o;
         }
         for (const statement of this.parsed) {
-            out += doPretty(statement);
+            let newLine = '\n';
+            if ((statement as Statement).statement !== undefined) {
+                if ((statement as Statement).statement === 'comment' || (statement as Statement).statement === 'multicomment') {
+                    newLine = '';
+                }
+            }
+            out += newLine + doPretty(statement);
         }
+
+        out = out.trimStart();
+
+        let backspaces = out.match(/\x08/gm);
+        if (backspaces) {
+            for (const backspace of backspaces) {
+                // get position of backspace
+                const pos = out.indexOf(backspace);
+                // remove the backspace and the character before it
+                out = out.slice(0, pos - 1) + ' ' + out.slice(pos + 1);
+            }
+        }
+
+        // figure out how to just not make the extra new lines lol
+        let extraNewlines = out.match(/\n{3}/gm);
+        if (extraNewlines) {
+            for (const newline of extraNewlines) {
+                // get position of newlines
+                const pos = out.indexOf(newline);
+                // replace the newlines with one newline
+                out = out.slice(0, pos) + '\n\n' + out.slice(pos + newline.length);
+            }
+        }
+
         return out;
     }
     exec(initalContext?: Context): any {

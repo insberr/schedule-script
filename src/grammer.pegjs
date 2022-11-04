@@ -1,10 +1,9 @@
 start = prog:statement* { return prog.filter((p) => p) }
 ws "whitespace" = [ \t\n\r]*
-statement = ws v:(commentonline / comment / multilinecomment / block / command ) ws { return v }
+statement = ws v:(commentstayonline / comment / multilinecomment / block / command ) ws { return v }
 
-// comment on line no work i give up pls fix todo hfgl
-commentonline = eol "//" d:[^\n]* "\n"? { return {statement: "commentonline", "args":d.map((e) => {return {type:"quote", data:e}}) } }
-comment = ws "//" d:[^\n]* "\n"? { return {statement: "comment", "args":d.map((e) => {return {type:"quote", data:e}}) } }
+commentstayonline = "//*" d:[^\n]* "\n"? { return {statement: "commentstayonline", "args":d.map((e) => {return {type:"quote", data:e}}) } }
+comment = "//" d:[^\n]* "\n"? { return {statement: "comment", "args":d.map((e) => {return {type:"quote", data:e}}) } }
 multilinecomment = "/*" d:[^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return {statement: "multicomment", "args":d.map((e) => {return {type:"quote", data:e}}) } }
 
 /*
@@ -70,4 +69,4 @@ quotedargSingle = "'" d:charS* "'" { return d.join("") }
 block = "{" "\n"? state:statement+ "\n"? "}" { return state.filter(s => s) }
 
 arg = (o:block { return { type: "block", data: o } }) / (o:(quotedargDouble/quotedargSingle) { return {type: "quote", data: o } }) / (o:text { return {type: "text", data: o } }) / (o:bracketed { return {type: "bracket", data: o } })
-command = statement:text args:(ws arg)* eol { return {statement, args:args.map(r => r[1])} }
+command = statement:text args:(ws arg)* eol [ ]* com:comment? { return {statement, args:args.map(r => r[1]), comment:com} }

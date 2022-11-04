@@ -3,7 +3,12 @@ export type Block = (Statement | Block)[];
 export type Statement = {
     statement: string;
     args: Arg[];
-    comment?: string;
+    comment?: { statement: string; args: Arg[] };
+};
+
+export type minifyOptions = {
+    keepMultiLineComments?: boolean;
+    keepSingleLineComments?: boolean;
 };
 
 export type Arg = BlockArg | QuoteArg | TextArg | BracketArg;
