@@ -26,15 +26,15 @@ jobs:
     - run: yarn build:cli
     - run: yarn scs help
     - name: minified file
-      run: yarn scs minify example/main.ex.scs
+      run: yarn scs minify examples/main.ex.scs
     - name: prettified
-      run: yarn scs pretty example/main.ex.scs
+      run: yarn scs pretty examples/main.ex.scs
     - name: parsed
-      run: yarn scs parse example/main.ex.scs
+      run: yarn scs parse examples/main.ex.scs
     - name: exec output
-      run: yarn scs exec example/main.ex.scs
+      run: yarn scs exec examples/main.ex.scs
     - name: import test
-      run: yarn scs exec example/importtest/entrypoint.ex.scs
+      run: yarn scs exec examples/importtest/entrypoint.ex.scs
     - name: Upload output
       uses: actions/upload-artifact@v3
       with:
