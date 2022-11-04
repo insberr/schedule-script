@@ -54,15 +54,15 @@ function print(path, options, print) {
             return join(line,printed)
         }
         const printed = path.map(print)
-        const dt = group(indent(group([line,join(line,printed)])))
+        const dt = group([indent(group(["{",line,join(line,printed)])),line,"}"])
         return dt
     } else {
         // this is a statement
         if (node.statement == 'comment' || node.statement == 'multicomment') {
             if (node.statement == 'comment') {
                 return '//' + node.args.map((r) => r.data).join('');
-            } else {
-                return '/*' + node.args.map((r) => r.data).join('') + '*/';
+            } else { 
+                return group([indent(group(['/*', join(line,node.args.map((r) => r.data).join('').trim().split("\n").map(r => r.trim()))])), "*/"])
             }
         }
         /** @arg {import("../..").Arg[]} args */

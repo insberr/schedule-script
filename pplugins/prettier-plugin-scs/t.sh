@@ -1,3 +1,3 @@
 echo t
-yarn scs minify ../../examples/main.ex.scs test.scs
+yarn scs pretty ../../examples/main.ex.scs test.scs
 yarn prettier --plugin . --write test.scs
