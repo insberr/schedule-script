@@ -26,17 +26,24 @@ jobs:
     - run: yarn build:cli
     - run: yarn scs help
     - name: minified file
-      run: cat testOut/test.min.scs
+      run: yarn scs minify example/main.ex.scs
     - name: prettified
-      run: cat testOut/test.pretty.scs
+      run: yarn scs pretty example/main.ex.scs
     - name: parsed
-      run: cat testOut/test.ignore.json
+      run: yarn scs parse example/main.ex.scs
     - name: exec output
-      run: cat testOut/test.exec.json
+      run: yarn scs exec example/main.ex.scs
     - name: import test
-      run: cat testOut/test.fs.exec.json
+      run: yarn scs minify example/importtest/entrypoint.ex.scs
     - name: Upload output
       uses: actions/upload-artifact@v3
       with:
         name: testoutput
         path: testOut
+    - name: build cli
+      run: yarn pack:cli
+    - name: Upload cli
+      uses: actions/upload-artifact@v3
+      with:
+        name: cli
+        path: dist/pkg
