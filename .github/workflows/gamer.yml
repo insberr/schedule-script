@@ -34,7 +34,7 @@ jobs:
     - name: exec output
       run: yarn scs exec example/main.ex.scs
     - name: import test
-      run: yarn scs minify example/importtest/entrypoint.ex.scs
+      run: yarn scs exec example/importtest/entrypoint.ex.scs
     - name: Upload output
       uses: actions/upload-artifact@v3
       with:
