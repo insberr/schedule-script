@@ -37,6 +37,7 @@ terms {
 // This can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
 
 lunches {
+    //test
     {
         only term 1; // If we arnt in term 1, we cancel processing.
         // teacher <name> <id> <lunch>
@@ -84,7 +85,6 @@ function cambridge [eleven twelve thirteen] {
         - grade
 
         schedule - reference to the schedule in which this overide is in
-
 
         Has and Contains
         - With a list of items

@@ -78,6 +78,7 @@
     },
     "lint-staged": {
         "*.ts": "yarn eslint --cache --fix",
-        "*": "yarn prettier --ignore-unknown --write"
+        "*": "yarn prettier --ignore-unknown --write",
+        "*.scs": "yarn scs prettyMany"
     }
 }

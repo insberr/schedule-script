@@ -4,6 +4,18 @@ export type Statement = {
     statement: string;
     args: Arg[];
     comment?: { statement: string; args: Arg[] };
+    location: {
+        start: {
+            offset: number;
+            line: number;
+            column: number;
+        };
+        end: {
+            offset: number;
+            line: number;
+            column: number;
+        };
+    };
 };
 
 export type minifyOptions = {
