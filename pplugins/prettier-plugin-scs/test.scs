@@ -1,138 +1,142 @@
 terms {
-    term 1 [September 6, 2022] [December 6, 2022];
-    term 2 [December 8, 2022] [March 27, 2023];
-    term 3 [March 28, 2023] [June 23, 2023];
-};
 
+        term 1 [September 6, 2022] [December 6, 2022];
+        term 2 [December 8, 2022] [March 27, 2023];
+        term 3 [March 28, 2023] [June 23, 2023];
+};
 lunches {
-    only term 1;
-    teacher [Rick Astley] ABCD-1234-AB34 1;
-    only term 2;
-    teacher [Rick Astley] ABCD-1234-AB34 2;
-    only term 3;
-    teacher [Rick Astley] ABCD-1234-AB34 3;
-};
 
+
+            only term 1;
+            teacher [Rick Astley] ABCD-1234-AB34 1;
+
+            only term 2;
+            teacher [Rick Astley] ABCD-1234-AB34 2;
+
+            only term 3;
+            teacher [Rick Astley] ABCD-1234-AB34 3;
+};
 set testValue test;
-
 set sentryDSN blah;
-
 config sentry $sentryDSN;
-
 function defaultZero {
-    user classes contains [period 0];
-    schedule classes contains [arrival];
-    replace class [arrival] with {
-        class [period 0] [6:30 to 7:30];
-    };
 
+        user classes contains [period 0];
+        schedule classes contains [arrival];
+        replace class [arrival] with {
+
+                class [period 0] [6:30 to 7:30];
+        };
 };
-
 function cambridge [eleven twelve thirteen] {
-    user classes contains [11] [12] [13];
-    only grade 10;
-    remove [period 1] [period 2];
-    insert {
-        class [period 11] $eleven;
-        class [period 12] $twelve;
-        class [period 13] $thirteen;
-    } last operation;
-    only grade 11;
-    remove [2] [3];
-    insert {
-        class [11] $eleven;
-        class [12] $twelve;
-        class [13] $thirteen;
-    } last operation;
-    force lunch 3;
-};
 
+        user classes contains [11] [12] [13];
+
+            only grade 10;
+            remove [period 1] [period 2];
+            insert {
+
+                    class [period 11] $eleven;
+                    class [period 12] $twelve;
+                    class [period 13] $thirteen;
+            } last operation;
+
+            only grade 11;
+            remove [2] [3];
+            insert {
+
+                    class [11] $eleven;
+                    class [12] $twelve;
+                    class [13] $thirteen;
+            } last operation;
+            force lunch 3;
+};
 schedule normal {
-    description 'Normal Schedule';
-    class [zero] [6:35 to 7:30];
-    class [period 1] [7:35 to 8:45];
-    class [2] [8:50 to 9:55];
-    class [3] [9:55 to 11:40];
-    class [4] [11:45 to 12:55];
-    class [5] [13:00 to 14:05];
-    class [dismissal] [14:05 to 11:10];
-    lunchConfig {
-        from [period 3];
-        passing [5 minutes];
-    };
 
-    lunch [1] [10:30 to 11:00];
-    lunch [2] [11:00 to 11:30];
-    lunch [3] [11:30 to 12:00];
-    call defaultZero;
-    call cambridge [11:00 to 11:30] [11:00 to 11:30] [11:00 to 11:30];
+        description 'Normal Schedule';
+        class [zero] [6:35 to 7:30];
+        class [period 1] [7:35 to 8:45];
+        class [2] [8:50 to 9:55];
+        class [3] [9:55 to 11:40];
+        class [4] [11:45 to 12:55];
+        class [5] [13:00 to 14:05];
+        class [dismissal] [14:05 to 11:10];
+        lunchConfig {
+
+                from [period 3];
+                passing [5 minutes];
+        };
+        lunch [1] [10:30 to 11:00];
+        lunch [2] [11:00 to 11:30];
+        lunch [3] [11:30 to 12:00];
+        call defaultZero;
+        call cambridge [11:00 to 11:30] [11:00 to 11:30] [11:00 to 11:30];
 };
-
 schedule testInherit {
-    inherit normal;
-    description 'Test Inherit Schedule';
-};
 
-event {
-    date [November 2, 2022];
-    schedule advisory;
-    message 'Advisory Day';
+        inherit normal;
+        description 'Test Inherit Schedule';
 };
-
 event {
-    from [November 2, 2022] to [November 5, 2022];
-    message 'Yall Silly';
+
+        date [November 2, 2022];
+        schedule advisory;
+        message 'Advisory Day';
 };
-
 event {
-    schedule lateStart;
-    message 'Late Start';
-    date [November 2, 2022];
-    date [november 9, 2022];
+
+        from [November 2, 2022] to [November 5, 2022];
+        message 'Yall Silly';
 };
-
 event {
-    info 'Assemblies';
-    from [November 3, 2022] to [November 5, 2022];
-    events {
-        day [1] {
-            message 'Something Strange 1';
+
+        schedule lateStart;
+        message 'Late Start';
+        date [November 2, 2022];
+        date [november 9, 2022];
+};
+event {
+
+        info 'Assemblies';
+        from [November 3, 2022] to [November 5, 2022];
+        events {
+
+                day [1] {
+
+                        message 'Something Strange 1';
+                };
+                day [2] {
+
+                        message 'Something Strange 2';
+                };
+                day [3] {
+
+                        message 'Something Strange 3';
+                };
         };
-
-        day [2] {
-            message 'Something Strange 2';
-        };
-
-        day [3] {
-            message 'Something Strange 3';
-        };
-
-    };
-
 };
-
 event {
-    info 'Assemblies';
-    from [November 3, 2022] to [November 5, 2022];
-    events {
-        day [1] {
-            message 'Something Strange 1';
+
+        info 'Assemblies';
+        from [November 3, 2022] to [November 5, 2022];
+        events {
+
+                day [1] {
+
+                        message 'Something Strange 1';
+                };
+                day [2] to [3] {
+
+                        message 'Something Strange 2 and 3';
+                };
         };
-
-        day [2] to [3] {
-            message 'Something Strange 2 and 3';
-        };
-
-    };
-
 };
-
 event {
-    message 'override lunch';
-    lunches {
-        teacher [Rick Astley] ABCD-1234-AB34 69;
-    };
 
-    schedule normal;
+        message 'override lunch';
+        lunches {
+
+                teacher [Rick Astley] ABCD-1234-AB34 69;
+        };
+        schedule normal;
 };
-

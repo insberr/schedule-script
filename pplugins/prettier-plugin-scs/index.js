@@ -1,8 +1,12 @@
+const { convertTypeAcquisitionFromJson } = require('typescript');
+
+
 const SCS = require('../..').SCS;
 
 const {
-    builders: { group, indent, join, line, softline },
+    builders: { group, indent, join, hardline, softline },
 } = require('prettier').doc;
+const line = hardline;
 
 module.exports.languages = [
     {
@@ -32,16 +36,26 @@ module.exports.parsers = {
         // The name of the AST that
         astFormat: 'scs-ast',
         locStart,
-        locEnd,
+        locEnd
     },
 };
 /** @arg {import('prettier').AstPath<import("../..").Block>} path */
 function print(path, options, print) {
-    const node = path.getValue();
+    let top = false
+    let node = path.getValue();
+    if (node.statement == "main") {
+        top = true
+        node = node.args[0].data
+    }
     if (Array.isArray(node)) {
         // this is a block
-        const printed = path.map(print);
-        return indent(join(line, printed));
+        if (top) {
+            const printed = node.map((_,i) => print(["args",0,"data",i]))
+            return join(line,printed)
+        }
+        const printed = path.map(print)
+        const dt = group(indent(group([line,join(line,printed)])))
+        return dt
     } else {
         // this is a statement
         if (node.statement == 'comment' || node.statement == 'multicomment') {
@@ -55,10 +69,11 @@ function print(path, options, print) {
         function formatArgs(args) {
             const out = [];
             //console.log(args)
+            console.log(args)
             args.forEach((e, i) => {
                 switch (e.type) {
                     case 'block':
-                        out.push(join(line, ['{', print(['args', i, 'data']), '}']));
+                        out.push(group([print(['args', i, 'data'])]))
                         break;
                     case 'text':
                         out.push(e.data);
@@ -72,17 +87,20 @@ function print(path, options, print) {
             });
             return out;
         }
-        //console.log(node)
+        console.log(node)
         const formatComment = (comment) => {
             return comment != null ? ` //${comment.args.map((r) => r.data).join('')}` : '';
         };
         //console.log(formatComment(node.comment))
-        return group([indent(group([join(' ', [node.statement, ...formatArgs(node.args)])])), ';', formatComment(node.comment), line]);
+        return group([group([join(' ', [node.statement, ...formatArgs(node.args)])]), ';', formatComment(node.comment)]);
     }
 }
 
 module.exports.printers = {
     'scs-ast': {
         print,
+        preprocess(a) {
+            return {statement: "main", args: [{type:"block", data:a}]}
+        }
     },
 };
