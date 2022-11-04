@@ -52,7 +52,7 @@ async function testSCSFS() {
             'events.ex.scs': 'events.ex.scs',
             'functions.ex.scs': 'functions.ex.scs',
             'schedules.ex.scs': 'schedules.ex.scs',
-            lunches: 'lunches.ex.scs',
+            'lunches.ex.scs': 'lunches.ex.scs',
         },
         (fl) => {
             return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory

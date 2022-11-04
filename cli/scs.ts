@@ -1,10 +1,26 @@
-import { existsSync, WriteStream } from 'fs';
+import { existsSync, readFileSync, WriteStream } from 'fs';
 import { opendir, readdir, readFile, stat, writeFile } from 'fs/promises';
-import { extname, join } from 'path';
+import { dirname, extname, join } from 'path';
 import { SCS } from '..';
 let args = process.argv.slice(2);
 
 const commands = ['prettyMany', 'pretty', 'minifyMany', 'minify', 'exec', 'parse'];
+
+function resolver(basedir: string) {
+    return (path: string) => {
+        let out = '';
+        try {
+            out = readFileSync(join(dirname(basedir), path), 'utf-8');
+        } catch (e) {
+            try {
+                out = readFileSync(join(dirname(basedir), path + '.scs'), 'utf-8');
+            } catch (e) {
+                throw new Error(`Cannot resolve ${path}`);
+            }
+        }
+        return out;
+    };
+}
 
 function usage() {
     console.log('SCS-CLI v0.0.0');
@@ -85,7 +101,7 @@ async function main(command?: string) {
             return;
         }
         const end = await operate(infile, outfile, async (dt) => {
-            const f = new SCS(dt);
+            const f = new SCS(dt, resolver(infile));
             return f.minify();
         });
         if (end != -1) {
@@ -99,7 +115,7 @@ async function main(command?: string) {
             return;
         }
         const end = await operate(infile, outfile, async (dt) => {
-            const f = new SCS(dt);
+            const f = new SCS(dt, resolver(infile));
             return f.pretty();
         });
         if (end != -1) {
@@ -113,7 +129,7 @@ async function main(command?: string) {
             return;
         }
         const end = await operate(infile, outfile, async (dt) => {
-            const f = new SCS(dt);
+            const f = new SCS(dt, resolver(infile));
             return JSON.stringify(f.parsed, null, 2);
         });
         if (end != -1) {
@@ -137,7 +153,7 @@ async function main(command?: string) {
             return;
         }
         const end = await operate(infile, outfile, async (dt) => {
-            const f = new SCS(dt);
+            const f = new SCS(dt, resolver(infile));
             return JSON.stringify(f.exec(arg), null, 2);
         });
         if (end != -1) {

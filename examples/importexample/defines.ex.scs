@@ -5,7 +5,7 @@ terms { // define all 3 terms
 };
 // this can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
 lunches {
-    import "lunches";
+    import "lunches.ex.scs";
 };
 
 
