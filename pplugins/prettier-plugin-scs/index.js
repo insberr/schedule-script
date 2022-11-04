@@ -69,7 +69,7 @@ function print(path, options, print) {
         function formatArgs(args) {
             const out = [];
             //console.log(args)
-            console.log(args)
+            //console.log(args)
             args.forEach((e, i) => {
                 switch (e.type) {
                     case 'block':
@@ -87,7 +87,7 @@ function print(path, options, print) {
             });
             return out;
         }
-        console.log(node)
+        //console.log(node)
         const formatComment = (comment) => {
             return comment != null ? ` //${comment.args.map((r) => r.data).join('')}` : '';
         };
