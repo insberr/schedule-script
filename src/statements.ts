@@ -136,7 +136,13 @@ export const StatementMap = new Map<string, StatementFunc>()
         const key = args.shift() as string;
         const value = args.shift();
         c.config[key] = value;
-    });
+    })
+    .set('comment', empty)
+    .set('multicomment', empty);
+
+function empty(args: PArgs, c: Context) {
+    c;
+}
 
 function setSimple(name: string) {
     return (args: PArgs, c: Context) => {

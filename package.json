@@ -41,7 +41,7 @@
     },
     "scripts": {
         "build": "parcel build",
-        "build:cli": "swc cli/scs.ts -s inline -o cli/cli.js",
+        "build:cli": "swc cli/scs.ts -s true -o cli/cli.js",
         "dev": "parcel watch",
         "cli": "ts-node cli/scs.ts",
         "test": "jest",
@@ -69,6 +69,6 @@
     },
     "lint-staged": {
         "*.ts": "yarn eslint --cache --fix",
-        "*": "yarn prettier --write"
+        "*": "yarn prettier --ignore-unknown --write"
     }
 }
