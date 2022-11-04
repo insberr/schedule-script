@@ -1,5 +1,5 @@
 /*
-    ideas used:
+ideas used:
     [] <- allows one "argument" to contain multiple things.
     {} <- contains statements (its a block!!1)
     
@@ -8,16 +8,14 @@
     you could even pass a block to a statement~!
     (i love blocks)
 */
-
 /*
-    matchers are cool things that match statements/periods. a matcher with value [period 2] would match a class with type period and number 2
+matchers are cool things that match statements/periods. a matcher with value [period 2] would match a class with type period and number 2
     or just [2] lmafo.
     maybe complex matcherxs like [period 2, teacher [Rick Astley]] or some shit
     then functions or conditions that contain matchers can do complex matching
 */
-
 /*
-    Importing
+Importing
     file order should go 
     imports (just in case)
     defines (lunches, terms, constant stuff)
@@ -28,15 +26,16 @@
     why? because a command only has access to what is above it
     if you were to place the terms {} below a schedule, that schedule would not have access to the terms.
 */
-
 // define all 3 terms
+
 terms {
     term 1 [September 6, 2022] [December 6, 2022];
-    term 2 [December 8, 2022]  [March 27, 2023];
-    term 3 [March 28, 2023]    [June 23, 2023];
+    term 2 [December 8, 2022] [March 27, 2023];
+    term 3 [March 28, 2023] [June 23, 2023];
 };
 
 // This can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
+
 lunches {
     {
         only term 1; // If we arnt in term 1, we cancel processing.
@@ -55,24 +54,27 @@ lunches {
     }
 };
 
-
 // HFGL
+
 set testValue test; // sets a value in context, its a variable
 
 set sentryDSN blah; // oh god variable manipulation statements...
 
 config sentry $sentryDSN; // sets config.[key] = value
 
-
 function defaultZero {
     user classes contains [period 0]; // only if the user has a period zero
     schedule classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
     // replace class <matcher> with <block>
     // basically find the class that matches the matcher (type or period or both) and replace it with the statements in the block
-    replace class [arrival] with { class [period 0] [6:30 to 7:30]; };  //replaces arrival with the statements in the block (allows multiple statements)
+    replace class [arrival] with {
+        class [period 0] [6:30 to 7:30];
+    }; //replaces arrival with the statements in the block (allows multiple statements)
+
 };
 
 // its like a function!
+
 function cambridge [eleven twelve thirteen] {
     /*
         Things passed to an overide by default
@@ -95,33 +97,28 @@ function cambridge [eleven twelve thirteen] {
         Equals
         - Has only the item or items, nothing more, nothing less.
     */
-
     // only continue doing conditions if this is true
     // if period 11, 12, or 13 is in the users classses
     user classes contains [11] [12] [13]; // maybe be able to specifiy and/or? (also matchers!)
-
     // imagine something like
     // user classes contains { period 3 with teacher [Rick Astley] }
-
     // blocks not passed into a statement are "absorbed" into their parent if all contitions match, like an if statement
     {
         only grade 10; // the only command searches for an item in the context, and compares it, IE passing variables from JS
-
         // these are matchers, remove can take many arguments
         remove [period 1] [period 2];
         // with the power of blocks!
         // insert <block> <location>
-        insert { 
+        insert {
             class [period 11] $eleven; // dont get me fucking started on dot accessers, good fucking luck
             class [period 12] $twelve; // How about just times[12] instead
-            class [period 13] $thirteen; 
+            class [period 13] $thirteen;
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
     }
     {
         only grade 11;
-        
         remove [2] [3];
-        insert { 
+        insert {
             class [11] $eleven;
             class [12] $twelve;
             class [13] $thirteen;
@@ -131,99 +128,106 @@ function cambridge [eleven twelve thirteen] {
 };
 
 schedule normal {
-    description "Normal Schedule";
-
+    description 'Normal Schedule';
     //  class [calss type] [<time> to <time>], {options};
-    class [zero]      [6:35 to 7:30];
-    class [period 1]  [7:35 to 8:45];
-    class [2]         [8:50 to 9:55];
-    class [3]         [9:55 to 11:40];
-    class [4]         [11:45 to 12:55];
-    class [5]         [13:00 to 14:05];
+    class [zero] [6:35 to 7:30];
+    class [period 1] [7:35 to 8:45];
+    class [2] [8:50 to 9:55];
+    class [3] [9:55 to 11:40];
+    class [4] [11:45 to 12:55];
+    class [5] [13:00 to 14:05];
     class [dismissal] [14:05 to 11:10];
-
     // how do we do this ...
     lunchConfig {
         from [period 3];
         passing [5 minutes];
     };
+
     lunch [1] [10:30 to 11:00];
     lunch [2] [11:00 to 11:30];
     lunch [3] [11:30 to 12:00];
-    
     call defaultZero;
-
     // Pass in args
     call cambridge [11:00 to 11:30] [11:00 to 11:30] [11:00 to 11:30];
 };
 
 // Inherited schedule
+
 schedule testInherit {
     inherit normal;
-    description "Test Inherit Schedule";
+    description 'Test Inherit Schedule';
 };
 
 // the things inside the [] can be infered 
 // maybe replace it with an id?
+
 event {
     date [November 2, 2022];
     schedule advisory;
-    message "Advisory Day";
+    message 'Advisory Day';
 };
 
 event {
-    from [November 2, 2022] to [November 5, 2022]; 
-    message "Yall Silly";
+    from [November 2, 2022] to [November 5, 2022];
+    message 'Yall Silly';
 };
 
 event {
     schedule lateStart;
-    message "Late Start";
-    date [November 2, 2022]; 
+    message 'Late Start';
+    date [November 2, 2022];
     date [november 9, 2022]; // multiple date arguments stack
 };
 
 event {
-    info "Assemblies";
+    info 'Assemblies';
     from [November 3, 2022] to [November 5, 2022];
     events {
         day [1] {
-            message "Something Strange 1"; // day specific overrides go here.
+            message 'Something Strange 1'; // day specific overrides go here.
             // they should be merged into the event on that day.
             // you could even do weird stuff like changing the event range
             // although why would you do that?
         };
+
         day [2] {
-            message "Something Strange 2";
+            message 'Something Strange 2';
         };
+
         day [3] {
-            message "Something Strange 3"; 
+            message 'Something Strange 3';
         }; // blocks save the day again!
+
     };
+
 };
 
 event {
-    info "Assemblies";
+    info 'Assemblies';
     from [November 3, 2022] to [November 5, 2022];
     events {
         day [1] {
-            message "Something Strange 1"; // day specific overrides go here.
+            message 'Something Strange 1'; // day specific overrides go here.
             // they should be merged into the event on that day.
             // you could even do weird stuff like changing the event range
             // although why would you do that?
         };
+
         day [2] to [3] {
-            message "Something Strange 2 and 3";
+            message 'Something Strange 2 and 3';
         };
+
     };
+
 };
 
 event {
     message 'override lunch';
-    
     // any command below or at this block will use these lunches instead. (includes the schedule.)
     lunches {
         teacher [Rick Astley] ABCD-1234-AB34 69;
     };
+
     schedule normal;
 };
+
