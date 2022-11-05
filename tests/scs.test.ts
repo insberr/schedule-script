@@ -14,13 +14,27 @@ test('parse', () => {
     writeFileSync(join(testDir, 'test.ignore.json'), JSON.stringify(scs.parsed, null, 2));
 });
 
-test('minify', () => {
-    const scs = new SCS(testFile);
-    const minified = scs.minify();
-    writeFileSync(join(testDir, 'test.min.scs'), minified);
-    const minscs = new SCS(minified);
-    writeFileSync(join(testDir, 'test.min.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
-    //expect(minscs.parsed).toEqual(scs.parsed);
+describe('minify', () => {
+    test('minify', () => {
+        const scs = new SCS(testFile);
+        const minified = scs.minify();
+        writeFileSync(join(testDir, 'test.min.scs'), minified);
+        const minscs = new SCS(minified);
+        writeFileSync(join(testDir, 'test.min.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
+        //expect(minscs.parsed).toEqual(scs.parsed);
+    });
+
+    test('minify keep multiline comments', () => {
+        // ! Make this actually test that it did what its supposed to do
+        const scs = new SCS(testFile);
+        const minified = scs.minify({ keepMultiLineComments: true });
+        writeFileSync(join(testDir, 'test.min.keep.block.comments.scs'), minified);
+        const minscs = new SCS(minified);
+        writeFileSync(join(testDir, 'test.min.keep.block.comments.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
+        //expect(minscs.parsed).toEqual(scs.parsed);
+    });
+
+    // ! add keep single line comments test
 });
 
 test('pretty', () => {

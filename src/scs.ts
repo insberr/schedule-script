@@ -1,7 +1,7 @@
 //import { inspect } from "util";
 import { Context, executeBlock } from './execute';
 import { parse as pe } from './grammer';
-import { Block, minifyOptions, Statement } from './types';
+import { Block, MinifyOptions, Statement } from './types';
 export * from './types';
 import { isStatement } from './lib';
 
@@ -25,11 +25,11 @@ export class SCS {
         this.resolver =
             resolver ||
             ((name) => {
-                throw new Error('Cannot resolve without a resolver');
+                throw new Error('Cannot resolve without a resolver. - Name: ' + name);
             });
         //this.parsedwithComments = this.parsed;
     }
-    minify(): string {
+    minify(options?: MinifyOptions): string {
         // TODO: options
 
         let out = '';
@@ -55,8 +55,21 @@ export class SCS {
                 if (statement.args.length == 0) {
                     args = '';
                 }
-                if (statement.statement == 'comment' || statement.statement == 'multicomment' || statement.statement == 'commentstayonline') {
-                    return '';
+                if (statement.statement === 'comment') {
+                    if (options?.keepSingleLineComments) {
+                        // The extra space at the start and end is important
+                        out += ` /* [single] ${statement.args.map((d) => d.data).join('')} */ `;
+                    }
+                    return out;
+                } else if (statement.statement === 'multicomment') {
+                    // TODO add uncompress multi line comments
+                    if (options?.keepMultiLineComments) {
+                        out += ` /* ${statement.args
+                            .map((d) => d.data)
+                            .join('')
+                            .replace(/\n/gm, '')} */ `;
+                    }
+                    return out;
                 }
                 out += statement.statement + args;
                 out += ';';
@@ -112,9 +125,6 @@ export class SCS {
                             .replace(/^/, '\n' + indent)
                             .replace('\n', indent) +
                         '*/\n';
-                } else if (statement.statement == 'commentstayonline') {
-                    // cringe backspace character
-                    o = '\x08//*' + statement.args.map((d) => d.data).join('') + '\n';
                 } else {
                     o += indent + statement.statement + args;
                     let endNewLine = '\n';
@@ -157,7 +167,8 @@ export class SCS {
 
         out = out.trimStart();
 
-        let backspaces = out.match(/\x08/gm);
+        // eslint-disable-next-line no-control-regex
+        const backspaces = out.match(/\x08/gm);
         if (backspaces) {
             for (const backspace of backspaces) {
                 // get position of backspace
@@ -168,7 +179,7 @@ export class SCS {
         }
 
         // figure out how to just not make the extra new lines lol
-        let extraNewlines = out.match(/\n{3}/gm);
+        const extraNewlines = out.match(/\n{3}/gm);
         if (extraNewlines) {
             for (const newline of extraNewlines) {
                 // get position of newlines
@@ -180,7 +191,7 @@ export class SCS {
 
         return out;
     }
-    exec(initalContext?: Context): any {
+    exec(initalContext?: Context): Context {
         const ret = executeBlock(this.parsed, initalContext || {}, this.resolver);
         // transform the context into the right data format here
         return ret;

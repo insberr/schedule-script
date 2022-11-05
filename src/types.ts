@@ -18,8 +18,9 @@ export type Statement = {
     };
 };
 
-export type minifyOptions = {
+export type MinifyOptions = {
     keepMultiLineComments?: boolean;
+    uncompressTopLevelMultiLineComments?: boolean;
     keepSingleLineComments?: boolean;
 };
 
