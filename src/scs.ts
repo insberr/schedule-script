@@ -30,7 +30,7 @@ export class SCS {
         //this.parsedwithComments = this.parsed;
     }
     minify(options?: MinifyOptions): string {
-        // TODO: options
+        // TODO: finish options
 
         let out = '';
         function minifyStatement(statement: Statement | Block): string {
@@ -142,7 +142,6 @@ export class SCS {
 
                     o += endNewLine;
                 }
-                // maybe put comment here idk ??
             } else {
                 // block
                 o += indent + '{\n';
