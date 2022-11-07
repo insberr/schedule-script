@@ -3,7 +3,7 @@ export type Block = (Statement | Block)[];
 export type Statement = {
     statement: string;
     args: Arg[];
-    comment?: { statement: string; args: Arg[] };
+    comment?: { statement: string; args: Arg[]; comment: string } | string;
     location: {
         start: {
             offset: number;

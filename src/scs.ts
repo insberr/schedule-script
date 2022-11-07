@@ -1,7 +1,7 @@
 //import { inspect } from "util";
 import { Context, executeBlock } from './execute';
 import { parse as pe } from './grammer';
-import { Block, MinifyOptions, Statement } from './types';
+import { Arg, Block, MinifyOptions, Statement } from './types';
 export * from './types';
 import { isStatement } from './lib';
 
@@ -58,16 +58,13 @@ export class SCS {
                 if (statement.statement === 'comment') {
                     if (options?.keepSingleLineComments) {
                         // The extra space at the start and end is important
-                        out += ` /* [single] ${statement.args.map((d) => d.data).join('')} */ `;
+                        out += ` /* [single] ${statement.comment} */ `;
                     }
                     return out;
                 } else if (statement.statement === 'multicomment') {
                     // TODO add uncompress multi line comments
                     if (options?.keepMultiLineComments) {
-                        out += ` /* ${statement.args
-                            .map((d) => d.data)
-                            .join('')
-                            .replace(/\n/gm, '')} */ `;
+                        out += ` /* ${(statement.comment as string).replace(/\n/gm, '')} */ `;
                     }
                     return out;
                 }
@@ -113,14 +110,12 @@ export class SCS {
                 }
 
                 if (statement.statement == 'comment') {
-                    o += indent + '//' + statement.args.map((d) => d.data).join('') + '\n';
+                    o += indent + '//' + (statement.comment as string) + '\n';
                 } else if (statement.statement == 'multicomment') {
                     o +=
                         indent +
                         '/*\n' +
-                        statement.args
-                            .map((d) => d.data)
-                            .join('')
+                        (statement.comment as string)
                             .trimStart()
                             .replace(/^/, '\n' + indent)
                             .replace('\n', indent) +
@@ -137,7 +132,7 @@ export class SCS {
                     }
 
                     if (statement.comment) {
-                        o += ' //' + statement.comment.args.map((a) => a.data).join('');
+                        o += ' //' + (statement.comment as { statement: string; args: Arg[]; comment: string }).comment;
                     }
 
                     o += endNewLine;

@@ -2,8 +2,8 @@ start = prog:statement* { return prog.filter((p) => p) }
 ws "whitespace" = [ \t\n\r]*
 statement = ws v:(comment / multilinecomment / block / command ) ws { return v }
 
-comment = "//" d:[^\n]* "\n"? { return {statement: "comment", "args":d.map((e) => {return {type:"quote", data:e}}),  location: location() } }
-multilinecomment = "/*" d:[^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return {statement: "multicomment", "args":d.map((e) => {return {type:"quote", data:e}}),  location: location() } }
+comment = "//" d:[^\n]* "\n"? { return {statement: "comment", "comment":d.join(''), "args": [],  location: location() } }
+multilinecomment = "/*" d:[^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return {statement: "multicomment", "comment":d.join(''), "args": [],  location: location() } }
 
 /*
 string "string"
