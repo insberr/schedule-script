@@ -6135,8 +6135,8 @@ __metadata:
 
 "prettier-plugin-scs@file:./pplugins/prettier-plugin-scs::locator=%40insberr%2Fschedule-script%40workspace%3A.":
   version: 1.0.0
-  resolution: "prettier-plugin-scs@file:./pplugins/prettier-plugin-scs#./pplugins/prettier-plugin-scs::hash=109485&locator=%40insberr%2Fschedule-script%40workspace%3A."
-  checksum: 461d905d9cef2a6204d05a2ba581c2e2a16da787809011a26404629f8b1ba7d06fddfef946e1c10607c548ff29a719e746fa3991249f537b9da93ebfa1e29b12
+  resolution: "prettier-plugin-scs@file:./pplugins/prettier-plugin-scs#./pplugins/prettier-plugin-scs::hash=7077d8&locator=%40insberr%2Fschedule-script%40workspace%3A."
+  checksum: 7284792f1cdea8414107d21b5385b4a1cd64bc171a591f8a627bc0567ae2dbedc851974570712440ed234fd80734253303a9bf23d4c558d69e6d93672ad9615a
   languageName: node
   linkType: hard
 
