@@ -65,6 +65,7 @@ function print(path, options, print) {
                     indent(
                         group([
                             '/*',
+                            line,
                             join(
                                 line,
                                 node.comment
@@ -74,6 +75,7 @@ function print(path, options, print) {
                             ),
                         ])
                     ),
+                    line,
                     '*/',
                 ]);
             }
@@ -117,4 +119,3 @@ module.exports.printers = {
         },
     },
 };
-
