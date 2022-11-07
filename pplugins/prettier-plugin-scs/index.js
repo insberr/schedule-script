@@ -1,6 +1,5 @@
 const { convertTypeAcquisitionFromJson } = require('typescript');
 
-
 const SCS = require('../..').SCS;
 
 const {
@@ -36,33 +35,47 @@ module.exports.parsers = {
         // The name of the AST that
         astFormat: 'scs-ast',
         locStart,
-        locEnd
+        locEnd,
     },
 };
 /** @arg {import('prettier').AstPath<import("../..").Block>} path */
 function print(path, options, print) {
-    let top = false
+    let top = false;
     let node = path.getValue();
-    if (node.statement == "main") {
-        top = true
-        node = node.args[0].data
+    if (node.statement == 'main') {
+        top = true;
+        node = node.args[0].data;
     }
     if (Array.isArray(node)) {
         // this is a block
         if (top) {
-            const printed = node.map((_,i) => print(["args",0,"data",i]))
-            return join(line,printed)
+            const printed = node.map((_, i) => print(['args', 0, 'data', i]));
+            return join(line, printed);
         }
-        const printed = path.map(print)
-        const dt = group([indent(group(["{",line,join(line,printed)])),line,"}"])
-        return dt
+        const printed = path.map(print);
+        const dt = group([indent(group(['{', line, join(line, printed)])), line, '}']);
+        return dt;
     } else {
         // this is a statement
         if (node.statement == 'comment' || node.statement == 'multicomment') {
             if (node.statement == 'comment') {
-                return '//' + node.args.map((r) => r.data).join('');
-            } else { 
-                return group([indent(group(['/*', join(line,node.args.map((r) => r.data).join('').trim().split("\n").map(r => r.trim()))])), "*/"])
+                return '//' + node.comment;
+            } else {
+                return group([
+                    indent(
+                        group([
+                            '/*',
+                            join(
+                                line,
+                                node.comment
+                                    .trim()
+                                    .split('\n')
+                                    .map((r) => r.trim())
+                            ),
+                        ])
+                    ),
+                    '*/',
+                ]);
             }
         }
         /** @arg {import("../..").Arg[]} args */
@@ -73,7 +86,7 @@ function print(path, options, print) {
             args.forEach((e, i) => {
                 switch (e.type) {
                     case 'block':
-                        out.push(group([print(['args', i, 'data'])]))
+                        out.push(group([print(['args', i, 'data'])]));
                         break;
                     case 'text':
                         out.push(e.data);
@@ -89,7 +102,7 @@ function print(path, options, print) {
         }
         //console.log(node)
         const formatComment = (comment) => {
-            return comment != null ? ` //${comment.args.map((r) => r.data).join('')}` : '';
+            return comment != null ? ` //${comment.comment}` : '';
         };
         //console.log(formatComment(node.comment))
         return group([group([join(' ', [node.statement, ...formatArgs(node.args)])]), ';', formatComment(node.comment)]);
@@ -100,7 +113,8 @@ module.exports.printers = {
     'scs-ast': {
         print,
         preprocess(a) {
-            return {statement: "main", args: [{type:"block", data:a}]}
-        }
+            return { statement: 'main', args: [{ type: 'block', data: a }] };
+        },
     },
 };
+
