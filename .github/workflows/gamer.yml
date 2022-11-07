@@ -48,4 +48,4 @@ jobs:
         name: cli
         path: dist/pkg
     - name: test plugin
-      run: yarn prettier --plugin ./pplugins/prettier-plugin-scs/index.js examples/main.ex.scs
+      run: yarn prettier examples/main.ex.scs
