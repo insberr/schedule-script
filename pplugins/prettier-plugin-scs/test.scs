@@ -7,13 +7,13 @@
     statements "act" on the block they are in, adding/removing/replacing data, etc etc
     you could even pass a block to a statement~!
     (i love blocks)
-    */
+*/
 /*
     matchers are cool things that match statements/periods. a matcher with value [period 2] would match a class with type period and number 2
     or just [2] lmafo.
     maybe complex matcherxs like [period 2, teacher [Rick Astley]] or some shit
     then functions or conditions that contain matchers can do complex matching
-    */
+*/
 /*
     Importing
     file order should go
@@ -25,7 +25,7 @@
 
     why? because a command only has access to what is above it
     if you were to place the terms {} below a schedule, that schedule would not have access to the terms.
-    */
+*/
 // define all 3 terms
 terms {
     term 1 [September 6, 2022] [December 6, 2022];
@@ -85,7 +85,7 @@ function cambridge [eleven twelve thirteen] {
 
         Equals
         - Has only the item or items, nothing more, nothing less.
-        */
+    */
     // only continue doing conditions if this is true
     // if period 11, 12, or 13 is in the users classses
     user classes contains [11] [12] [13]; // maybe be able to specifiy and/or? (also matchers!)
