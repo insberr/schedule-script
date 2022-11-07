@@ -539,6 +539,7 @@ __metadata:
     pkg: ^5.8.0
     prettier: ^2.7.1
     prettier-eslint: ^15.0.1
+    prettier-plugin-scs: "file:./pplugins/prettier-plugin-scs"
     ts-jest: ^29.0.3
     ts-node: ^10.9.1
     typescript: ^4.8.4
@@ -6129,6 +6130,13 @@ __metadata:
     typescript: "npm:^4.5.4"
     vue-eslint-parser: "npm:^8.0.1"
   checksum: fad92d666ab92f6c773faf507ee15f2c0de8c8ac2b692a57a7c0621202f90d9e577f2664d8a701ec3b96bec3ecba586e49c3d9170de9392c0ee7c3362fdddcae
+  languageName: node
+  linkType: hard
+
+"prettier-plugin-scs@file:./pplugins/prettier-plugin-scs::locator=%40insberr%2Fschedule-script%40workspace%3A.":
+  version: 1.0.0
+  resolution: "prettier-plugin-scs@file:./pplugins/prettier-plugin-scs#./pplugins/prettier-plugin-scs::hash=109485&locator=%40insberr%2Fschedule-script%40workspace%3A."
+  checksum: 461d905d9cef2a6204d05a2ba581c2e2a16da787809011a26404629f8b1ba7d06fddfef946e1c10607c548ff29a719e746fa3991249f537b9da93ebfa1e29b12
   languageName: node
   linkType: hard
 
