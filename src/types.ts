@@ -53,3 +53,7 @@ export type TimeRange = {
     start: Time;
     end: Time;
 };
+
+export type Output = {
+    // piss
+};
