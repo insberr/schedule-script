@@ -539,7 +539,7 @@ __metadata:
     pkg: ^5.8.0
     prettier: ^2.7.1
     prettier-eslint: ^15.0.1
-    prettier-plugin-scs: "file:./pplugins/prettier-plugin-scs"
+    prettier-plugin-scs: "link:./pplugins/prettier-plugin-scs"
     ts-jest: ^29.0.3
     ts-node: ^10.9.1
     typescript: ^4.8.4
@@ -6133,12 +6133,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-scs@file:./pplugins/prettier-plugin-scs::locator=%40insberr%2Fschedule-script%40workspace%3A.":
-  version: 1.0.0
-  resolution: "prettier-plugin-scs@file:./pplugins/prettier-plugin-scs#./pplugins/prettier-plugin-scs::hash=7077d8&locator=%40insberr%2Fschedule-script%40workspace%3A."
-  checksum: 7284792f1cdea8414107d21b5385b4a1cd64bc171a591f8a627bc0567ae2dbedc851974570712440ed234fd80734253303a9bf23d4c558d69e6d93672ad9615a
+"prettier-plugin-scs@link:./pplugins/prettier-plugin-scs::locator=%40insberr%2Fschedule-script%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "prettier-plugin-scs@link:./pplugins/prettier-plugin-scs::locator=%40insberr%2Fschedule-script%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "prettier@npm:^2.5.1, prettier@npm:^2.7.1":
   version: 2.7.1
