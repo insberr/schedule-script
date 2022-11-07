@@ -59,7 +59,7 @@
         "pack:cli": "yarn build && yarn build:cli && yarn dlx pkg .",
         "prepack": "yarn build && yarn build:cli && pinst --disable",
         "textex": "ts-node tests/textex.ts",
-        "install-scs-syntax": "curl -H \"Accept: application/vnd.github.VERSION.raw\" https://api.github.com/repos/insberr/scs-syntax-highlighting/contents/scs-syntax-highlighting-0.0.3.vsix\\?ref\\=main --output scs-syntax-highlighting-0.0.3.vsix && code --install-extension scs-syntax-highlighting-0.0.3.vsix",
+        "install-scs-syntax": "curl -H \"Accept: application/vnd.github.VERSION.raw\" https://api.github.com/repos/insberr/scs-syntax-highlighting/contents/scs-syntax-highlighting-0.0.4.vsix\\?ref\\=main --output scs-syntax-highlighting-0.0.4.vsix && code --install-extension scs-syntax-highlighting-0.0.4.vsix",
         "format": "prettier --write .",
         "lint": "eslint src && prettier --check .",
         "postinstall": "husky install",
