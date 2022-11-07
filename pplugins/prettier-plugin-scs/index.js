@@ -107,7 +107,12 @@ function print(path, options, print) {
             return comment != null ? ` //${comment.comment}` : '';
         };
         //console.log(formatComment(node.comment))
-        return group([group([join(' ', [node.statement, ...formatArgs(node.args)])]), ';', formatComment(node.comment)]);
+        return group([
+            group([join(' ', [node.statement, ...formatArgs(node.args)])]),
+            ';',
+            formatComment(node.comment),
+            node.args[node.args.length - 1]?.type == 'block' ? line : '',
+        ]);
     }
 }
 

@@ -6,7 +6,9 @@ function defaultZero {
     replace class [arrival] with {
         class [period 0] [6:30 to 7:30];
     }; //replaces arrival with the statements in the block (allows multiple statements)
+
 };
+
 function cambridge [eleven twelve thirteen] {
     // its like a function!
     /*
