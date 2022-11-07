@@ -193,7 +193,15 @@ export class SCS {
     exec(initalContext?: Context): Context {
         const ret = executeBlock(this.parsed, initalContext || {}, this.resolver);
         // transform the context into the right data format here
-        return ret;
+        // fuck you
+        const newret: any = {};
+        for (const key in ret) {
+            if (key.startsWith('func_')) {
+                continue;
+            }
+            newret[key] = ret[key];
+        }
+        return newret;
     }
 }
 
