@@ -4,15 +4,10 @@ terms {
     term 2 [December 8, 2022] [March 27, 2023];
     term 3 [March 28, 2023] [June 23, 2023];
 };
-
 // this can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
-
 lunches {
     import 'lunches.ex.scs';
 };
-
 set testValue test; // sets a value in context, its a variable
-
 set sentryDSN blah;
-
 config sentry $sentryDSN; // sets config.[key] = value

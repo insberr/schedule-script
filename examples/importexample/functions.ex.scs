@@ -6,9 +6,7 @@ function defaultZero {
     replace class [arrival] with {
         class [period 0] [6:30 to 7:30];
     }; //replaces arrival with the statements in the block (allows multiple statements)
-
 };
-
 function cambridge [eleven twelve thirteen] {
     // its like a function!
     /*
@@ -24,12 +22,12 @@ function cambridge [eleven twelve thirteen] {
     /*
         Has and Contains
         - With a list of items
-            has - All the items exist
-            contains - At least one of the items exist
-        
+        has - All the items exist
+        contains - At least one of the items exist
+
         - With one item
-            They are the same lol
-        
+        They are the same lol
+
         Equals
         - Has only the item or items, nothing more, nothing less.
     */
@@ -62,4 +60,3 @@ function cambridge [eleven twelve thirteen] {
         force lunch 3;
     }
 };
-

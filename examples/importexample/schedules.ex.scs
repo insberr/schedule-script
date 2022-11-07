@@ -13,9 +13,8 @@ schedule normal {
         from [period 3];
         passing [5 minutes];
     };
-
-    lunch [1] [10:30 to 11:00]; // how the fuck do you 
-    lunch [2] [11:00 to 11:30]; // maybe use blocks? 
+    lunch [1] [10:30 to 11:00]; // how the fuck do you
+    lunch [2] [11:00 to 11:30]; // maybe use blocks?
     lunch [3] [11:30 to 12:00];
     call defaultZero;
     // pass in args
@@ -23,11 +22,8 @@ schedule normal {
     // pain
     call cambridge [11:00 to 11:30] [11:00 to 11:30] [11:00 to 11:30];
 };
-
 // inherited schedule
-
 schedule testInherit {
     inherit normal;
-    description 'Test Inherit Schedule'; // all the @ signs are unnessicary 
+    description 'Test Inherit Schedule'; // all the @ signs are unnessicary
 };
-
