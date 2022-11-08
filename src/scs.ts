@@ -5,6 +5,8 @@ import { Arg, Block, MinifyOptions, Statement } from './types';
 export * from './types';
 import { isStatement } from './lib';
 
+export { _statements } from './statements';
+
 function quoteEscape(str: string): string {
     let newStr = str;
     newStr = newStr.replace(/"/g, '\\"');
