@@ -122,6 +122,9 @@ export const StatementMap = new Map<string, StatementFunc>()
             const to = args[2] as string;
             c.dates = c.dates || [];
             c.dates.push(...getDaysArray(new Date(from), new Date(to)));
+        } else if (c.statement == 'lunchConfig') {
+            c.studentLunches = c.studentLunches || {};
+            c.studentLunches.basedOn = args[0] as string;
         } else {
             c.from = args;
         }
@@ -138,7 +141,20 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.config[key] = value;
     })
     .set('comment', empty)
-    .set('multicomment', empty);
+    .set('multicomment', empty)
+    .set('lunchConfig', (args, c) => {
+        copyInto(args[0] as Context, c);
+    })
+    .set('passing', (args, c) => {
+        c.studentLunches = c.studentLunches || {};
+        c.studentLunches.passing = args[0] as string;
+    })
+    .set('lunch', (args, c) => {
+        const [lunchid, durataion] = args as string[];
+        c.studentLunches = c.studentLunches || {};
+        c.studentLunches.lunches = c.studentLunches.lunches || {};
+        c.studentLunches.lunches[lunchid] = parseTimeRange(durataion);
+    });
 
 function empty(args: PArgs, c: Context) {
     c;
