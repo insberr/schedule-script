@@ -150,6 +150,14 @@ schedule testInherit {
     description 'Test Inherit Schedule';
 };
 
+schedule advisory {
+    inherit normal;
+};
+
+schedule lateStart {
+    inherit normal;
+};
+
 // the things inside the [] can be infered
 // maybe replace it with an id?
 event {

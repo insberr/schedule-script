@@ -239,3 +239,30 @@ describe('quotes: message', () => {
         });
     });
 });
+
+describe('scheduleFor', () => {
+    it('should work with scs', () => {
+        const scs = new SCS(testFile);
+        const execed = scs.scheduleFor(new Date('November 9, 2022'));
+        writeFileSync(join(testDir, 'test.scheduleFor.11-9-2022.exec.json'), JSON.stringify(execed, null, 2));
+        //console.dir(execed,{depth:32})
+    });
+    it('should work with scsfs', async () => {
+        const fs = new SCSFS();
+        const manifest = {
+            // key: filename, value: value passed to fetcher to get the content (ie url)
+            'main.ex.scs': 'entrypoint.ex.scs',
+            'defines.ex.scs': 'defines.ex.scs',
+            'events.ex.scs': 'events.ex.scs',
+            'functions.ex.scs': 'functions.ex.scs',
+            'schedules.ex.scs': 'schedules.ex.scs',
+            'lunches.ex.scs': 'lunches.ex.scs',
+        };
+        await fs.addAsync(manifest, (fl) => {
+            return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory
+        });
+        const execed = fs.scheduleFor('main.ex.scs', new Date('November 9, 2022'));
+        writeFileSync(join(testDir, 'test.scheduleFor.scsfs.11-9-2022.exec.json'), JSON.stringify(execed, null, 2));
+        //console.dir(execed,{depth:32})
+    });
+});

@@ -4,6 +4,7 @@ import { parse as pe } from './grammer';
 import { Arg, Block, MinifyOptions, Statement } from './types';
 export * from './types';
 import { isStatement } from './lib';
+import { isSameDay } from 'date-fns';
 
 export { _statements } from './statements';
 
@@ -30,6 +31,21 @@ export class SCS {
                 throw new Error('Cannot resolve without a resolver. - Name: ' + name);
             });
         //this.parsedwithComments = this.parsed;
+    }
+    scheduleFor(date: Date, context?: Context): { schedule: unknown; event: unknown } | undefined {
+        // @todo pls add type
+        // this function should do way more processing, ie including lunch info
+        // also adding default schedules
+        const execed = this.exec({ displayDate: date, ...context });
+        for (const _element of execed.events) {
+            const element: { dates: Date[]; schedule: string } = _element;
+            if (!element.dates) {
+                continue;
+            }
+            if (element.dates.find((e) => isSameDay(e, date))) {
+                return { schedule: execed.schedules[element.schedule], event: element };
+            }
+        }
     }
     minify(options?: MinifyOptions): string {
         // TODO: finish options
