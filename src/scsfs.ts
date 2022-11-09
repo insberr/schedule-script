@@ -17,13 +17,12 @@ export class SCSFS {
     scheduleFor(filename: string, date: Date, context?: Context): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
-        const execed = this.exec(filename, { displayDate: date, ...context });
-        for (const _element of execed.events) {
-            const element: { dates: Date[]; schedule: string } = _element;
-            if (element.dates.find((e) => isSameDay(e, date))) {
-                return { schedule: execed.schedules[element.schedule], event: element };
-            }
+        const file = this.files[filename];
+        if (!file) {
+            throw new Error(`File ${filename} not found`);
         }
+        const parsed = new SCS(file, this.resolve.bind(this));
+        return parsed.scheduleFor(date, context);
     }
     exec(filename: string, context?: Context) {
         const file = this.files[filename];

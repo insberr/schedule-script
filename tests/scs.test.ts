@@ -82,6 +82,12 @@ test('scsfs', async () => {
     writeFileSync(join(testDir, 'test.fs.exec.json'), JSON.stringify(execed, null, 2));
 });
 
+test('linty', () => {
+    const scs = new SCS(testFile);
+    const linty = scs.lint();
+    writeFileSync(join(testDir, 'test.linty.json'), JSON.stringify(linty, null, 2));
+});
+
 describe('quotes: message', () => {
     describe('no quotes insde', () => {
         test('single', () => {

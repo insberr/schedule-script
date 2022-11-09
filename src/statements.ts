@@ -154,6 +154,9 @@ export const StatementMap = new Map<string, StatementFunc>()
     })
     .set('comment', empty)
     .set('multicomment', empty)
+    .set('import', empty)
+    .set('function', empty)
+    .set('call', empty)
     .set('lunchConfig', (args, c) => {
         copyInto(args[0] as Context, c);
     })
