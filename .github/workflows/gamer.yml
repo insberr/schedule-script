@@ -33,6 +33,8 @@ jobs:
       run: yarn scs parse examples/main.ex.scs
     - name: exec output
       run: yarn scs exec examples/main.ex.scs
+    - name: lint scs files
+      run: yarn scs lint examples/
     - name: import test
       run: yarn scs exec examples/importexample/entrypoint.ex.scs
     - name: Upload output
