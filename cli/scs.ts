@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, WriteStream } from 'fs';
 import { opendir, readdir, readFile, stat, writeFile } from 'fs/promises';
 import { dirname, extname, join } from 'path';
-import { SCS, LintObject, LintLevel } from '../src/scs';
+import { SCS, LintObject, LintLevel } from '..';
 let args = process.argv.slice(2);
 
 const commands = ['prettyMany', 'pretty', 'minifyMany', 'minify', 'lint', 'exec', 'parse'];
