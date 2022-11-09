@@ -73,7 +73,8 @@
         "@ungap/structured-clone": "^1.0.1",
         "date-fns": "^2.29.3",
         "immer": "^9.0.16",
-        "peggy": "^2.0.1"
+        "peggy": "^2.0.1",
+        "schedule-script": "github:insberr/schedule-script"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com",

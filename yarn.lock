@@ -540,6 +540,7 @@ __metadata:
     prettier: ^2.7.1
     prettier-eslint: ^15.0.1
     prettier-plugin-scs: "link:./pplugins/prettier-plugin-scs"
+    schedule-script: "github:insberr/schedule-script"
     ts-jest: ^29.0.3
     ts-node: ^10.9.1
     typescript: ^4.8.4
@@ -6457,6 +6458,22 @@ __metadata:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
+  languageName: node
+  linkType: hard
+
+"schedule-script@github:insberr/schedule-script":
+  version: 0.0.5
+  resolution: "schedule-script@https://github.com/insberr/schedule-script.git#commit=da939de87d26a221574a14057f353b2b9e80e6bc"
+  dependencies:
+    "@parcel/resolver-default": 2.7.0
+    "@ungap/structured-clone": ^1.0.1
+    date-fns: ^2.29.3
+    immer: ^9.0.16
+    peggy: ^2.0.1
+  bin:
+    schedule-script: ./cli/cli.js
+    scs: ./cli/cli.js
+  checksum: ab3046e97a6a4ec6161d2598d5c689c437dee108f3cc7ef2a90dbb6f0d9235000e8a5472a4332b46d3fe526eae57e0f02596910ab0f3f49727bcd1c9e711cfa6
   languageName: node
   linkType: hard
 
