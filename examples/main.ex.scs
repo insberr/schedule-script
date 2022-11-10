@@ -1,3 +1,6 @@
+// hello world
+// test 2
+
 /*
     ideas used:
     [] <- allows one "argument" to contain multiple things.
@@ -53,7 +56,7 @@ lunches {
     }
 };
 
-// HFGL
+// GLHF
 set testValue test; // sets a value in context, its a variable
 set sentryDSN blah; // oh god variable manipulation statements...
 config sentry $sentryDSN; // sets config.[key] = value
