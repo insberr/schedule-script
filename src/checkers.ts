@@ -32,6 +32,10 @@ function parenting(parents: { [key: string]: Checker }): Checker {
     };
 }
 
+function simple(args: args[]) {
+    return combine([hasAmtOfArgs(args.length), ...args.map((n, i) => argumentOfType(i, n))]);
+}
+
 function formatType(t: string): string {
     return (
         {
@@ -43,14 +47,17 @@ function formatType(t: string): string {
     );
 }
 
-function argumentOfType(argumentIndex: number, type: 'quote' | 'text' | 'block' | 'bracket'): Checker {
+type args = 'quote' | 'text' | 'block' | 'bracket';
+
+function argumentOfType(argumentIndex: number, type: args | args[]): Checker {
+    const ot = typeof type == 'string' ? [type] : type;
     return (statement: Statement, parent?: Statement) => {
-        if (statement.args[argumentIndex].type != type) {
+        if (!ot.includes(statement.args[argumentIndex].type)) {
             return {
                 level: LintLevel.error,
-                message: `Argument ${argumentIndex} of ${statement.statement} must be a ${formatType(type)}, not a ${formatType(
-                    statement.args[argumentIndex].type
-                )}`,
+                message: `Argument ${argumentIndex} of ${statement.statement} must be any of (${ot
+                    .map((t) => formatType(t))
+                    .join(', ')}), not a ${formatType(statement.args[argumentIndex].type)}`,
             };
         }
     };
@@ -67,28 +74,50 @@ export const checkers = new Map<string, Checker>()
     .set(
         'schedule',
         parenting({
-            root: combine([hasAmtOfArgs(2), argumentOfType(0, 'text'), argumentOfType(1, 'block')]),
-            event: combine([hasAmtOfArgs(1), argumentOfType(0, 'text')]),
+            root: simple(['text', 'block']),
+            event: simple(['text']),
         })
     )
     .set(
         'term',
         parenting({
-            terms: combine([hasAmtOfArgs(3), argumentOfType(0, 'text'), argumentOfType(1, 'bracket'), argumentOfType(2, 'bracket')]),
+            terms: simple(['text', 'bracket', 'bracket']),
         })
     )
     .set(
         'info',
         parenting({
-            event: combine([hasAmtOfArgs(1), argumentOfType(0, 'quote')]),
+            event: simple(['quote']),
         })
     )
     .set(
         'description',
         parenting({
-            schedule: combine([hasAmtOfArgs(1), argumentOfType(0, 'quote')]),
+            schedule: simple(['quote']),
         })
     )
     .set('root', () => {
         return { message: 'reserved statement: root', level: LintLevel.error };
-    });
+    })
+    .set('call', (s, p) => {
+        if (s.args.length == 0) {
+            return { message: 'Statement call requires 1+ arguments', level: LintLevel.error };
+        }
+    })
+    .set('function', (s, p) => {
+        if (s.args.length < 2 || s.args.length > 3) {
+            return { message: 'Statement call requires 2-3 arguments', level: LintLevel.error };
+        }
+        if (s.args.length == 2) {
+            return simple(['text', 'block'])(s, p);
+        } else {
+            return simple(['text', 'bracket', 'block'])(s, p);
+        }
+    })
+    .set('class', simple(['bracket', 'bracket']))
+    .set('terms', simple(['block']))
+    .set('lunches', simple(['block']))
+    .set('only', simple(['text', 'text']))
+    .set('teacher', simple(['bracket', 'text', 'text']))
+    .set('set', simple(['text', 'text']))
+    .set('config', simple(['text', 'text']));
