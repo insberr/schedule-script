@@ -57,3 +57,26 @@ export type TimeRange = {
 export type Output = {
     // piss
 };
+
+export enum LintLevel {
+    info,
+    warn,
+    error,
+}
+
+export type LintObject = {
+    location: {
+        start: {
+            offset: number;
+            line: number;
+            column: number;
+        };
+        end: {
+            offset: number;
+            line: number;
+            column: number;
+        };
+    };
+    level: LintLevel;
+    message: string;
+};

@@ -106,18 +106,18 @@ function cambridge [eleven twelve thirteen] {
         // with the power of blocks!
         // insert <block> <location>
         insert {
-            class [period 11] $eleven; // dont get me fucking started on dot accessers, good fucking luck
-            class [period 12] $twelve; // How about just times[12] instead
-            class [period 13] $thirteen;
+            class [period 11] [$eleven]; // dont get me fucking started on dot accessers, good fucking luck
+            class [period 12] [$twelve]; // How about just times[12] instead
+            class [period 13] [$thirteen];
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
     }
     {
         only grade 11;
         remove [2] [3];
         insert {
-            class [11] $eleven;
-            class [12] $twelve;
-            class [13] $thirteen;
+            class [11] [$eleven];
+            class [12] [$twelve];
+            class [13] [$thirteen];
         } last operation; // last operation; in this example, puts this in place of where [period 2] was
         force lunch 3;
     }
@@ -151,6 +151,14 @@ schedule normal {
 schedule testInherit {
     inherit normal;
     description 'Test Inherit Schedule';
+};
+
+schedule advisory {
+    inherit normal;
+};
+
+schedule lateStart {
+    inherit normal;
 };
 
 // the things inside the [] can be infered

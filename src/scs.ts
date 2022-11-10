@@ -1,9 +1,12 @@
 //import { inspect } from "util";
 import { Context, executeBlock } from './execute';
 import { parse as pe } from './grammer';
-import { Arg, Block, MinifyOptions, Statement } from './types';
+import { Arg, Block, LintLevel, LintObject, MinifyOptions, Statement } from './types';
 export * from './types';
-import { isStatement } from './lib';
+import { isStatement, recurseInto } from './lib';
+import { isSameDay } from 'date-fns';
+import { checkers } from './checkers';
+import { StatementMap } from './statements';
 
 export { _statements } from './statements';
 
@@ -30,6 +33,21 @@ export class SCS {
                 throw new Error('Cannot resolve without a resolver. - Name: ' + name);
             });
         //this.parsedwithComments = this.parsed;
+    }
+    scheduleFor(date: Date, context?: Context): { schedule: unknown; event: unknown } | undefined {
+        // @todo pls add type
+        // this function should do way more processing, ie including lunch info
+        // also adding default schedules
+        const execed = this.exec({ displayDate: date, ...context });
+        for (const _element of execed.events) {
+            const element: { dates: Date[]; schedule: string } = _element;
+            if (!element.dates) {
+                continue;
+            }
+            if (element.dates.find((e) => isSameDay(e, date))) {
+                return { schedule: execed.schedules[element.schedule], event: element };
+            }
+        }
     }
     minify(options?: MinifyOptions): string {
         // TODO: finish options
@@ -82,6 +100,36 @@ export class SCS {
             out += minifyStatement(statement);
         }
         return out;
+    }
+    lint(): LintObject[] {
+        const objs: LintObject[] = [];
+        recurseInto(this.parsed, (statement, parent) => {
+            if (statement.statement === 'comment' || statement.statement === 'multicomment') {
+                return;
+            }
+            const e = checkers.get(statement.statement);
+            if (!e) {
+                if (StatementMap.get(statement.statement)) {
+                    objs.push({
+                        level: LintLevel.info,
+                        message: `No checker for statement: ${statement.statement}`,
+                        location: statement.location,
+                    });
+                } else {
+                    objs.push({
+                        level: LintLevel.error,
+                        message: `Unknown statement: ${statement.statement}`,
+                        location: statement.location,
+                    });
+                }
+            } else {
+                const ret = e(statement, parent);
+                if (ret) {
+                    objs.push({ ...ret, location: statement.location });
+                }
+            }
+        });
+        return objs;
     }
     pretty(): string {
         let deep = 0;

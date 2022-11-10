@@ -1,10 +1,10 @@
 import { existsSync, readFileSync, WriteStream } from 'fs';
 import { opendir, readdir, readFile, stat, writeFile } from 'fs/promises';
 import { dirname, extname, join } from 'path';
-import { SCS } from '..';
+import { SCS, LintObject, LintLevel } from '..';
 let args = process.argv.slice(2);
 
-const commands = ['prettyMany', 'pretty', 'minifyMany', 'minify', 'exec', 'parse'];
+const commands = ['prettyMany', 'pretty', 'minifyMany', 'minify', 'lint', 'exec', 'parse'];
 
 function resolver(basedir: string) {
     return (path: string) => {
@@ -37,6 +37,9 @@ function usage() {
     console.log();
     console.log('scs minify <infile> [outfile]');
     console.log('minifies a single file');
+    console.log();
+    console.log('scs lint [...files]');
+    console.log('lints many files');
     console.log();
     console.log('scs exec <infile> [outfile] [...args]');
     console.log('executes infile, writes the output context to outfile. specify args in key=value, spaces not supported');
@@ -173,6 +176,20 @@ async function main(command?: string) {
             args = [fl, fl];
             await main('pretty');
         }
+    } else if (command == 'lint') {
+        const files = await resolve([...args]);
+        const lints: (LintObject & { file: string })[] = [];
+        for (const fl of files) {
+            const data = await readFile(fl, 'utf-8');
+            const f = new SCS(data, resolver(fl));
+            const lint = f.lint();
+            lints.push(...lint.map((n) => ({ ...n, file: fl })));
+        }
+        lints.forEach((lint) => {
+            console.log(
+                `${lint.file}:${lint.location.start.line}:${lint.location.start.column}:${LintLevel[lint.level].toUpperCase()} ${lint.message}`
+            );
+        });
     } else {
         usage();
     }

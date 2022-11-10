@@ -29,3 +29,11 @@ schedule testInherit {
     inherit normal;
     description 'Test Inherit Schedule'; // all the @ signs are unnessicary
 };
+
+schedule advisory {
+    inherit normal;
+};
+
+schedule lateStart {
+    inherit normal;
+};

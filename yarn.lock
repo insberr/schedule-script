@@ -511,10 +511,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@insberr/schedule-script@workspace:."
   dependencies:
-    "@parcel/config-default": ^2.7.0
-    "@parcel/core": ^2.7.0
+    "@parcel/config-default": 2.7.0
+    "@parcel/core": 2.7.0
     "@parcel/packager-ts": 2.7.0
-    "@parcel/resolver-default": 2.7.0
     "@parcel/transformer-inline-string": 2.7.0
     "@parcel/transformer-typescript-types": ^2.7.0
     "@swc/cli": ^0.1.57
@@ -532,8 +531,7 @@ __metadata:
     immer: ^9.0.16
     jest: ^29.2.2
     lint-staged: ^13.0.3
-    parcel: ^2.7.0
-    parcel-transformer-peggy: ^1.0.0
+    parcel: 2.7.0
     peggy: ^2.0.1
     pinst: ^3.0.0
     pkg: ^5.8.0
@@ -1074,7 +1072,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/config-default@npm:2.7.0, @parcel/config-default@npm:^2.7.0":
+"@parcel/config-default@npm:2.7.0":
   version: 2.7.0
   resolution: "@parcel/config-default@npm:2.7.0"
   dependencies:
@@ -1114,7 +1112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/core@npm:2.7.0, @parcel/core@npm:^2.7.0":
+"@parcel/core@npm:2.7.0":
   version: 2.7.0
   resolution: "@parcel/core@npm:2.7.0"
   dependencies:
@@ -1412,7 +1410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@parcel/plugin@npm:2.7.0, @parcel/plugin@npm:^2.0.0-alpha.3":
+"@parcel/plugin@npm:2.7.0":
   version: 2.7.0
   resolution: "@parcel/plugin@npm:2.7.0"
   dependencies:
@@ -5824,17 +5822,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parcel-transformer-peggy@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "parcel-transformer-peggy@npm:1.0.0"
-  dependencies:
-    "@parcel/plugin": ^2.0.0-alpha.3
-    peggy: ^1.2.0
-  checksum: 21d44fed6a6b3232190472cbbb052d2d6c86d53d30ab3cbfd8901c6c2d56073c1e415a0db855443bcbc67736fdd331ab42e64e28fe4a1364aacca642839d3722
-  languageName: node
-  linkType: hard
-
-"parcel@npm:^2.7.0":
+"parcel@npm:2.7.0":
   version: 2.7.0
   resolution: "parcel@npm:2.7.0"
   dependencies:
@@ -5918,15 +5906,6 @@ __metadata:
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
   checksum: 5b1e2daa247062061325b8fdbfd1fb56dde0a448fb1455453276ea18c60685bdad23a445dc148cf87bc216be1573357509b7d4060494a6fd768c7efad833ee45
-  languageName: node
-  linkType: hard
-
-"peggy@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "peggy@npm:1.2.0"
-  bin:
-    peggy: bin/peggy
-  checksum: 658c985df8175cb7e90990f663ec5f84d25db6d05adb7f2ffcbcc86c7cddc8de0b818c8d1eb64e78c84ae848e921ff54acabb39da4fb5e497c1dcfdcbfc50b47
   languageName: node
   linkType: hard
 

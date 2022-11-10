@@ -7,8 +7,20 @@ export const StatementMap = new Map<string, StatementFunc>()
     .set('schedule', (args, c) => {
         if (c.statement) {
             //console.log(c.statement)
-            c.schedule = args;
-            return;
+            if (c.statement == 'event') {
+                const schedules = find(c, 'schedules');
+                if (!schedules) {
+                    throw new Error('unable to find schedules');
+                }
+                const sch = schedules[args[0] as string];
+                if (!sch) {
+                    throw new Error(('Cannot find schedule ' + args[0]) as string);
+                }
+                c.schedule = args[0] as string;
+            } else {
+                c.schedule = args;
+                return;
+            }
         } else {
             // define top level schedule
             c.schedules = c.schedules || {};
@@ -142,6 +154,9 @@ export const StatementMap = new Map<string, StatementFunc>()
     })
     .set('comment', empty)
     .set('multicomment', empty)
+    .set('import', empty)
+    .set('function', empty)
+    .set('call', empty)
     .set('lunchConfig', (args, c) => {
         copyInto(args[0] as Context, c);
     })
