@@ -82,4 +82,3 @@
         "*": "yarn prettier --ignore-unknown --write"
     }
 }
-

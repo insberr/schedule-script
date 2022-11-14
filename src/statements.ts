@@ -169,6 +169,66 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.studentLunches = c.studentLunches || {};
         c.studentLunches.lunches = c.studentLunches.lunches || {};
         c.studentLunches.lunches[lunchid] = parseTimeRange(durataion);
+    })
+    .set('user', (args, c) => {
+        // currently only uses `user classes contains` so thats all im going to support
+        const [classes, contains, what] = args as string[];
+        if (classes != 'classes' || contains != 'contains') {
+            throw new Error('Invalid user statement (lmao)');
+        }
+        const ptyper = what.split(' ');
+        let num: number | null = null;
+        let type = 'period';
+        if (ptyper.length == 1) {
+            const isNum = /^\d+$/.test(ptyper[0]);
+            if (isNum) {
+                num = parseInt(ptyper[0]);
+            } else {
+                type = ptyper[0];
+            }
+        } else {
+            const [rtype, rnum] = ptyper;
+            num = parseInt(rnum);
+            type = rtype;
+        }
+        // format
+        // {
+        // "user": {classes: [{type: "period", num: 1}, {type: "period", num: 2}]}
+        // }
+        // gl hf
+        let e: boolean | undefined = (find(c, 'users') as { classes?: any[] } | undefined)?.classes?.includes({ type, num });
+        if (e == undefined) {
+            e = false;
+        }
+        c.stop = !e;
+    })
+    .set('self', (args, c) => {
+        // currently only uses `user classes contains` so thats all im going to support
+        const [classes, contains, what] = args as string[];
+        if (classes != 'classes' || contains != 'contains') {
+            throw new Error('Invalid self statement (lmao)');
+        }
+        const ptyper = what.split(' ');
+        let num: number | null = null;
+        let type = 'period';
+        if (ptyper.length == 1) {
+            const isNum = /^\d+$/.test(ptyper[0]);
+            if (isNum) {
+                num = parseInt(ptyper[0]);
+            } else {
+                type = ptyper[0];
+            }
+        } else {
+            const [rtype, rnum] = ptyper;
+            num = parseInt(rnum);
+            type = rtype;
+        }
+        let classy = c.classes as { type: string; num: number | null }[] | undefined;
+        if (classy == undefined) {
+            classy = [];
+        }
+        const found = classy.find((e) => e.type == type && e.num == num);
+        c.stop = found == undefined;
     });
 
 function empty(args: PArgs, c: Context) {
