@@ -13,6 +13,17 @@ function combine(checks: Checker[]): Checker {
     };
 }
 
+function mustEqual(index: number, arg: args, value: string): Checker {
+    return (statement: Statement, parent?: Statement) => {
+        if (statement.args[index].type == arg && statement.args[index].data != value) {
+            return {
+                message: `Argument ${index} of ${statement.statement} must be ${value}, not ${statement.args[index].data}`,
+                level: LintLevel.error,
+            };
+        }
+    };
+}
+
 function parenting(parents: { [key: string]: Checker }): Checker {
     return (statement: Statement, parent?: Statement) => {
         let parentStatement: string;
@@ -120,4 +131,20 @@ export const checkers = new Map<string, Checker>()
     .set('only', simple(['text', 'text']))
     .set('teacher', simple(['bracket', 'text', 'text']))
     .set('set', simple(['text', 'text']))
-    .set('config', simple(['text', 'text']));
+    .set('config', simple(['text', 'text']))
+    .set('message', simple(['quote']))
+    .set('user', combine([hasAmtOfArgs(3), mustEqual(0, 'text', 'classes'), mustEqual(1, 'text', 'contains'), argumentOfType(2, 'bracket')]))
+    .set('self', combine([hasAmtOfArgs(3), mustEqual(0, 'text', 'classes'), mustEqual(1, 'text', 'contains'), argumentOfType(2, 'bracket')]))
+    .set('event', simple(['block']))
+    .set('inherit', simple(['text']))
+    .set('date', simple(['bracket']))
+    .set('lunchConfig', simple(['block']))
+    .set('passing', simple(['bracket']))
+    .set('lunch', simple(['bracket', 'bracket']))
+    .set(
+        'from',
+        parenting({
+            lunchConfig: simple(['bracket']),
+            event: simple(['bracket', 'text', 'bracket']),
+        })
+    );

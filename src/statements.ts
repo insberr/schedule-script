@@ -199,14 +199,21 @@ export const StatementMap = new Map<string, StatementFunc>()
         // "user": {classes: [{type: "period", num: 1}, {type: "period", num: 2}]}
         // }
         // gl hf
-        let e: boolean | undefined = (find(c, 'users') as { classes?: any[] } | undefined)?.classes?.includes({ type, num });
-        if (e == undefined) {
-            e = false;
+        const userinfo = find(c, 'user') as { classes?: { type: string; num: number | null }[] } | undefined;
+        if (!userinfo) {
+            c.stop = true;
+            return;
         }
-        c.stop = !e;
+        userinfo.classes = userinfo.classes || [];
+        const found = userinfo.classes.find((e) => e.type == type && e.num == num);
+        if (!found) {
+            c.stop = true;
+            return;
+        }
+        c.stop = false;
     })
     .set('self', (args, c) => {
-        // currently only uses `user classes contains` so thats all im going to support
+        // currently only uses `self classes contains` so thats all im going to support
         const [classes, contains, what] = args as string[];
         if (classes != 'classes' || contains != 'contains') {
             throw new Error('Invalid self statement (lmao)');

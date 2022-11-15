@@ -438,9 +438,179 @@ describe('Statements', () => {
         });
     });
     describe('user', () => {
-        // todo
+        it('should check the user obj', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [period 1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec({ user: { classes: [{ type: 'period', num: 1 }] } });
+            expect(out).toHaveProperty('test.test', '5678');
+        });
+        it('should check the user obj false', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [period 1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec({ user: { classes: [{ type: 'period', num: 2 }] } });
+            expect(out).toHaveProperty('test.test', '1234');
+        });
+        it('shouldnt execute with no user', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [period 1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.test', '1234');
+        });
+        it('shouldnt execute with a user with no classes', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [period 1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec({ user: {} });
+            expect(out).toHaveProperty('test.test', '1234');
+        });
+        it('should correctly detect with shorthand period', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec({ user: { classes: [{ type: 'period', num: 1 }] } });
+            expect(out).toHaveProperty('test.test', '5678');
+        });
+        it('should correctly detect with shorthand type', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [arrival];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec({ user: { classes: [{ type: 'arrival', num: null }] } });
+            expect(out).toHaveProperty('test.test', '5678');
+        });
+        it('should throw an error with invalid user statement', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user e lmafo [1];
+                    set test 5678;
+                }
+            };
+            `);
+            expect(() => scs.exec({ user: { classes: [{ type: 'arrival', num: null }] } })).toThrow();
+        });
     });
     describe('self', () => {
-        // todo
+        it('should check the classes obj', () => {
+            const scs = new SCS(`
+            schedule test {
+                set test 1234;
+                class [period 1] [5:00 to 6:00];
+                {
+                    self classes contains [period 1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.test', '5678');
+        });
+        it('should check the classes obj false', () => {
+            const scs = new SCS(`
+            schedule test {
+                set test 1234;
+                class [period 1] [5:00 to 6:00];
+                {
+                    self classes contains [period 2];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.test', '1234');
+        });
+        it('shouldnt execute with no classes', () => {
+            const scs = new SCS(`
+            schedule test {
+                set test 1234;
+                {
+                    self classes contains [period 1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.test', '1234');
+        });
+        it('should correctly detect with shorthand period', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                set test 1234;
+                {
+                    self classes contains [1];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.test', '5678');
+        });
+        it('should correctly detect with shorthand type', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [arrival] [5:00 to 6:00];
+                set test 1234;
+                {
+                    self classes contains [arrival];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.test', '5678');
+        });
+        it('should throw an error with invalid user statement', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                set test 1234;
+                {
+                    self cringe e [1];
+                    set test 5678;
+                }
+            };
+            `);
+            expect(() => scs.exec()).toThrow();
+        });
     });
 });
