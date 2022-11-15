@@ -3,10 +3,11 @@ import { Context, executeBlock } from './execute';
 import { parse as pe } from './grammer';
 import { Arg, Block, LintLevel, LintObject, MinifyOptions, Statement } from './types';
 export * from './types';
-import { isStatement, recurseInto } from './lib';
+import { isStatement, parseTimeRange, recurseInto } from './lib';
 import { isSameDay } from 'date-fns';
 import { checkers } from './checkers';
 import { StatementMap } from './statements';
+import produce from 'immer';
 
 export { _statements } from './statements';
 
@@ -236,6 +237,43 @@ export class SCS {
             newret[key] = ret[key];
         }
         return newret;
+    }
+    bundle(): string {
+        const e = produce(this.parsed, (p: any) => {
+            const dofunny = (b: Block | Statement, parent?: Statement) => {
+                if (Array.isArray(b)) {
+                    b.forEach((e, i) => {
+                        if ((e as Statement).statement == 'import') {
+                            const impst = e as Statement;
+                            const toimp = impst.args[0].data as string;
+                            const imp = this.resolver(toimp);
+                            const parsed = new SCS(imp, this.resolver);
+                            const bundledDep = parsed.bundle();
+                            const newBlock = pe(bundledDep) as Block;
+                            newBlock.unshift({
+                                statement: 'comment',
+                                args: [],
+                                comment: ' *' + toimp + '*',
+                                location: { start: { offset: 0, line: 0, column: 0 }, end: { offset: 0, line: 0, column: 0 } },
+                            } as Statement);
+                            b[i] = newBlock;
+                            return;
+                        }
+                        dofunny(e, parent);
+                    });
+                } else {
+                    b.args.forEach((c) => {
+                        if (c.type == 'block') {
+                            dofunny(c.data, b);
+                        }
+                    });
+                }
+            };
+            dofunny(p);
+        });
+        const n = new SCS('e;');
+        n.parsed = e;
+        return n.pretty();
     }
 }
 

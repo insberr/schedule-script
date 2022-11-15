@@ -272,3 +272,21 @@ describe('scheduleFor', () => {
         //console.dir(execed,{depth:32})
     });
 });
+
+it('should bundle', async () => {
+    const fs = new SCSFS();
+    const manifest = {
+        // key: filename, value: value passed to fetcher to get the content (ie url)
+        'main.ex.scs': 'entrypoint.ex.scs',
+        'defines.ex.scs': 'defines.ex.scs',
+        'events.ex.scs': 'events.ex.scs',
+        'functions.ex.scs': 'functions.ex.scs',
+        'schedules.ex.scs': 'schedules.ex.scs',
+        'lunches.ex.scs': 'lunches.ex.scs',
+    };
+    await fs.addAsync(manifest, (fl) => {
+        return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory
+    });
+    const bundle = fs.bundle('main.ex.scs');
+    writeFileSync(join(testDir, 'test.bundle.scs'), bundle);
+});

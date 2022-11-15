@@ -59,7 +59,10 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.events.push(args[0]);
     })
     .set('terms', (args, c) => {
-        const t: { termIndex: number; start: Date; end: Date }[] = (args[0] as Context).terms;
+        let t: { termIndex: number; start: Date; end: Date }[] = (args[0] as Context).terms;
+        if (t == undefined) {
+            t = [];
+        }
         c.terms = t;
         const displayDate = find(c, 'displayDate') || new Date();
         const newTerm = t.filter((term) => {

@@ -39,4 +39,12 @@ export class SCSFS {
         }
         return data;
     }
+    bundle(filename: string) {
+        const file = this.files[filename];
+        if (!file) {
+            throw new Error(`File ${filename} not found`);
+        }
+        const parsed = new SCS(file, this.resolve.bind(this));
+        return parsed.bundle();
+    }
 }
