@@ -62,8 +62,8 @@ text "text" = [0-9a-z:()\-$]i+ { return text() } // add the rest of the symbols?
 bracketed "bracketed text" = "[" j:[0-9a-z$\-, :]i+ "]" { return j.join("") }
 eol "semicolon" = ";"
 
-quotedargDouble = "\"" d:charD* "\"" { return d.join("") }
-quotedargSingle = "'" d:charS* "'" { return d.join("") }
+quotedargDouble "double quoted text" = "\"" d:charD* "\"" { return d.join("") }
+quotedargSingle "single quoted text" = "'" d:charS* "'" { return d.join("") }
 
 block "block" = "{" "\n"? state:statement+ "\n"? "}" { return state.filter(s => s) }
 
