@@ -1,5 +1,5 @@
 import exp from 'constants';
-import { isSameDay } from 'date-fns';
+import { isAfter, isBefore, isSameDay } from 'date-fns';
 import { SCS } from '../src/scs';
 
 describe('Statements', () => {
@@ -320,6 +320,127 @@ describe('Statements', () => {
         });
     });
     describe('from', () => {
-        //describe("from event")
+        describe('from event', () => {
+            it('should create all days between', () => {
+                const scs = new SCS(`
+                event {
+                    from [November 12, 2022] to [January 12, 2023];
+                };
+                `);
+                const out = scs.exec();
+                expect(out).toHaveProperty('events.0.dates');
+                const dates = out.events[0].dates as Date[];
+                dates.forEach((d) => {
+                    const start = new Date('November 12, 2022');
+                    const end = new Date('January 12, 2023');
+                    const isInside = isBefore(d, end) && isAfter(d, start);
+                    const isEnds = isSameDay(d, start) || isSameDay(d, end);
+                    expect(isInside || isEnds).toBe(true);
+                });
+            });
+        });
+        it('from lunchConfig', () => {
+            const scs = new SCS(`
+                lunchConfig {
+                    from [period 2];
+                };
+                `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('studentLunches.basedOn', 'period 2');
+        });
+        it('other', () => {
+            const scs = new SCS(`
+                set cringe {
+                    from [period 2];
+                };
+                `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('cringe.from', ['period 2']);
+        });
+    });
+    describe('config', () => {
+        it('should set config value', () => {
+            const scs = new SCS(`
+                config cringe gamer;
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('config.cringe', 'gamer');
+        });
+        it('should work with multilevel values', () => {
+            const scs = new SCS(`
+                config info {
+                    set name "namey";
+                    set loginToken "1234";
+                };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('config.info', { name: 'namey', loginToken: '1234' });
+        });
+    });
+    describe('passing', () => {
+        it('should set passing time ', () => {
+            const scs = new SCS(`
+                lunchConfig {
+                    passing [50 minutes];
+                };
+                `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('studentLunches.passing', '50 minutes');
+        });
+    });
+    describe('lunch', () => {
+        it('should set the lunch correctly', () => {
+            const scs = new SCS(`
+            schedule test {
+                lunch [1] [10:30 to 11:00]; 
+                lunch [2] [11:00 to 11:30];
+                lunch [3] [11:30 to 12:00];
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.studentLunches.lunches');
+            expect(out.schedules.test.studentLunches.lunches[1]).toStrictEqual({
+                start: {
+                    h: 10,
+                    m: 30,
+                    s: 0,
+                },
+                end: {
+                    h: 11,
+                    m: 0,
+                    s: 0,
+                },
+            });
+            expect(out.schedules.test.studentLunches.lunches[2]).toStrictEqual({
+                start: {
+                    h: 11,
+                    m: 0,
+                    s: 0,
+                },
+                end: {
+                    h: 11,
+                    m: 30,
+                    s: 0,
+                },
+            });
+            expect(out.schedules.test.studentLunches.lunches[3]).toStrictEqual({
+                start: {
+                    h: 11,
+                    m: 30,
+                    s: 0,
+                },
+                end: {
+                    h: 12,
+                    m: 0,
+                    s: 0,
+                },
+            });
+        });
+    });
+    describe('user', () => {
+        // todo
+    });
+    describe('self', () => {
+        // todo
     });
 });
