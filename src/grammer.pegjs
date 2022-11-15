@@ -1,6 +1,6 @@
 start = prog:statement* { return prog.filter((p) => p) }
 ws "whitespace" = [ \t\n\r]*
-statement = ws v:(comment / multilinecomment / block / command ) ws { return v }
+statement = ws v:(comment / multilinecomment / block / command / eol ) ws { return v }
 
 comment "comment" = "//" d:[^\n]* "\n"? { return {statement: "comment", "comment":d.join(''), "args": [],  location: location() } }
 multilinecomment "multiline comment" = "/*" d:[^*]* "*"+ ([^/*] [^*]* "*"+)* "/" { return {statement: "multicomment", "comment":d.join(''), "args": [],  location: location() } }
@@ -60,7 +60,7 @@ HEXDIG = [0-9a-f]i
 
 text "text" = [0-9a-z:()\-$]i+ { return text() } // add the rest of the symbols?
 bracketed "bracketed text" = "[" j:[0-9a-z$\-, :]i+ "]" { return j.join("") }
-eol "semicolon" = ";"
+eol "semicolon" = ";" {return null}
 
 quotedargDouble "double quoted text" = "\"" d:charD* "\"" { return d.join("") }
 quotedargSingle "single quoted text" = "'" d:charS* "'" { return d.join("") }
