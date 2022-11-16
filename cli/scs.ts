@@ -14,6 +14,13 @@ const commands = [
     'parse',
 ];
 
+const colors = {
+    [LintLevel.error]: '\x1b[31m',
+    [LintLevel.warn]: '\x1b[33m',
+    [LintLevel.info]: '\x1b[90m',
+    reset: '\x1b[0m',
+};
+
 function resolver(basedir: string) {
     return (path: string) => {
         let out = '';
@@ -204,9 +211,11 @@ async function main(command?: string) {
         }
         lints.forEach((lint) => {
             console.log(
-                `[${LintLevel[lint.level].toUpperCase()}] ${lint.file}:${
-                    lint.location.start.line
-                }:${lint.location.start.column} ${lint.message}`
+                `[${colors[lint.level]}${LintLevel[lint.level].toUpperCase()}${
+                    colors['reset']
+                }] ${lint.file}:${lint.location.start.line}:${
+                    lint.location.start.column
+                } ${lint.message}`
             );
         });
     } else {
