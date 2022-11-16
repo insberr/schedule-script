@@ -4,7 +4,15 @@ import { dirname, extname, join } from 'path';
 import { SCS, LintObject, LintLevel } from '..';
 let args = process.argv.slice(2);
 
-const commands = ['prettyMany', 'pretty', 'minifyMany', 'minify', 'lint', 'exec', 'parse'];
+const commands = [
+    'prettyMany',
+    'pretty',
+    'minifyMany',
+    'minify',
+    'lint',
+    'exec',
+    'parse',
+];
 
 function resolver(basedir: string) {
     return (path: string) => {
@@ -13,7 +21,10 @@ function resolver(basedir: string) {
             out = readFileSync(join(dirname(basedir), path), 'utf-8');
         } catch (e) {
             try {
-                out = readFileSync(join(dirname(basedir), path + '.scs'), 'utf-8');
+                out = readFileSync(
+                    join(dirname(basedir), path + '.scs'),
+                    'utf-8'
+                );
             } catch (e) {
                 throw new Error(`Cannot resolve ${path}`);
             }
@@ -42,7 +53,9 @@ function usage() {
     console.log('lints many files');
     console.log();
     console.log('scs exec <infile> [outfile] [...args]');
-    console.log('executes infile, writes the output context to outfile. specify args in key=value, spaces not supported');
+    console.log(
+        'executes infile, writes the output context to outfile. specify args in key=value, spaces not supported'
+    );
     console.log('example: scs exec in.scs out.json grade=10 name=weckysmecky');
     console.log();
     console.log('scs parse <infile> [outfile]');
@@ -75,7 +88,11 @@ async function resolve(arg: string[]): Promise<string[]> {
     return e;
 }
 
-async function operate(inf: string, outf: string, fn: (data: string) => Promise<string>) {
+async function operate(
+    inf: string,
+    outf: string,
+    fn: (data: string) => Promise<string>
+) {
     if (!existsSync(inf)) {
         throw new Error('infile doesnt exist!');
     }
@@ -187,7 +204,9 @@ async function main(command?: string) {
         }
         lints.forEach((lint) => {
             console.log(
-                `${lint.file}:${lint.location.start.line}:${lint.location.start.column}:${LintLevel[lint.level].toUpperCase()} ${lint.message}`
+                `${lint.file}:${lint.location.start.line}:${
+                    lint.location.start.column
+                }:${LintLevel[lint.level].toUpperCase()} ${lint.message}`
             );
         });
     } else {

@@ -73,10 +73,21 @@ describe('Statements', () => {
             };
             `);
             const out = scs.exec();
-            expect(out).toHaveProperty('schedules.test.classes.0.type', 'period');
+            expect(out).toHaveProperty(
+                'schedules.test.classes.0.type',
+                'period'
+            );
             expect(out).toHaveProperty('schedules.test.classes.0.num', 1);
-            expect(out).toHaveProperty('schedules.test.classes.0.start', { h: 5, m: 0, s: 0 });
-            expect(out).toHaveProperty('schedules.test.classes.0.end', { h: 6, m: 0, s: 0 });
+            expect(out).toHaveProperty('schedules.test.classes.0.start', {
+                h: 5,
+                m: 0,
+                s: 0,
+            });
+            expect(out).toHaveProperty('schedules.test.classes.0.end', {
+                h: 6,
+                m: 0,
+                s: 0,
+            });
         });
         it('should infer type period', () => {
             const scs = new SCS(`
@@ -85,10 +96,21 @@ describe('Statements', () => {
             };
             `);
             const out = scs.exec();
-            expect(out).toHaveProperty('schedules.test.classes.0.type', 'period');
+            expect(out).toHaveProperty(
+                'schedules.test.classes.0.type',
+                'period'
+            );
             expect(out).toHaveProperty('schedules.test.classes.0.num', 1);
-            expect(out).toHaveProperty('schedules.test.classes.0.start', { h: 5, m: 0, s: 0 });
-            expect(out).toHaveProperty('schedules.test.classes.0.end', { h: 6, m: 0, s: 0 });
+            expect(out).toHaveProperty('schedules.test.classes.0.start', {
+                h: 5,
+                m: 0,
+                s: 0,
+            });
+            expect(out).toHaveProperty('schedules.test.classes.0.end', {
+                h: 6,
+                m: 0,
+                s: 0,
+            });
         });
         it('should infer null', () => {
             const scs = new SCS(`
@@ -97,10 +119,21 @@ describe('Statements', () => {
             };
             `);
             const out = scs.exec();
-            expect(out).toHaveProperty('schedules.test.classes.0.type', 'arrival');
+            expect(out).toHaveProperty(
+                'schedules.test.classes.0.type',
+                'arrival'
+            );
             expect(out).toHaveProperty('schedules.test.classes.0.num', null);
-            expect(out).toHaveProperty('schedules.test.classes.0.start', { h: 5, m: 0, s: 0 });
-            expect(out).toHaveProperty('schedules.test.classes.0.end', { h: 6, m: 0, s: 0 });
+            expect(out).toHaveProperty('schedules.test.classes.0.start', {
+                h: 5,
+                m: 0,
+                s: 0,
+            });
+            expect(out).toHaveProperty('schedules.test.classes.0.end', {
+                h: 6,
+                m: 0,
+                s: 0,
+            });
         });
     });
     describe('term', () => {
@@ -114,8 +147,12 @@ describe('Statements', () => {
             expect(out).toHaveProperty('terms.0.end');
             expect(out.terms[0].end).toBeInstanceOf(Date);
             expect(out).toHaveProperty('terms.0.termIndex', 0);
-            expect(isSameDay(out.terms[0].start, new Date(2022, 10, 21))).toBe(true);
-            expect(isSameDay(out.terms[0].end, new Date(2023, 5, 1))).toBe(true);
+            expect(isSameDay(out.terms[0].start, new Date(2022, 10, 21))).toBe(
+                true
+            );
+            expect(isSameDay(out.terms[0].end, new Date(2023, 5, 1))).toBe(
+                true
+            );
         });
     });
     describe('terms', () => {
@@ -230,8 +267,16 @@ describe('Statements', () => {
             const out = scs.exec();
             expect(out).toHaveProperty('lunches.aaaa', 1);
             expect(out).toHaveProperty('lunches.bbbb', 2);
-            expect(out).toHaveProperty('teachers.0', { id: 'aaaa', name: 'firsty', lunch: 1 });
-            expect(out).toHaveProperty('teachers.1', { id: 'bbbb', name: 'secondy', lunch: 2 });
+            expect(out).toHaveProperty('teachers.0', {
+                id: 'aaaa',
+                name: 'firsty',
+                lunch: 1,
+            });
+            expect(out).toHaveProperty('teachers.1', {
+                id: 'bbbb',
+                name: 'secondy',
+                lunch: 2,
+            });
         });
     });
     describe('inherit', () => {
@@ -245,7 +290,10 @@ describe('Statements', () => {
             };
             `);
             const out = scs.exec();
-            expect(out).toHaveProperty('schedules.test2.classes', out.schedules.test.classes);
+            expect(out).toHaveProperty(
+                'schedules.test2.classes',
+                out.schedules.test.classes
+            );
         });
         it('should error when the schedule doesnt exist', () => {
             const scs = new SCS(`
@@ -274,7 +322,10 @@ describe('Statements', () => {
         };
         `);
         const out = scs.exec();
-        expect(out).toHaveProperty('schedules.test.description', 'this is a test');
+        expect(out).toHaveProperty(
+            'schedules.test.description',
+            'this is a test'
+        );
     });
     it('info', () => {
         const scs = new SCS(`
@@ -303,7 +354,9 @@ describe('Statements', () => {
             expect(out).toHaveProperty('dates');
             expect(out.dates).toHaveLength(1);
             expect(out.dates[0]).toBeInstanceOf(Date);
-            expect(out.dates[0].toDateString()).toBe(new Date(2022, 10, 21).toDateString());
+            expect(out.dates[0].toDateString()).toBe(
+                new Date(2022, 10, 21).toDateString()
+            );
         });
         it('should add multiple days', () => {
             const scs = new SCS(`
@@ -314,9 +367,13 @@ describe('Statements', () => {
             expect(out).toHaveProperty('dates');
             expect(out.dates).toHaveLength(2);
             expect(out.dates[0]).toBeInstanceOf(Date);
-            expect(out.dates[0].toDateString()).toBe(new Date(2022, 10, 21).toDateString());
+            expect(out.dates[0].toDateString()).toBe(
+                new Date(2022, 10, 21).toDateString()
+            );
             expect(out.dates[1]).toBeInstanceOf(Date);
-            expect(out.dates[1].toDateString()).toBe(new Date(2022, 10, 22).toDateString());
+            expect(out.dates[1].toDateString()).toBe(
+                new Date(2022, 10, 22).toDateString()
+            );
         });
     });
     describe('from', () => {
@@ -374,7 +431,10 @@ describe('Statements', () => {
                 };
             `);
             const out = scs.exec();
-            expect(out).toHaveProperty('config.info', { name: 'namey', loginToken: '1234' });
+            expect(out).toHaveProperty('config.info', {
+                name: 'namey',
+                loginToken: '1234',
+            });
         });
     });
     describe('passing', () => {
@@ -448,7 +508,9 @@ describe('Statements', () => {
                 }
             };
             `);
-            const out = scs.exec({ user: { classes: [{ type: 'period', num: 1 }] } });
+            const out = scs.exec({
+                user: { classes: [{ type: 'period', num: 1 }] },
+            });
             expect(out).toHaveProperty('test.test', '5678');
         });
         it('should check the user obj false', () => {
@@ -461,7 +523,9 @@ describe('Statements', () => {
                 }
             };
             `);
-            const out = scs.exec({ user: { classes: [{ type: 'period', num: 2 }] } });
+            const out = scs.exec({
+                user: { classes: [{ type: 'period', num: 2 }] },
+            });
             expect(out).toHaveProperty('test.test', '1234');
         });
         it('shouldnt execute with no user', () => {
@@ -500,7 +564,9 @@ describe('Statements', () => {
                 }
             };
             `);
-            const out = scs.exec({ user: { classes: [{ type: 'period', num: 1 }] } });
+            const out = scs.exec({
+                user: { classes: [{ type: 'period', num: 1 }] },
+            });
             expect(out).toHaveProperty('test.test', '5678');
         });
         it('should correctly detect with shorthand type', () => {
@@ -513,7 +579,9 @@ describe('Statements', () => {
                 }
             };
             `);
-            const out = scs.exec({ user: { classes: [{ type: 'arrival', num: null }] } });
+            const out = scs.exec({
+                user: { classes: [{ type: 'arrival', num: null }] },
+            });
             expect(out).toHaveProperty('test.test', '5678');
         });
         it('should throw an error with invalid user statement', () => {
@@ -526,7 +594,26 @@ describe('Statements', () => {
                 }
             };
             `);
-            expect(() => scs.exec({ user: { classes: [{ type: 'arrival', num: null }] } })).toThrow();
+            expect(() =>
+                scs.exec({
+                    user: { classes: [{ type: 'arrival', num: null }] },
+                })
+            ).toThrow();
+        });
+        it('should work with varargs', () => {
+            const scs = new SCS(`
+            set test {
+                set test 1234;
+                {
+                    user classes contains [1] [2];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec({
+                user: { classes: [{ type: 'period', num: 2 }] },
+            });
+            expect(out).toHaveProperty('test.test', '5678');
         });
     });
     describe('self', () => {
@@ -611,6 +698,78 @@ describe('Statements', () => {
             };
             `);
             expect(() => scs.exec()).toThrow();
+        });
+        it('should correctly detect with varargs', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [arrival] [5:00 to 6:00];
+                class [zero]    [6:30 to 5:00]
+                set test 1234;
+                {
+                    self classes contains [1] [2] [3] [zero];
+                    set test 5678;
+                }
+            };
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.test', '5678');
+        });
+    });
+    describe('day', () => {
+        it('should work with one day', () => {
+            const scs = new SCS(`
+            set test {
+                day [1] {
+                    set test 1234;
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.days.1.test', '1234');
+        });
+        it('should work with multiple days', () => {
+            const scs = new SCS(`
+            set test {
+                day [1] {
+                    set test 1234;
+                };
+                day [2] {
+                    set test 5678;
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.days.1.test', '1234');
+            expect(out).toHaveProperty('test.days.2.test', '5678');
+        });
+        it('should work with date ranges', () => {
+            const scs = new SCS(`
+            set test {
+                day [1] to [100] {
+                    set test 1234;
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.days');
+            Object.keys(out.test.days).forEach((k: string) => {
+                expect(out).toHaveProperty(`test.days.${k}.test`, '1234');
+            });
+        });
+    });
+    describe('events', () => {
+        it('should pull up days', () => {
+            const scs = new SCS(`
+            set test {
+                events {
+                    day [1] {
+                        set test 1234;
+                    };
+                    day [2] {
+                        set test 5678;
+                    };
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.eventOverrides.1.test', '1234');
+            expect(out).toHaveProperty('test.eventOverrides.2.test', '5678');
         });
     });
 });

@@ -1,7 +1,14 @@
 //import { inspect } from "util";
 import { Context, executeBlock } from './execute';
 import { parse as pe } from './grammer';
-import { Arg, Block, LintLevel, LintObject, MinifyOptions, Statement } from './types';
+import {
+    Arg,
+    Block,
+    LintLevel,
+    LintObject,
+    MinifyOptions,
+    Statement,
+} from './types';
 export * from './types';
 import { isStatement, parseTimeRange, recurseInto } from './lib';
 import { isSameDay } from 'date-fns';
@@ -31,11 +38,16 @@ export class SCS {
         this.resolver =
             resolver ||
             ((name) => {
-                throw new Error('Cannot resolve without a resolver. - Name: ' + name);
+                throw new Error(
+                    'Cannot resolve without a resolver. - Name: ' + name
+                );
             });
         //this.parsedwithComments = this.parsed;
     }
-    scheduleFor(date: Date, context?: Context): { schedule: unknown; event: unknown } | undefined {
+    scheduleFor(
+        date: Date,
+        context?: Context
+    ): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
         // also adding default schedules
@@ -46,7 +58,10 @@ export class SCS {
                 continue;
             }
             if (element.dates.find((e) => isSameDay(e, date))) {
-                return { schedule: execed.schedules[element.schedule], event: element };
+                return {
+                    schedule: execed.schedules[element.schedule],
+                    event: element,
+                };
             }
         }
     }
@@ -85,7 +100,10 @@ export class SCS {
                 } else if (statement.statement === 'multicomment') {
                     // TODO add uncompress multi line comments
                     if (options?.keepMultiLineComments) {
-                        out += ` /* ${(statement.comment as string).replace(/\n/gm, '')} */ `;
+                        out += ` /* ${(statement.comment as string).replace(
+                            /\n/gm,
+                            ''
+                        )} */ `;
                     }
                     return out;
                 }
@@ -105,7 +123,10 @@ export class SCS {
     lint(): LintObject[] {
         const objs: LintObject[] = [];
         recurseInto(this.parsed, (statement, parent) => {
-            if (statement.statement === 'comment' || statement.statement === 'multicomment') {
+            if (
+                statement.statement === 'comment' ||
+                statement.statement === 'multicomment'
+            ) {
                 return;
             }
             const e = checkers.get(statement.statement);
@@ -183,7 +204,15 @@ export class SCS {
                     }
 
                     if (statement.comment) {
-                        o += ' //' + (statement.comment as { statement: string; args: Arg[]; comment: string }).comment;
+                        o +=
+                            ' //' +
+                            (
+                                statement.comment as {
+                                    statement: string;
+                                    args: Arg[];
+                                    comment: string;
+                                }
+                            ).comment;
                     }
 
                     o += endNewLine;
@@ -203,7 +232,10 @@ export class SCS {
         for (const statement of this.parsed) {
             let newLine = '\n';
             if ((statement as Statement).statement !== undefined) {
-                if ((statement as Statement).statement === 'comment' || (statement as Statement).statement === 'multicomment') {
+                if (
+                    (statement as Statement).statement === 'comment' ||
+                    (statement as Statement).statement === 'multicomment'
+                ) {
                     newLine = '';
                 }
             }
@@ -219,14 +251,21 @@ export class SCS {
                 // get position of newlines
                 const pos = out.indexOf(newline);
                 // replace the newlines with one newline
-                out = out.slice(0, pos) + '\n\n' + out.slice(pos + newline.length);
+                out =
+                    out.slice(0, pos) +
+                    '\n\n' +
+                    out.slice(pos + newline.length);
             }
         }
 
         return out;
     }
     exec(initalContext?: Context): Context {
-        const ret = executeBlock(this.parsed, initalContext || {}, this.resolver);
+        const ret = executeBlock(
+            this.parsed,
+            initalContext || {},
+            this.resolver
+        );
         // transform the context into the right data format here
         // fuck you
         const newret: any = {};
@@ -254,7 +293,10 @@ export class SCS {
                                 statement: 'comment',
                                 args: [],
                                 comment: ' *' + toimp + '*',
-                                location: { start: { offset: 0, line: 0, column: 0 }, end: { offset: 0, line: 0, column: 0 } },
+                                location: {
+                                    start: { offset: 0, line: 0, column: 0 },
+                                    end: { offset: 0, line: 0, column: 0 },
+                                },
                             } as Statement);
                             b[i] = newBlock;
                             return;

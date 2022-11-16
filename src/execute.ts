@@ -13,7 +13,11 @@ export type Context = {
 
 export type PArgs = (string | Context)[];
 
-export function executeBlock(data: Block, initcontext: Context, resolver: (filename: string) => string): Context {
+export function executeBlock(
+    data: Block,
+    initcontext: Context,
+    resolver: (filename: string) => string
+): Context {
     let context = clone(initcontext);
     for (const item of data) {
         if (isStatement(item)) {
@@ -21,7 +25,9 @@ export function executeBlock(data: Block, initcontext: Context, resolver: (filen
                 context = produce(context, (c) => {
                     let args: string[] = [];
                     if (item.args.length == 3) {
-                        args = (item.args.splice(1, 1)[0].data as string).split(' ');
+                        args = (item.args.splice(1, 1)[0].data as string).split(
+                            ' '
+                        );
                     }
                     const name = item.args[0].data as string;
                     const body = item.args[1].data as Block;
@@ -38,11 +44,18 @@ export function executeBlock(data: Block, initcontext: Context, resolver: (filen
             const parsedArgs: PArgs = [];
             item.args.forEach((element) => {
                 if (element.type == 'block') {
-                    const blk = produce(executeBlock(element.data, { parent: context, statement: item.statement }, resolver), (r) => {
-                        delete r.parent;
-                        delete r.statement;
-                        delete r.stop;
-                    });
+                    const blk = produce(
+                        executeBlock(
+                            element.data,
+                            { parent: context, statement: item.statement },
+                            resolver
+                        ),
+                        (r) => {
+                            delete r.parent;
+                            delete r.statement;
+                            delete r.stop;
+                        }
+                    );
                     parsedArgs.push(blk);
                 } else {
                     if (element.data.startsWith('$')) {
@@ -69,7 +82,11 @@ export function executeBlock(data: Block, initcontext: Context, resolver: (filen
                     argMapping[func.args[i]] = arg;
                 });
                 //console.log("calling function "+tocall+" with args "+JSON.stringify(argMapping))
-                context = executeBlock(func.body, { ...context, ...argMapping }, resolver);
+                context = executeBlock(
+                    func.body,
+                    { ...context, ...argMapping },
+                    resolver
+                );
                 continue;
             }
             //console.log("executing",item.statement,"with", parsedArgs)
@@ -84,7 +101,11 @@ export function executeBlock(data: Block, initcontext: Context, resolver: (filen
     return context;
 }
 
-function executeStatement(statement: string, args: PArgs, icontext: Context): Context {
+function executeStatement(
+    statement: string,
+    args: PArgs,
+    icontext: Context
+): Context {
     const def = (_: PArgs, c: Context) => {
         c.unknownCommands = c.unknownCommands || [];
         c.unknownCommands.push(statement);

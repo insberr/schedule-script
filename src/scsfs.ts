@@ -7,14 +7,21 @@ export class SCSFS {
     add(name: string, data: string) {
         this.files[name] = data;
     }
-    addAsync(files: { [key: string]: string }, fetcher: (name: string) => Promise<string>) {
+    addAsync(
+        files: { [key: string]: string },
+        fetcher: (name: string) => Promise<string>
+    ) {
         return Promise.all(
             Object.keys(files).map(async (f) => {
                 this.add(f, await fetcher(files[f]));
             })
         );
     }
-    scheduleFor(filename: string, date: Date, context?: Context): { schedule: unknown; event: unknown } | undefined {
+    scheduleFor(
+        filename: string,
+        date: Date,
+        context?: Context
+    ): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
         const file = this.files[filename];

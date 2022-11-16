@@ -51,13 +51,21 @@ export function dateToTime(time: Date): Time {
 // https://stackoverflow.com/a/50398144
 export function getDaysArray(start: Date, end: Date) {
     const arr = [];
-    for (let dt = new Date(start); dt <= new Date(end); dt.setDate(dt.getDate() + 1)) {
+    for (
+        let dt = new Date(start);
+        dt <= new Date(end);
+        dt.setDate(dt.getDate() + 1)
+    ) {
         arr.push(new Date(dt));
     }
     return arr;
 }
 
-export function recurseInto(b: Block | Statement, cb: (s: Statement, parent?: Statement) => void, parent?: Statement) {
+export function recurseInto(
+    b: Block | Statement,
+    cb: (s: Statement, parent?: Statement) => void,
+    parent?: Statement
+) {
     if (Array.isArray(b)) {
         b.forEach((e) => recurseInto(e, cb, parent));
     } else {

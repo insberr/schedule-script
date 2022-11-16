@@ -14,7 +14,9 @@ export const StatementMap = new Map<string, StatementFunc>()
                 }
                 const sch = schedules[args[0] as string];
                 if (!sch) {
-                    throw new Error(('Cannot find schedule ' + args[0]) as string);
+                    throw new Error(
+                        ('Cannot find schedule ' + args[0]) as string
+                    );
                 }
                 c.schedule = args[0] as string;
             } else {
@@ -59,7 +61,9 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.events.push(args[0]);
     })
     .set('terms', (args, c) => {
-        let t: { termIndex: number; start: Date; end: Date }[] = (args[0] as Context).terms;
+        let t: { termIndex: number; start: Date; end: Date }[] = (
+            args[0] as Context
+        ).terms;
         if (t == undefined) {
             t = [];
         }
@@ -67,8 +71,10 @@ export const StatementMap = new Map<string, StatementFunc>()
         const displayDate = find(c, 'displayDate') || new Date();
         const newTerm = t.filter((term) => {
             return (
-                (isAfter(displayDate, term.start) || isSameDay(displayDate, term.start)) &&
-                (isBefore(displayDate, term.end) || isSameDay(displayDate, term.end))
+                (isAfter(displayDate, term.start) ||
+                    isSameDay(displayDate, term.start)) &&
+                (isBefore(displayDate, term.end) ||
+                    isSameDay(displayDate, term.end))
             );
         });
         if (newTerm.length == 0) {
@@ -90,7 +96,11 @@ export const StatementMap = new Map<string, StatementFunc>()
         const [item, compare] = args as string[];
         const toc = find(c, item);
         if (toc == undefined) {
-            console.warn('Unable to find item', item, 'in context, this is probably an issue');
+            console.warn(
+                'Unable to find item',
+                item,
+                'in context, this is probably an issue'
+            );
         }
         c.stop = toc?.toString() != compare;
     })
@@ -175,70 +185,129 @@ export const StatementMap = new Map<string, StatementFunc>()
     })
     .set('user', (args, c) => {
         // currently only uses `user classes contains` so thats all im going to support
-        const [classes, contains, what] = args as string[];
+        const classes = args.shift();
+        const contains = args.shift();
         if (classes != 'classes' || contains != 'contains') {
             throw new Error('Invalid user statement (lmao)');
         }
-        const ptyper = what.split(' ');
-        let num: number | null = null;
-        let type = 'period';
-        if (ptyper.length == 1) {
-            const isNum = /^\d+$/.test(ptyper[0]);
-            if (isNum) {
-                num = parseInt(ptyper[0]);
+        const checks: { type: string; num: number | null }[] = [];
+        for (const what of args) {
+            const ptyper = what.split(' ');
+            let num: number | null = null;
+            let type = 'period';
+            if (ptyper.length == 1) {
+                const isNum = /^\d+$/.test(ptyper[0]);
+                if (isNum) {
+                    num = parseInt(ptyper[0]);
+                } else {
+                    type = ptyper[0];
+                }
             } else {
-                type = ptyper[0];
+                const [rtype, rnum] = ptyper;
+                num = parseInt(rnum);
+                type = rtype;
             }
-        } else {
-            const [rtype, rnum] = ptyper;
-            num = parseInt(rnum);
-            type = rtype;
+            checks.push({ num, type });
         }
         // format
         // {
         // "user": {classes: [{type: "period", num: 1}, {type: "period", num: 2}]}
         // }
         // gl hf
-        const userinfo = find(c, 'user') as { classes?: { type: string; num: number | null }[] } | undefined;
+        const userinfo = find(c, 'user') as
+            | { classes?: { type: string; num: number | null }[] }
+            | undefined;
         if (!userinfo) {
             c.stop = true;
             return;
         }
         userinfo.classes = userinfo.classes || [];
-        const found = userinfo.classes.find((e) => e.type == type && e.num == num);
-        if (!found) {
-            c.stop = true;
-            return;
+        for (const check of checks) {
+            const found = userinfo.classes.find(
+                (e) => e.type == check.type && e.num == check.num
+            );
+            if (found) {
+                c.stop = false;
+                return;
+            }
         }
-        c.stop = false;
+        c.stop = true;
     })
     .set('self', (args, c) => {
         // currently only uses `self classes contains` so thats all im going to support
-        const [classes, contains, what] = args as string[];
+        const classes = args.shift();
+        const contains = args.shift();
         if (classes != 'classes' || contains != 'contains') {
             throw new Error('Invalid self statement (lmao)');
         }
-        const ptyper = what.split(' ');
-        let num: number | null = null;
-        let type = 'period';
-        if (ptyper.length == 1) {
-            const isNum = /^\d+$/.test(ptyper[0]);
-            if (isNum) {
-                num = parseInt(ptyper[0]);
+        const checks: { type: string; num: number | null }[] = [];
+        for (const what of args) {
+            const ptyper = what.split(' ');
+            let num: number | null = null;
+            let type = 'period';
+            if (ptyper.length == 1) {
+                const isNum = /^\d+$/.test(ptyper[0]);
+                if (isNum) {
+                    num = parseInt(ptyper[0]);
+                } else {
+                    type = ptyper[0];
+                }
             } else {
-                type = ptyper[0];
+                const [rtype, rnum] = ptyper;
+                num = parseInt(rnum);
+                type = rtype;
             }
+            checks.push({ num, type });
+        }
+        // format
+        // {
+        // "user": {classes: [{type: "period", num: 1}, {type: "period", num: 2}]}
+        // }
+        // gl hf
+        const cls = c.classes as
+            | { type: string; num: number | null }[]
+            | undefined;
+        if (!cls) {
+            c.stop = true;
+            return;
+        }
+        for (const check of checks) {
+            const found = cls.find(
+                (e) => e.type == check.type && e.num == check.num
+            );
+            if (found) {
+                c.stop = false;
+                return;
+            }
+        }
+        c.stop = true;
+    })
+    .set('day', (args, c) => {
+        const _start = args.shift() as string;
+        let data: Context;
+        let _end: string;
+        if (typeof args[0] == 'string') {
+            const to = args.shift();
+            if (to != 'to') {
+                throw new Error('expected to, got ' + to);
+            }
+            _end = args.shift() as string;
+            data = args.shift() as Context;
         } else {
-            const [rtype, rnum] = ptyper;
-            num = parseInt(rnum);
-            type = rtype;
+            _end = _start;
+            data = args.shift() as Context;
         }
-        let classy = c.classes as { type: string; num: number | null }[] | undefined;
-        if (classy == undefined) {
-            classy = [];
-        }
-        const found = classy.find((e) => e.type == type && e.num == num);
-        c.stop = found == undefined;
+        const end = parseInt(_end) + 1;
+        const start = parseInt(_start);
+        const values = Array.from({ length: end - start }, (v, k) => k + start);
+        c.days = c.days || {};
+        values.forEach((m) => {
+            c.days[m.toString()] = data;
+        });
+    })
+    .set('events', (args, c) => {
+        const days = (args[0] as Context).days;
+        c.eventOverrides = days;
     });
 
 function empty(args: PArgs, c: Context) {

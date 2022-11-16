@@ -32,7 +32,10 @@ const ende = performance.now();
 
 console.log('exec', ende - starte, 'ms');
 
-writeFileSync(join(testDir, 'test.ignore.json'), JSON.stringify(scs.parsed, null, 2));
+writeFileSync(
+    join(testDir, 'test.ignore.json'),
+    JSON.stringify(scs.parsed, null, 2)
+);
 writeFileSync(join(testDir, 'test.min.scs'), minified);
 writeFileSync(join(testDir, 'test.pretty.scs'), pretty);
 writeFileSync(join(testDir, 'test.exec.json'), JSON.stringify(execed, null, 2));
@@ -55,7 +58,10 @@ async function testSCSFS() {
             'lunches.ex.scs': 'lunches.ex.scs',
         },
         (fl) => {
-            return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory
+            return readFile(
+                join(__dirname, '../examples', 'importexample', fl),
+                'utf8'
+            ); // read from the funny directory
         }
     ); // files are fetched using the function in parallel and loaded into the virtual file system
     const endl = performance.now();
@@ -67,6 +73,9 @@ async function testSCSFS() {
 
     console.log('exec', ende2 - starte2, 'ms');
 
-    writeFileSync(join(testDir, 'test.fs.exec.json'), JSON.stringify(execfs, null, 2));
+    writeFileSync(
+        join(testDir, 'test.fs.exec.json'),
+        JSON.stringify(execfs, null, 2)
+    );
 }
 testSCSFS();

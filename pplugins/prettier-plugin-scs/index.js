@@ -53,7 +53,11 @@ function print(path, options, print) {
             return join(line, printed);
         }
         const printed = path.map(print);
-        const dt = group([indent(group(['{', line, join(line, printed)])), line, '}']);
+        const dt = group([
+            indent(group(['{', line, join(line, printed)])),
+            line,
+            '}',
+        ]);
         return dt;
     } else {
         // this is a statement

@@ -11,7 +11,10 @@ if (!existsSync(testDir)) {
 
 test('parse', () => {
     const scs = new SCS(testFile);
-    writeFileSync(join(testDir, 'test.ignore.json'), JSON.stringify(scs.parsed, null, 2));
+    writeFileSync(
+        join(testDir, 'test.ignore.json'),
+        JSON.stringify(scs.parsed, null, 2)
+    );
 });
 
 describe('minify', () => {
@@ -20,7 +23,10 @@ describe('minify', () => {
         const minified = scs.minify();
         writeFileSync(join(testDir, 'test.min.scs'), minified);
         const minscs = new SCS(minified);
-        writeFileSync(join(testDir, 'test.min.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
+        writeFileSync(
+            join(testDir, 'test.min.ignore.json'),
+            JSON.stringify(minscs.parsed, null, 2)
+        );
         //expect(minscs.parsed).toEqual(scs.parsed);
     });
 
@@ -28,9 +34,15 @@ describe('minify', () => {
         // ! Make this actually test that it did what its supposed to do
         const scs = new SCS(testFile);
         const minified = scs.minify({ keepMultiLineComments: true });
-        writeFileSync(join(testDir, 'test.min.keep.block.comments.scs'), minified);
+        writeFileSync(
+            join(testDir, 'test.min.keep.block.comments.scs'),
+            minified
+        );
         const minscs = new SCS(minified);
-        writeFileSync(join(testDir, 'test.min.keep.block.comments.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
+        writeFileSync(
+            join(testDir, 'test.min.keep.block.comments.ignore.json'),
+            JSON.stringify(minscs.parsed, null, 2)
+        );
         //expect(minscs.parsed).toEqual(scs.parsed);
     });
 
@@ -42,7 +54,10 @@ test('pretty', () => {
     const pretty = scs.pretty();
     writeFileSync(join(testDir, 'test.pretty.scs'), pretty);
     const minscs = new SCS(pretty);
-    writeFileSync(join(testDir, 'test.pretty.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
+    writeFileSync(
+        join(testDir, 'test.pretty.ignore.json'),
+        JSON.stringify(minscs.parsed, null, 2)
+    );
     //expect(minscs.parsed).toEqual(scs.parsed);
 });
 
@@ -53,7 +68,10 @@ test('minify pretty', () => {
     const pretty = scsMin.pretty();
     writeFileSync(join(testDir, 'test.min.pretty.scs'), pretty);
     const minscs = new SCS(pretty);
-    writeFileSync(join(testDir, 'test.min.pretty.ignore.json'), JSON.stringify(minscs.parsed, null, 2));
+    writeFileSync(
+        join(testDir, 'test.min.pretty.ignore.json'),
+        JSON.stringify(minscs.parsed, null, 2)
+    );
     //expect(minscs.parsed).toEqual(scs.parsed);
 });
 
@@ -61,7 +79,10 @@ test('exec', () => {
     const scs = new SCS(testFile);
     const execed = scs.exec();
     //console.dir(execed,{depth:32})
-    writeFileSync(join(testDir, 'test.exec.json'), JSON.stringify(execed, null, 2));
+    writeFileSync(
+        join(testDir, 'test.exec.json'),
+        JSON.stringify(execed, null, 2)
+    );
 });
 
 test('scsfs', async () => {
@@ -76,16 +97,25 @@ test('scsfs', async () => {
         'lunches.ex.scs': 'lunches.ex.scs',
     };
     await fs.addAsync(manifest, (fl) => {
-        return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory
+        return readFile(
+            join(__dirname, '../examples', 'importexample', fl),
+            'utf8'
+        ); // read from the funny directory
     });
     const execed = fs.exec('main.ex.scs');
-    writeFileSync(join(testDir, 'test.fs.exec.json'), JSON.stringify(execed, null, 2));
+    writeFileSync(
+        join(testDir, 'test.fs.exec.json'),
+        JSON.stringify(execed, null, 2)
+    );
 });
 
 test('linty', () => {
     const scs = new SCS(testFile);
     const linty = scs.lint();
-    writeFileSync(join(testDir, 'test.linty.json'), JSON.stringify(linty, null, 2));
+    writeFileSync(
+        join(testDir, 'test.linty.json'),
+        JSON.stringify(linty, null, 2)
+    );
 });
 
 describe('quotes: message', () => {
@@ -104,7 +134,9 @@ describe('quotes: message', () => {
     describe("single quotes inside single quotes ('msg \\'hi\\' more')", () => {
         test('both escaped single', () => {
             const scs = new SCS(`message 'Test \\'single quotes\\' message';`);
-            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\'single quotes\\' message';\n`
+            );
         });
 
         test('first escaped single', () => {
@@ -131,25 +163,37 @@ describe('quotes: message', () => {
                 Love the quirks of this language already
             */
             const value = new SCS(`message 'Test 'single quotes' message';`);
-            expect(value.exec()).toEqual({ message: 'Test  single quotes  message' });
-            expect(value.pretty()).toEqual(`message 'Test ' single quotes ' message';\n`);
+            expect(value.exec()).toEqual({
+                message: 'Test  single quotes  message',
+            });
+            expect(value.pretty()).toEqual(
+                `message 'Test ' single quotes ' message';\n`
+            );
 
             // cringe
             const value2 = new SCS(value.pretty());
-            expect(value2.exec()).toEqual({ message: 'Test  single quotes  message' });
-            expect(value2.pretty()).toEqual(`message 'Test ' single quotes ' message';\n`);
+            expect(value2.exec()).toEqual({
+                message: 'Test  single quotes  message',
+            });
+            expect(value2.pretty()).toEqual(
+                `message 'Test ' single quotes ' message';\n`
+            );
         });
 
         test('not closed single escaped', () => {
             const scs = new SCS(`message 'Test \\'single quotes message';`);
-            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\'single quotes message';\n`
+            );
         });
     });
 
     describe('double quotes inside double quotes ("msg \\"hi\\" more")', () => {
         test('both escaped double', () => {
             const scs = new SCS(`message "Test \\"double quotes\\" message";`);
-            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\"double quotes\\" message';\n`
+            );
         });
 
         test('first escaped double', () => {
@@ -176,72 +220,102 @@ describe('quotes: message', () => {
                 Love the quirks of this language already
             */
             const value = new SCS(`message "Test "double quotes" message";`);
-            expect(value.exec()).toEqual({ message: 'Test  double quotes  message' });
-            expect(value.pretty()).toEqual(`message 'Test ' double quotes ' message';\n`);
+            expect(value.exec()).toEqual({
+                message: 'Test  double quotes  message',
+            });
+            expect(value.pretty()).toEqual(
+                `message 'Test ' double quotes ' message';\n`
+            );
 
             // cringe
             const value2 = new SCS(value.pretty());
-            expect(value2.exec()).toEqual({ message: 'Test  double quotes  message' });
-            expect(value2.pretty()).toEqual(`message 'Test ' double quotes ' message';\n`);
+            expect(value2.exec()).toEqual({
+                message: 'Test  double quotes  message',
+            });
+            expect(value2.pretty()).toEqual(
+                `message 'Test ' double quotes ' message';\n`
+            );
         });
 
         test('not closed double escaped', () => {
             const scs = new SCS(`message "Test \\"double quotes message";`);
-            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\"double quotes message';\n`
+            );
         });
     });
 
     describe('single quotes inside double quotes ("msg \\\'hi\\\' more")', () => {
         test('both escaped', () => {
             const scs = new SCS(`message "Test \\'single quotes\\' message";`);
-            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\'single quotes\\' message';\n`
+            );
         });
 
         test('first escaped', () => {
             const scs = new SCS(`message "Test \\'single quotes' message";`);
-            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\'single quotes\\' message';\n`
+            );
         });
 
         test('last escaped', () => {
             const scs = new SCS(`message "Test 'single quotes\\' message";`);
-            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\'single quotes\\' message';\n`
+            );
         });
 
         test('none escaped', () => {
             const value = new SCS(`message "Test 'single quotes' message";`);
-            expect(value.pretty()).toEqual(`message 'Test \\'single quotes\\' message';\n`);
+            expect(value.pretty()).toEqual(
+                `message 'Test \\'single quotes\\' message';\n`
+            );
         });
 
         test('not closed escaped', () => {
             const scs = new SCS(`message "Test \\'single quotes message";`);
-            expect(scs.pretty()).toEqual(`message 'Test \\'single quotes message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\'single quotes message';\n`
+            );
         });
     });
 
     describe('double quotes inside single quotes (\'msg \\"hi\\" more\')', () => {
         test('both escaped', () => {
             const scs = new SCS(`message 'Test \\"double quotes\\" message';`);
-            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\"double quotes\\" message';\n`
+            );
         });
 
         test('first escaped', () => {
             const scs = new SCS(`message 'Test \\"double quotes" message';`);
-            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\"double quotes\\" message';\n`
+            );
         });
 
         test('last escaped', () => {
             const scs = new SCS(`message 'Test "double quotes\\" message';`);
-            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\"double quotes\\" message';\n`
+            );
         });
 
         test('none escaped', () => {
             const value = new SCS(`message 'Test "double quotes" message';`);
-            expect(value.pretty()).toEqual(`message 'Test \\"double quotes\\" message';\n`);
+            expect(value.pretty()).toEqual(
+                `message 'Test \\"double quotes\\" message';\n`
+            );
         });
 
         test('not closed escaped', () => {
             const scs = new SCS(`message 'Test \\"double quotes message';`);
-            expect(scs.pretty()).toEqual(`message 'Test \\"double quotes message';\n`);
+            expect(scs.pretty()).toEqual(
+                `message 'Test \\"double quotes message';\n`
+            );
         });
     });
 });
@@ -250,7 +324,10 @@ describe('scheduleFor', () => {
     it('should work with scs', () => {
         const scs = new SCS(testFile);
         const execed = scs.scheduleFor(new Date('November 9, 2022'));
-        writeFileSync(join(testDir, 'test.scheduleFor.11-9-2022.exec.json'), JSON.stringify(execed, null, 2));
+        writeFileSync(
+            join(testDir, 'test.scheduleFor.11-9-2022.exec.json'),
+            JSON.stringify(execed, null, 2)
+        );
         //console.dir(execed,{depth:32})
     });
     it('should work with scsfs', async () => {
@@ -265,10 +342,19 @@ describe('scheduleFor', () => {
             'lunches.ex.scs': 'lunches.ex.scs',
         };
         await fs.addAsync(manifest, (fl) => {
-            return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory
+            return readFile(
+                join(__dirname, '../examples', 'importexample', fl),
+                'utf8'
+            ); // read from the funny directory
         });
-        const execed = fs.scheduleFor('main.ex.scs', new Date('November 9, 2022'));
-        writeFileSync(join(testDir, 'test.scheduleFor.scsfs.11-9-2022.exec.json'), JSON.stringify(execed, null, 2));
+        const execed = fs.scheduleFor(
+            'main.ex.scs',
+            new Date('November 9, 2022')
+        );
+        writeFileSync(
+            join(testDir, 'test.scheduleFor.scsfs.11-9-2022.exec.json'),
+            JSON.stringify(execed, null, 2)
+        );
         //console.dir(execed,{depth:32})
     });
 });
@@ -285,7 +371,10 @@ it('should bundle', async () => {
         'lunches.ex.scs': 'lunches.ex.scs',
     };
     await fs.addAsync(manifest, (fl) => {
-        return readFile(join(__dirname, '../examples', 'importexample', fl), 'utf8'); // read from the funny directory
+        return readFile(
+            join(__dirname, '../examples', 'importexample', fl),
+            'utf8'
+        ); // read from the funny directory
     });
     const bundle = fs.bundle('main.ex.scs');
     writeFileSync(join(testDir, 'test.bundle.scs'), bundle);
