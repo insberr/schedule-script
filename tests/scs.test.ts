@@ -1,4 +1,4 @@
-import { SCS, SCSFS } from '../src/scs';
+import { SCS, SCSFS, _checkers, _statements } from '../src/scs';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { readFile } from 'fs/promises';
@@ -378,4 +378,10 @@ it('should bundle', async () => {
     });
     const bundle = fs.bundle('main.ex.scs');
     writeFileSync(join(testDir, 'test.bundle.scs'), bundle);
+});
+
+it('all statements should have checkers', () => {
+    _statements.forEach((statement) => {
+        expect(Array.from(_checkers.keys())).toContain(statement);
+    });
 });

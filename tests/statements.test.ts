@@ -245,6 +245,9 @@ describe('Statements', () => {
             expect(out).toHaveProperty('test', '5678');
         });
         it('shouldnt continue if the item isnt found', () => {
+            const cl = jest.spyOn(console, 'warn').mockImplementation(() => {
+                /* do nothing */
+            });
             const scs = new SCS(`
             set test 1234;
             {
@@ -254,6 +257,8 @@ describe('Statements', () => {
             `);
             const out = scs.exec();
             expect(out).toHaveProperty('test', '1234');
+            expect(cl).toBeCalledTimes(1);
+            cl.mockRestore();
         });
     });
     describe('lunches', () => {
@@ -435,6 +440,15 @@ describe('Statements', () => {
                 name: 'namey',
                 loginToken: '1234',
             });
+        });
+    });
+    describe('force', () => {
+        it('should set force value', () => {
+            const scs = new SCS(`
+                force me gamer;
+            `);
+            const out = scs.exec();
+            expect(out).toHaveProperty('forced.me', 'gamer');
         });
     });
     describe('passing', () => {
@@ -770,6 +784,180 @@ describe('Statements', () => {
             const out = scs.exec();
             expect(out).toHaveProperty('test.eventOverrides.1.test', '1234');
             expect(out).toHaveProperty('test.eventOverrides.2.test', '5678');
+        });
+    });
+    describe('remove', () => {
+        it('should remove a class', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                remove [period 1];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', []);
+        });
+        it('should leave other classes alone', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                remove [period 1];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('should work with multiple arguments', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                remove [period 1] [period 2];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', []);
+        });
+        it('should work with shorthand periods', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                remove [1];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('should work with shorthand type', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [arrival] [5:00 to 6:00];
+                remove [arrival];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', []);
+        });
+        it('should set last op correctly', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [arrival] [5:00 to 6:00];
+                class [period 1] [6:00 to 7:00];
+                class [period 2] [7:00 to 8:00];
+                class [period 3] [8:00 to 9:00];
+                class [period 4] [9:00 to 10:00];
+                class [period 5] [10:00 to 11:00];
+                remove [3];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.lastOP', 3); // should be the index of the last removed element (last in the list of classes, not last in the matcher array)
+        });
+        it('should set last op correctly with multiple removes', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [arrival] [5:00 to 6:00];
+                class [period 1] [6:00 to 7:00];
+                class [period 2] [7:00 to 8:00];
+                class [period 3] [8:00 to 9:00];
+                class [period 4] [9:00 to 10:00];
+                class [period 5] [10:00 to 11:00];
+                remove [3] [4];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.lastOP', 4); // should be the index of the last removed element (last in the list of classes, not last in the matcher array)
+        });
+    });
+    describe('replace', () => {
+        it('should replace the class', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                replace class [period 1] with {
+                    class [period 2] [6:00 to 7:00];
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('should replace the class with multiple classes', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                replace class [period 1] with {
+                    class [period 2] [6:00 to 7:00];
+                    class [period 3] [7:00 to 8:00];
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 3,
+                    start: { h: 7, m: 0, s: 0 },
+                    end: { h: 8, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('shouldnt touch other classes', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                replace class [period 1] with {
+                    class [period 3] [7:00 to 8:00];
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 3,
+                    start: { h: 7, m: 0, s: 0 },
+                    end: { h: 8, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('should set lastOP', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                replace class [period 1] with {
+                    class [period 3] [7:00 to 8:00];
+                };
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('schedules.test.lastOP', 0);
         });
     });
 });

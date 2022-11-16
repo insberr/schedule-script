@@ -17,6 +17,7 @@ import { StatementMap } from './statements';
 import produce from 'immer';
 
 export { _statements } from './statements';
+export { checkers as _checkers } from './checkers';
 
 function quoteEscape(str: string): string {
     let newStr = str;

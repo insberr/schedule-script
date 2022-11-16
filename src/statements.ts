@@ -1,5 +1,11 @@
 import type { Context, PArgs } from './execute';
-import { find, copyInto, parseTimeRange, getDaysArray } from './lib';
+import {
+    find,
+    copyInto,
+    parseTimeRange,
+    getDaysArray,
+    generateMatch,
+} from './lib';
 import { isAfter, isBefore, isSameDay } from 'date-fns';
 type StatementFunc = (args: PArgs, context: Context) => void;
 
@@ -38,21 +44,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         const timeRange = args[1] as string;
         const ptimerange = parseTimeRange(timeRange);
         outc = { ...ptimerange };
-        const ptyper = typeM.split(' ');
-        let num: number | null = null;
-        let type = 'period';
-        if (ptyper.length == 1) {
-            const isNum = /^\d+$/.test(ptyper[0]);
-            if (isNum) {
-                num = parseInt(ptyper[0]);
-            } else {
-                type = ptyper[0];
-            }
-        } else {
-            const [rtype, rnum] = ptyper;
-            num = parseInt(rnum);
-            type = rtype;
-        }
+        const { type, num } = generateMatch(typeM);
         outc = { ...outc, type, num };
         c.classes.push(outc);
     })
@@ -192,22 +184,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         }
         const checks: { type: string; num: number | null }[] = [];
         for (const what of args) {
-            const ptyper = what.split(' ');
-            let num: number | null = null;
-            let type = 'period';
-            if (ptyper.length == 1) {
-                const isNum = /^\d+$/.test(ptyper[0]);
-                if (isNum) {
-                    num = parseInt(ptyper[0]);
-                } else {
-                    type = ptyper[0];
-                }
-            } else {
-                const [rtype, rnum] = ptyper;
-                num = parseInt(rnum);
-                type = rtype;
-            }
-            checks.push({ num, type });
+            checks.push(generateMatch(what as string));
         }
         // format
         // {
@@ -242,22 +219,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         }
         const checks: { type: string; num: number | null }[] = [];
         for (const what of args) {
-            const ptyper = what.split(' ');
-            let num: number | null = null;
-            let type = 'period';
-            if (ptyper.length == 1) {
-                const isNum = /^\d+$/.test(ptyper[0]);
-                if (isNum) {
-                    num = parseInt(ptyper[0]);
-                } else {
-                    type = ptyper[0];
-                }
-            } else {
-                const [rtype, rnum] = ptyper;
-                num = parseInt(rnum);
-                type = rtype;
-            }
-            checks.push({ num, type });
+            checks.push(generateMatch(what as string));
         }
         // format
         // {
@@ -308,6 +270,59 @@ export const StatementMap = new Map<string, StatementFunc>()
     .set('events', (args, c) => {
         const days = (args[0] as Context).days;
         c.eventOverrides = days;
+    })
+    .set('remove', (args, c) => {
+        const classes = c.classes as
+            | { type: string; num: number | null }[]
+            | undefined;
+        if (!classes) {
+            return;
+        }
+        const toRemove = args.map((e) => generateMatch(e as string));
+        let lastRemovedIndex = -1;
+        c.classes = classes.filter((e, i) => {
+            const found = toRemove.find(
+                (f) => f.type == e.type && f.num == e.num
+            );
+            if (found) {
+                lastRemovedIndex = i;
+            }
+            return !found;
+        });
+        c.lastOP = lastRemovedIndex;
+    })
+    .set('force', (args, c) => {
+        c.forced = c.forced || {};
+        const key = args.shift() as string;
+        const value = args.shift();
+        c.forced[key] = value;
+    })
+    .set('replace', (args, c) => {
+        /*replace class [arrival] with {
+            class [period 0] [6:30 to 7:30];
+        };*/
+        args.shift(); // class
+        const matcher = args.shift() as string;
+        args.shift(); // with
+        const data = args.shift() as Context;
+        if (!data.classes) {
+            return;
+        }
+        const classes = c.classes as
+            | { type: string; num: number | null }[]
+            | undefined;
+        if (!classes) {
+            return;
+        }
+        const toRemove = generateMatch(matcher);
+        const indexOfToReplace = classes.findIndex((e) => {
+            return toRemove.type == e.type && toRemove.num == e.num;
+        });
+        if (indexOfToReplace == -1) {
+            return;
+        }
+        (c.classes as any[]).splice(indexOfToReplace, 1, ...data.classes);
+        c.lastOP = indexOfToReplace;
     });
 
 function empty(args: PArgs, c: Context) {

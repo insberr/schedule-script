@@ -204,9 +204,9 @@ async function main(command?: string) {
         }
         lints.forEach((lint) => {
             console.log(
-                `${lint.file}:${lint.location.start.line}:${
-                    lint.location.start.column
-                }:${LintLevel[lint.level].toUpperCase()} ${lint.message}`
+                `[${LintLevel[lint.level].toUpperCase()}] ${lint.file}:${
+                    lint.location.start.line
+                }:${lint.location.start.column} ${lint.message}`
             );
         });
     } else {

@@ -167,6 +167,8 @@ export const checkers = new Map<string, Checker>()
             };
         }
     })
+    .set('comment', simple([]))
+    .set('multicomment', simple([]))
     .set('function', (s, p) => {
         if (s.args.length < 2 || s.args.length > 3) {
             return {
@@ -239,4 +241,15 @@ export const checkers = new Map<string, Checker>()
                     level: LintLevel.error,
                 };
         }
-    });
+    })
+    .set('remove', varArgsofType('bracket', 0))
+    .set('force', simple(['text', 'text']))
+    .set(
+        'replace',
+        combine([
+            mustEqual(0, 'text', 'class'),
+            argumentOfType(1, 'bracket'),
+            mustEqual(2, 'text', 'with'),
+            argumentOfType(3, 'block'),
+        ])
+    );

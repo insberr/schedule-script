@@ -77,3 +77,22 @@ export function recurseInto(
         });
     }
 }
+
+export function generateMatch(m: string): { type: string; num: number | null } {
+    const ptyper = m.split(' ');
+    let num: number | null = null;
+    let type = 'period';
+    if (ptyper.length == 1) {
+        const isNum = /^\d+$/.test(ptyper[0]);
+        if (isNum) {
+            num = parseInt(ptyper[0]);
+        } else {
+            type = ptyper[0];
+        }
+    } else {
+        const [rtype, rnum] = ptyper;
+        num = parseInt(rnum);
+        type = rtype;
+    }
+    return { num, type };
+}
