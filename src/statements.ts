@@ -354,7 +354,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         if (index == -1) {
             return;
         }
-        console.log(index);
+        //console.log(index);
         (c.classes as any[]).splice(index, 0, ...toInsert.classes);
     });
 

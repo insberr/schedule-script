@@ -968,7 +968,7 @@ describe('Statements', () => {
                 insert { class [period 3] [7:00 to 8:00]; } at [3];
             };`);
             const out = scs.exec();
-            console.log(out.schedules.test.classes);
+            //console.log(out.schedules.test.classes);
             expect(out).toHaveProperty('schedules.test.classes', [
                 {
                     type: 'period',
@@ -998,7 +998,7 @@ describe('Statements', () => {
                 insert { class [period 3] [7:00 to 8:00]; } at [1];
             };`);
             const out = scs.exec();
-            console.log(out.schedules.test.classes);
+            //console.log(out.schedules.test.classes);
             expect(out).toHaveProperty('schedules.test.classes', [
                 {
                     type: 'period',
@@ -1029,7 +1029,7 @@ describe('Statements', () => {
                 insert { class [period 3] [7:00 to 8:00]; } last operation;
             };`);
             const out = scs.exec();
-            console.log(out.schedules.test.classes);
+            //console.log(out.schedules.test.classes);
             expect(out).toHaveProperty('schedules.test.classes', [
                 {
                     type: 'period',

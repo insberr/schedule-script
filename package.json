@@ -1,6 +1,6 @@
 {
     "name": "@insberr/schedule-script",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Schedule? Scripted.",
     "source": "src/scs.ts",
     "main": "dist/scs.js",
