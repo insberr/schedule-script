@@ -323,6 +323,39 @@ export const StatementMap = new Map<string, StatementFunc>()
         }
         (c.classes as any[]).splice(indexOfToReplace, 1, ...data.classes);
         c.lastOP = indexOfToReplace;
+    })
+    .set('insert', (args, c) => {
+        /*
+        insert {
+            class [period 11] [$eleven];
+            class [period 12] [$twelve];
+            class [period 13] [$thirteen];
+        } last operation;
+        */
+        const toInsert = args.shift() as Context;
+        if (!toInsert.classes) {
+            return;
+        }
+        let index = -1;
+        //console.log(args)
+        if (args.join(' ') == 'last operation') {
+            index = c.lastOP;
+        } else {
+            args.shift(); // at
+            //console.log(args)
+            index = parseInt(args[0] as string);
+        }
+        const classes = c.classes as
+            | { type: string; num: number | null }[]
+            | undefined;
+        if (!classes) {
+            return;
+        }
+        if (index == -1) {
+            return;
+        }
+        console.log(index);
+        (c.classes as any[]).splice(index, 0, ...toInsert.classes);
     });
 
 function empty(args: PArgs, c: Context) {

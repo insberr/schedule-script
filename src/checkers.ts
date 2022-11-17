@@ -252,4 +252,5 @@ export const checkers = new Map<string, Checker>()
             mustEqual(2, 'text', 'with'),
             argumentOfType(3, 'block'),
         ])
-    );
+    )
+    .set('insert', simple(['block', 'text', 'text']));

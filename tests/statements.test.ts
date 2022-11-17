@@ -1,4 +1,3 @@
-import exp from 'constants';
 import { isAfter, isBefore, isSameDay } from 'date-fns';
 import { SCS } from '../src/scs';
 
@@ -958,6 +957,93 @@ describe('Statements', () => {
             };`);
             const out = scs.exec();
             expect(out).toHaveProperty('schedules.test.lastOP', 0);
+        });
+    });
+    describe('insert', () => {
+        it('should insert at index', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                insert { class [period 3] [7:00 to 8:00]; } at [3];
+            };`);
+            const out = scs.exec();
+            console.log(out.schedules.test.classes);
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 1,
+                    start: { h: 5, m: 0, s: 0 },
+                    end: { h: 6, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 3,
+                    start: { h: 7, m: 0, s: 0 },
+                    end: { h: 8, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('should insert at index between', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                insert { class [period 3] [7:00 to 8:00]; } at [1];
+            };`);
+            const out = scs.exec();
+            console.log(out.schedules.test.classes);
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 1,
+                    start: { h: 5, m: 0, s: 0 },
+                    end: { h: 6, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 3,
+                    start: { h: 7, m: 0, s: 0 },
+                    end: { h: 8, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+            ]);
+        });
+        it('should work with last operation', () => {
+            const scs = new SCS(`
+            schedule test {
+                class [period 1] [5:00 to 6:00];
+                class [period 2] [6:00 to 7:00];
+                remove [1];
+                insert { class [period 3] [7:00 to 8:00]; } last operation;
+            };`);
+            const out = scs.exec();
+            console.log(out.schedules.test.classes);
+            expect(out).toHaveProperty('schedules.test.classes', [
+                {
+                    type: 'period',
+                    num: 3,
+                    start: { h: 7, m: 0, s: 0 },
+                    end: { h: 8, m: 0, s: 0 },
+                },
+                {
+                    type: 'period',
+                    num: 2,
+                    start: { h: 6, m: 0, s: 0 },
+                    end: { h: 7, m: 0, s: 0 },
+                },
+            ]);
         });
     });
 });
