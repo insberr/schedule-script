@@ -1046,4 +1046,28 @@ describe('Statements', () => {
             ]);
         });
     });
+    describe('functions', () => {
+        it('should call function', () => {
+            const scs = new SCS(`
+            function test {
+                set test 1234;
+            };
+            set test {
+                call test;
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.test', '1234');
+        });
+        it('should call functions with args', () => {
+            const scs = new SCS(`
+            function test [arg] {
+                set test $arg;
+            };
+            set test {
+                call test [1234];
+            };`);
+            const out = scs.exec();
+            expect(out).toHaveProperty('test.test', '1234');
+        });
+    });
 });

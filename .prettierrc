@@ -3,5 +3,6 @@
     "useTabs": false,
     "singleQuote": true,
     "printWidth": 80,
+    "endOfLine": "crlf",
     "$schema": "http://json.schemastore.org/prettierrc"
 }
