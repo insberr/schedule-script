@@ -183,6 +183,7 @@ export const checkers = new Map<string, Checker>()
         }
     })
     .set('class', simple(['bracket', 'bracket']))
+    .set('location', simple(['bracket', 'bracket', 'quote']))
     .set('terms', simple(['block']))
     .set('lunches', simple(['block']))
     .set('only', simple(['text', 'text']))

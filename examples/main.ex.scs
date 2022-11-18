@@ -28,6 +28,11 @@
     why? because a command only has access to what is above it
     if you were to place the terms {} below a schedule, that schedule would not have access to the terms.
 */
+
+location [10.4] [20] 'Greenhouse';
+location [10] [20] 'test';
+
+
 // define all 3 terms
 terms {
     term 1 [September 6, 2022] [December 6, 2022];
@@ -231,3 +236,5 @@ event {
 
     schedule normal;
 };
+
+

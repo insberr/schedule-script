@@ -356,6 +356,19 @@ export const StatementMap = new Map<string, StatementFunc>()
         }
         //console.log(index);
         (c.classes as any[]).splice(index, 0, ...toInsert.classes);
+    })
+    .set('location', (args, c) => {
+        console.log(args)
+        c.locations = c.locations || [];
+        let outc: any = {};
+        const xcoord = args[0] as string;
+        const ycoord = args[1] as string;
+        const name = args[2] as string;
+        // const ptimerange = parseTimeRange(timeRange);
+        outc = { x: xcoord, y: ycoord, name: name };
+        // const { type, num } = generateMatch(typeM);
+        // outc = { ...outc, type, num };
+        c.locations.push(outc);
     });
 
 function empty(args: PArgs, c: Context) {

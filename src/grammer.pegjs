@@ -59,7 +59,7 @@ DIGIT  = [0-9]
 HEXDIG = [0-9a-f]i
 
 text "text" = [0-9a-z:()\-$]i+ { return text() } // add the rest of the symbols?
-bracketed "bracketed text" = "[" j:[0-9a-z$\-, :]i+ "]" { return j.join("") }
+bracketed "bracketed text" = "[" j:[0-9a-z$\-,. :]i+ "]" { return j.join("") }
 eol "semicolon" = ";" {return null}
 
 quotedargDouble "double quoted text" = "\"" d:charD* "\"" { return d.join("") }
