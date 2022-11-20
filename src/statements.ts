@@ -12,7 +12,6 @@ type StatementFunc = (args: PArgs, context: Context) => void;
 export const StatementMap = new Map<string, StatementFunc>()
     .set('schedule', (args, c) => {
         if (c.statement) {
-            //console.log(c.statement)
             if (c.statement == 'event') {
                 const schedules = find(c, 'schedules');
                 if (!schedules) {
@@ -26,8 +25,12 @@ export const StatementMap = new Map<string, StatementFunc>()
                 }
                 c.schedule = args[0] as string;
             } else {
-                c.schedule = args;
-                return;
+                // c.schedule = args;
+                // return;
+                c.schedules = c.schedules || {};
+                const name = args.shift() as string;
+                const data = args.pop() as Context;
+                c.schedules[name] = data;
             }
         } else {
             // define top level schedule

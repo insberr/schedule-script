@@ -1,0 +1,5 @@
+
+schedule testy {
+    description "test";
+    class [1] [7:15 to 8:20];
+};

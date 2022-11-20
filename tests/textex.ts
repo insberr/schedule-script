@@ -50,12 +50,14 @@ async function testSCSFS() {
     await fs.addAsync(
         {
             // key: filename, value: value passed to fetcher to get the content (ie url)
-            'main.ex.scs': 'entrypoint.ex.scs',
-            'defines.ex.scs': 'defines.ex.scs',
-            'events.ex.scs': 'events.ex.scs',
-            'functions.ex.scs': 'functions.ex.scs',
-            'schedules.ex.scs': 'schedules.ex.scs',
-            'lunches.ex.scs': 'lunches.ex.scs',
+            './main.ex.scs': './entrypoint.ex.scs',
+            './defines.ex.scs': './defines.ex.scs',
+            './events.ex.scs': './events.ex.scs',
+            './functions.ex.scs': './functions.ex.scs',
+            './schedules.ex.scs': './schedules.ex.scs',
+            './lunches.ex.scs': './lunches.ex.scs',
+            './locations.ex.scs': './locations.ex.scs',
+            './testsch.ex.scs': './testsch.ex.scs',
         },
         (fl) => {
             return readFile(
@@ -68,7 +70,7 @@ async function testSCSFS() {
     console.log('load', endl - startl, 'ms');
 
     const starte2 = performance.now();
-    const execfs = fs.exec('main.ex.scs', { grade: 10, other_variable: 6969 }); // 10th grade
+    const execfs = fs.exec('./main.ex.scs', { grade: 10, other_variable: 6969 }); // 10th grade
     const ende2 = performance.now();
 
     console.log('exec', ende2 - starte2, 'ms');
