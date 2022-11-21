@@ -45,14 +45,20 @@ export class SCS {
             });
         //this.parsedwithComments = this.parsed;
     }
-    scheduleFor(
+    scheduleFor({ date, user, context }: {
         date: Date,
+        user: { grade: string, classes: unknown[], schoolName: string },
         context?: Context
-    ): { schedule: unknown; event: unknown } | undefined {
+    }): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
         // also adding default schedules
         const execed = this.exec({ displayDate: date, ...context });
+        if (execed.multischool) {
+            console.log('not supported yet');
+            return { schedule: 'not added yet', event:'not added yet' };
+        }
+
         for (const _element of execed.events) {
             const element: { dates: Date[]; schedule: string } = _element;
             if (!element.dates) {

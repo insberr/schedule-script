@@ -5,6 +5,7 @@ import {
     parseTimeRange,
     getDaysArray,
     generateMatch,
+    parseText,
 } from './lib';
 import { isAfter, isBefore, isSameDay } from 'date-fns';
 type StatementFunc = (args: PArgs, context: Context) => void;
@@ -152,13 +153,13 @@ export const StatementMap = new Map<string, StatementFunc>()
     .set('set', (args, c) => {
         const key = args.shift() as string;
         const value = args.shift();
-        c[key] = value;
+        c[key] = typeof value === 'string' ? parseText(value) : value;
     })
     .set('config', (args, c) => {
         c.config = c.config || {};
         const key = args.shift() as string;
         const value = args.shift();
-        c.config[key] = value;
+        c.config[key] = typeof value === 'string' ? parseText(value) : value;;
     })
     .set('comment', empty)
     .set('multicomment', empty)

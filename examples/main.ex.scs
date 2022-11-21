@@ -61,9 +61,12 @@ lunches {
 };
 
 // GLHF
+set testwhatb true;
 set testValue test; // sets a value in context, its a variable
 set sentryDSN blah; // oh god variable manipulation statements...
 config sentry $sentryDSN; // sets config.[key] = value
+config multischool true;
+
 function defaultZero {
     user classes contains [period 0]; // only if the user has a period zero
     self classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival

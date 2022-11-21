@@ -96,3 +96,14 @@ export function generateMatch(m: string): { type: string; num: number | null } {
     }
     return { num, type };
 }
+
+export function parseText(t: string): any {
+    if (t === 'true') return true;
+    if (t === 'false') return false;
+    if (t === 'null') return null;
+    if (t === 'undefined') return undefined;
+
+    if (t.includes('.') && !isNaN(parseFloat(t))) return parseFloat(t);
+    if (!isNaN(parseInt(t))) return parseInt(t);
+    return t
+}

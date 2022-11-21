@@ -17,10 +17,12 @@ export class SCSFS {
             })
         );
     }
-    scheduleFor(
+    scheduleFor({ filename, date, user, context }: {
         filename: string,
         date: Date,
+        user: { grade: string, classes: unknown[], schoolName: string },
         context?: Context
+    }
     ): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
@@ -29,7 +31,7 @@ export class SCSFS {
             throw new Error(`File ${filename} not found`);
         }
         const parsed = new SCS(file, this.resolve.bind(this));
-        return parsed.scheduleFor(date, context);
+        return parsed.scheduleFor({ date, user, context });
     }
     exec(filename: string, context?: Context) {
         const file = this.files[filename];
