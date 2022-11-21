@@ -1,6 +1,6 @@
 {
-    "name": "@insberr/schedule-script",
-    "version": "1.0.1",
+    "name": "schedule-script",
+    "version": "0.1.0",
     "description": "Schedule? Scripted.",
     "source": "src/scs.ts",
     "main": "dist/scs.js",
@@ -74,7 +74,6 @@
         "peggy": "^2.0.1"
     },
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com",
         "access": "public"
     },
     "lint-staged": {
