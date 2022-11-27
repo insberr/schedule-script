@@ -255,4 +255,3 @@ export const checkers = new Map<string, Checker>()
         ])
     )
     .set('insert', simple(['block', 'text', 'text']));
-

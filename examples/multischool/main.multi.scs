@@ -1,11 +1,12 @@
-
 set schools {
     set exschool1 {
         import './exschool1/main.exschool1.scs';
     };
+
     set exschool2 {
         import './exschool2/main.exschool2.scs';
     };
+
 };
 
 // this is required maybe ...

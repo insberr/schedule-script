@@ -13,9 +13,9 @@ lunches {
 set testValue test; // sets a value in context, its a variable
 set sentryDSN blah;
 config sentry $sentryDSN; // sets config.[key] = value
-
 set schools {
     set testschool {
         import './testsch.ex.scs';
     };
+
 };

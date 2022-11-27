@@ -70,7 +70,10 @@ async function testSCSFS() {
     console.log('load', endl - startl, 'ms');
 
     const starte2 = performance.now();
-    const execfs = fs.exec('./main.ex.scs', { grade: 10, other_variable: 6969 }); // 10th grade
+    const execfs = fs.exec('./main.ex.scs', {
+        grade: 10,
+        other_variable: 6969,
+    }); // 10th grade
     const ende2 = performance.now();
 
     console.log('exec', ende2 - starte2, 'ms');

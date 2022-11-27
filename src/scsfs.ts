@@ -17,13 +17,17 @@ export class SCSFS {
             })
         );
     }
-    scheduleFor({ filename, date, user, context }: {
-        filename: string,
-        date: Date,
-        user: { grade: string, classes: unknown[], schoolName: string },
-        context?: Context
-    }
-    ): { schedule: unknown; event: unknown } | undefined {
+    scheduleFor({
+        filename,
+        date,
+        user,
+        context,
+    }: {
+        filename: string;
+        date: Date;
+        user: { grade: string; classes: unknown[]; schoolName: string };
+        context?: Context;
+    }): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
         const file = this.files[filename];

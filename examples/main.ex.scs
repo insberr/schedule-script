@@ -28,11 +28,8 @@
     why? because a command only has access to what is above it
     if you were to place the terms {} below a schedule, that schedule would not have access to the terms.
 */
-
 location [10.4] [20] 'Greenhouse';
 location [10] [20] 'test';
-
-
 // define all 3 terms
 terms {
     term 1 [September 6, 2022] [December 6, 2022];
@@ -66,7 +63,6 @@ set testValue test; // sets a value in context, its a variable
 set sentryDSN blah; // oh god variable manipulation statements...
 config sentry $sentryDSN; // sets config.[key] = value
 config multischool true;
-
 function defaultZero {
     user classes contains [period 0]; // only if the user has a period zero
     self classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
@@ -239,5 +235,3 @@ event {
 
     schedule normal;
 };
-
-

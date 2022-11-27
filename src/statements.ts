@@ -387,4 +387,3 @@ function setSimple(name: string) {
 // you could import statements from other files and add them to the map.
 
 export const _statements = Array.from(StatementMap.keys());
-

@@ -45,10 +45,14 @@ export class SCS {
             });
         //this.parsedwithComments = this.parsed;
     }
-    scheduleFor({ date, user, context }: {
-        date: Date,
-        user: { grade: string, classes: unknown[], schoolName: string },
-        context?: Context
+    scheduleFor({
+        date,
+        user,
+        context,
+    }: {
+        date: Date;
+        user: { grade: string; classes: unknown[]; schoolName: string };
+        context?: Context;
     }): { schedule: unknown; event: unknown } | undefined {
         // @todo pls add type
         // this function should do way more processing, ie including lunch info
@@ -56,7 +60,7 @@ export class SCS {
         const execed = this.exec({ displayDate: date, ...context });
         if (execed.multischool) {
             console.log('not supported yet');
-            return { schedule: 'not added yet', event:'not added yet' };
+            return { schedule: 'not added yet', event: 'not added yet' };
         }
 
         for (const _element of execed.events) {
