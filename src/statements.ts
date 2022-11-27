@@ -43,7 +43,7 @@ export const StatementMap = new Map<string, StatementFunc>()
     })
     .set('class', (args, c) => {
         c.classes = c.classes || [];
-        let outc: any = {};
+        let outc: Record<string, unknown> = {};
         const typeM = args[0] as string;
         const timeRange = args[1] as string;
         const ptimerange = parseTimeRange(timeRange);
@@ -103,9 +103,11 @@ export const StatementMap = new Map<string, StatementFunc>()
     .set('lunches', (args, c) => {
         const tech = args[0] as Context;
         c.lunches = {};
-        tech.teachers.forEach((element: any) => {
-            c.lunches[element.id] = element.lunch;
-        });
+        tech.teachers.forEach(
+            (element: { id: string | number; lunch: string | number }) => {
+                c.lunches[element.id] = element.lunch;
+            }
+        );
         c.teachers = tech.teachers;
     })
     .set('teacher', (args, c) => {
@@ -325,7 +327,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         if (indexOfToReplace == -1) {
             return;
         }
-        (c.classes as any[]).splice(indexOfToReplace, 1, ...data.classes);
+        (c.classes as unknown[]).splice(indexOfToReplace, 1, ...data.classes);
         c.lastOP = indexOfToReplace;
     })
     .set('insert', (args, c) => {
@@ -359,12 +361,12 @@ export const StatementMap = new Map<string, StatementFunc>()
             return;
         }
         //console.log(index);
-        (c.classes as any[]).splice(index, 0, ...toInsert.classes);
+        (c.classes as unknown[]).splice(index, 0, ...toInsert.classes);
     })
     .set('location', (args, c) => {
         // console.log(args);
         c.locations = c.locations || [];
-        let outc: any = {};
+        let outc: Record<string, unknown> = {};
         const xcoord = args[0] as string;
         const ycoord = args[1] as string;
         const name = args[2] as string;

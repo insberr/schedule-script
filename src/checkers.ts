@@ -16,6 +16,8 @@ function combine(checks: Checker[]): Checker {
     };
 }
 
+/*
+// Unused Function, no idea what it was for
 function anyof(t: unknown[]): boolean {
     for (const item of t) {
         if (!item) {
@@ -24,6 +26,7 @@ function anyof(t: unknown[]): boolean {
     }
     return true;
 }
+*/
 
 function varArgsofType(type: args, start: number) {
     return (statement: Statement, parent?: Statement) => {

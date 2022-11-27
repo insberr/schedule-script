@@ -6,7 +6,8 @@ export function isStatement(s: Statement | Block): s is Statement {
     return (s as Statement).statement !== undefined;
 }
 
-export function find(context: Context, item: string): unknown | undefined {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function find(context: Context, item: string): any {
     const dt = context[item];
     if (dt != undefined) {
         return dt;
