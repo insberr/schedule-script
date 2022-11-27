@@ -45,6 +45,7 @@ export class SCS {
             });
         //this.parsedwithComments = this.parsed;
     }
+
     scheduleFor({
         date,
         user,
@@ -58,9 +59,36 @@ export class SCS {
         // this function should do way more processing, ie including lunch info
         // also adding default schedules
         const execed = this.exec({ displayDate: date, ...context });
-        if (execed.multischool) {
-            console.log('not supported yet');
-            return { schedule: 'not added yet', event: 'not added yet' };
+        if (execed.multischool || execed.config.multischool) {
+            const schoolExeced = execed.schools[user.schoolName];
+
+            // first see if theres global events
+            if (execed.events !== undefined) {
+                // combine those with the school events
+                console.log(
+                    'execed has events and is multischool, no handler implemented for this yet'
+                );
+            }
+
+            // Same for schedules and everything else really. Priority goes to global
+
+            // For now
+            if (schoolExeced === undefined) return undefined;
+            if (schoolExeced.events !== undefined) {
+                for (const _element of schoolExeced.events) {
+                    const element: { dates: Date[]; schedule: string } =
+                        _element;
+                    if (!element.dates) {
+                        continue;
+                    }
+                    if (element.dates.find((e) => isSameDay(e, date))) {
+                        return {
+                            schedule: execed.schedules[element.schedule],
+                            event: element,
+                        };
+                    }
+                }
+            }
         }
 
         for (const _element of execed.events) {
