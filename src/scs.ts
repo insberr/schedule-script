@@ -83,7 +83,10 @@ export class SCS {
                     }
                     if (element.dates.find((e) => isSameDay(e, date))) {
                         return {
-                            schedule: execed.schedules[element.schedule],
+                            schedule:
+                                schoolExeced.schedules !== undefined
+                                    ? schoolExeced.schedules[element.schedule]
+                                    : undefined,
                             event: element,
                         };
                     }
