@@ -6,7 +6,7 @@ export function isStatement(s: Statement | Block): s is Statement {
     return (s as Statement).statement !== undefined;
 }
 
-export function find(context: Context, item: string): any {
+export function find(context: Context, item: string): unknown | undefined {
     const dt = context[item];
     if (dt != undefined) {
         return dt;
@@ -20,7 +20,10 @@ export function find(context: Context, item: string): any {
     }
 }
 
-export function copyInto(src: any, dest: any) {
+export function copyInto(
+    src: Record<string, unknown>,
+    dest: Record<string, unknown>
+) {
     Object.keys(src).forEach((element) => {
         dest[element] = src[element];
     });
@@ -97,7 +100,9 @@ export function generateMatch(m: string): { type: string; num: number | null } {
     return { num, type };
 }
 
-export function parseText(t: string): any {
+export function parseText(
+    t: string
+): string | number | boolean | null | undefined {
     if (t === 'true') return true;
     if (t === 'false') return false;
     if (t === 'null') return null;
@@ -105,5 +110,6 @@ export function parseText(t: string): any {
 
     if (t.includes('.') && !isNaN(parseFloat(t))) return parseFloat(t);
     if (!isNaN(parseInt(t))) return parseInt(t);
-    return t
+    return t;
 }
+

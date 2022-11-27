@@ -159,7 +159,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         c.config = c.config || {};
         const key = args.shift() as string;
         const value = args.shift();
-        c.config[key] = typeof value === 'string' ? parseText(value) : value;;
+        c.config[key] = typeof value === 'string' ? parseText(value) : value;
     })
     .set('comment', empty)
     .set('multicomment', empty)
@@ -362,7 +362,7 @@ export const StatementMap = new Map<string, StatementFunc>()
         (c.classes as any[]).splice(index, 0, ...toInsert.classes);
     })
     .set('location', (args, c) => {
-        console.log(args)
+        // console.log(args);
         c.locations = c.locations || [];
         let outc: any = {};
         const xcoord = args[0] as string;
@@ -387,3 +387,4 @@ function setSimple(name: string) {
 // you could import statements from other files and add them to the map.
 
 export const _statements = Array.from(StatementMap.keys());
+

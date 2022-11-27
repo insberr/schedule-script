@@ -16,7 +16,7 @@ function combine(checks: Checker[]): Checker {
     };
 }
 
-function anyof(t: any[]) {
+function anyof(t: unknown[]): boolean {
     for (const item of t) {
         if (!item) {
             return false;
@@ -255,3 +255,4 @@ export const checkers = new Map<string, Checker>()
         ])
     )
     .set('insert', simple(['block', 'text', 'text']));
+
