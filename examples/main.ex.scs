@@ -1,33 +1,20 @@
-// hello world
-// test 2
 /*
-    ideas used:
+    Ideas Used:
     [] <- allows one "argument" to contain multiple things.
-    {} <- contains statements (its a block!!1)
+    {} <- contains statements (its a block!!)
 
-    you could even think the entire file is inside a block, makes logic a bit easier.
-    statements "act" on the block they are in, adding/removing/replacing data, etc etc
-    you could even pass a block to a statement~!
-    (i love blocks)
-*/
-/*
-    matchers are cool things that match statements/periods. a matcher with value [period 2] would match a class with type period and number 2
-    or just [2] lmafo.
-    maybe complex matcherxs like [period 2, teacher [Rick Astley]] or some shit
-    then functions or conditions that contain matchers can do complex matching
-*/
-/*
-    Importing
-    file order should go
-    imports (just in case)
-    defines (lunches, terms, constant stuff)
-    functions
-    schedules
-    events
+    You could even think the entire file is inside a block, makes logic a bit easier.
+    Statements "act" on the block they are in, adding/removing/replacing data, etc.
+    You could even pass a block to a statement!!
+    (i love blocks) -- Wackery
 
-    why? because a command only has access to what is above it
-    if you were to place the terms {} below a schedule, that schedule would not have access to the terms.
+    Matchers are cool things that match statements/periods.
+    A matcher with value [period 2] would match a class with type 'period' and number '2'
+    - or just [2] lmafo.
+    Maybe complex matcherxs like [period 2, teacher [Rick Astley]] or some sh
 */
+// Define map locations
+// location [x] [y] <name>;
 location [10.4] [20] 'Greenhouse';
 location [10] [20] 'test';
 // define all 3 terms
@@ -37,40 +24,47 @@ terms {
     term 3 [March 28, 2023] [June 23, 2023];
 };
 
-// This can be overridden in events/schedules, any command that needs it searches up the "block tree" for the nearest one.
+// This can be overridden in events/schedules.
+//   any command that needs it searches up the "block tree" for the nearest one.
 lunches {
-    //test
     {
-        only term 1; // If we arnt in term 1, we cancel processing.
+        // If we arnt in term 1, we cancel processing
+        only term 1;
         // teacher <name> <id> <lunch>
         teacher [Rick Astley] ABCD-1234-AB34 1;
     }
     {
-        only term 2; // If we arnt in term 2, we cancel processing.
+        // If we arnt in term 2, we cancel processing.
+        only term 2;
         // teacher <name> <id> <lunch>
         teacher [Rick Astley] ABCD-1234-AB34 2;
     }
     {
-        only term 3; // If we arnt in term 3, we cancel processing.
+        // If we arnt in term 3, we cancel processing.
+        only term 3;
         // teacher <name> <id> <lunch>
         teacher [Rick Astley] ABCD-1234-AB34 3;
     }
 };
 
-// GLHF
-set testwhatb true;
-set testValue test; // sets a value in context, its a variable
-set sentryDSN blah; // oh god variable manipulation statements...
-config sentry $sentryDSN; // sets config.[key] = value
-config multischool true;
+// sets a value in context, its a variable
+set testValue test;
+// oh god variable manipulation statements...
+set sentryDSN blah;
+// sets config.[key] = value
+config sentry $sentryDSN;
+// Functions
 function defaultZero {
-    user classes contains [period 0]; // only if the user has a period zero
-    self classes contains [arrival]; // if the schedule referencing this overide has a class of type arrival
+    // only if the user has a period zero
+    user classes contains [period 0];
+    // if the schedule referencing this overide has a class of type arrival
+    self classes contains [arrival];
     // replace class <matcher> with <block>
     // basically find the class that matches the matcher (type or period or both) and replace it with the statements in the block
+    // replaces arrival with the statements in the block (allows multiple statements)
     replace class [arrival] with {
         class [period 0] [6:30 to 7:30];
-    }; //replaces arrival with the statements in the block (allows multiple statements)
+    };
 
 };
 
@@ -98,7 +92,8 @@ function cambridge [eleven twelve thirteen] {
     */
     // only continue doing conditions if this is true
     // if period 11, 12, or 13 is in the users classses
-    user classes contains [11] [12] [13]; // maybe be able to specifiy and/or? (also matchers!)
+    // maybe be able to specifiy and/or? (also matchers!)
+    user classes contains [11] [12] [13];
     // imagine something like
     // user classes contains { period 3 with teacher [Rick Astley] }
     // blocks not passed into a statement are "absorbed" into their parent if all contitions match, like an if statement
@@ -108,20 +103,22 @@ function cambridge [eleven twelve thirteen] {
         remove [period 1] [period 2];
         // with the power of blocks!
         // insert <block> <location>
+        // last operation; in this example, puts this in place of where [period 2] was
         insert {
-            class [period 11] [$eleven]; // dont get me fucking started on dot accessers, good fucking luck
-            class [period 12] [$twelve]; // How about just times[12] instead
+            class [period 11] [$eleven];
+            class [period 12] [$twelve];
             class [period 13] [$thirteen];
-        } last operation; // last operation; in this example, puts this in place of where [period 2] was
+        } last operation;
     }
     {
         only grade 11;
         remove [2] [3];
+        // last operation; in this example, puts this in place of where [period 2] was
         insert {
             class [11] [$eleven];
             class [12] [$twelve];
             class [13] [$thirteen];
-        } last operation; // last operation; in this example, puts this in place of where [period 2] was
+        } last operation;
         force lunch 3;
     }
 };
